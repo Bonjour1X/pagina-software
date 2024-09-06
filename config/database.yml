@@ -22,13 +22,13 @@ default: &default
 
 development:
   <<: *default
-  database: sprint0_development
+  database: 2024_2_grupo_23_development
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: sprint0
+  #username: 2024_2_grupo_23
 
   # The password associated with the PostgreSQL role (username).
   #password:
@@ -56,7 +56,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: sprint0_test
+  database: 2024_2_grupo_23_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: sprint0_production
-  username: sprint0
-  password: <%= ENV["SPRINT0_DATABASE_PASSWORD"] %>
+  database: 2024_2_grupo_23_production
+  username: 2024_2_grupo_23
+  password: <%= ENV["2024_2_GRUPO_23_DATABASE_PASSWORD"] %>
