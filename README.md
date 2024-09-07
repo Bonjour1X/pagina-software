@@ -1,24 +1,33 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ # Aplicación Ruby on Rails - Grupo 23
 
-Things you may want to cover:
+Puedes acceder a la aplicación en el siguiente enlace:
 
-* Ruby version
+[Aplicación en Render](https://two024-2-grupo-23.onrender.com)
 
-* System dependencies
+## Descripción
 
-* Configuration
+Este repositorio contiene una aplicación básica en Ruby on Rails desplegada en Render.
 
-* Database creation
+## Información del Proyecto
 
-* Database initialization
+### Ruby version
 
-* How to run the test suite
+- Ruby 3.1.0
 
-* Services (job queues, cache servers, search engines, etc.)
+### Dependencias del Sistema
 
-* Deployment instructions
+- Rails 7.x.x
+- Bundler
 
-* ...
+### Configuración
+
+El archivo de configuración para RuboCop está incluido en el proyecto para mantener el código conforme a las mejores prácticas.
+
+
+
+ 
+
+
+
