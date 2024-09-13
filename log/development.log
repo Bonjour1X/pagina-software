@@ -2263,3 +2263,40 @@ Started GET "/manifest.json" for 127.0.0.1 at 2024-09-06 20:07:44 -0400
   
 ActionController::RoutingError (No route matches [GET] "/manifest.json"):
   
+Started GET "/" for 127.0.0.1 at 2024-09-06 20:53:38 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | GC: 0.2ms)
+Completed 200 OK in 34ms (Views: 9.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 16.4ms)
+
+
+Started GET "/manifest.json" for 127.0.0.1 at 2024-09-06 20:53:38 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/" for 127.0.0.1 at 2024-09-06 20:54:43 -0400
+Processing by RenderController#index as */*
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/" for ::1 at 2024-09-06 21:33:30 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 0.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | GC: 0.2ms)
+Completed 200 OK in 38ms (Views: 10.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 13.7ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-06 21:33:31 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
