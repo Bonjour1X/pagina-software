@@ -2300,3 +2300,350 @@ Started GET "/manifest.json" for ::1 at 2024-09-06 21:33:31 -0400
   
 ActionController::RoutingError (No route matches [GET] "/manifest.json"):
   
+  [1m[35m (269.5ms)[0m  [1m[35mCREATE DATABASE "2024_2_grupo_23_development" ENCODING = 'unicode'[0m
+  [1m[35m (242.7ms)[0m  [1m[35mCREATE DATABASE "2024_2_grupo_23_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8169279968912869485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (4.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (6.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to DeviseCreateUsers (20240929165124)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (72.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240929165124') RETURNING "version"[0m
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(8169279968912869485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2024-09-29 14:58:05 -0300
+Started GET "/" for ::1 at 2024-09-29 14:58:05 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RenderController#index as HTML
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 8.8ms | GC: 0.0ms)
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 1.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 170.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 18.7ms | GC: 0.0ms)
+Completed 200 OK in 1507ms (Views: 192.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Completed 200 OK in 1480ms (Views: 305.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 14:58:08 -0300
+Started GET "/" for ::1 at 2024-09-29 14:58:08 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.6ms | GC: 0.0ms)
+Completed 200 OK in 10ms (Views: 9.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 14:58:09 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/" for ::1 at 2024-09-29 15:09:49 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 18.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 20.3ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 239ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+  
+ActionView::Template::Error (undefined method `user_signed_in?' for #<ActionView::Base:0x0000000000b810>):
+
+Causes:
+NoMethodError (undefined method `user_signed_in?' for #<ActionView::Base:0x0000000000b810>)
+    4:       <h1 class="display-4"><p>Receta del choripán chileno</p>
+    5: 
+    6:       <p>¡Deporte ya!</p>
+    7:       <% if user_signed_in? %>
+    8:         <p>Welcome <%= current_user.email %></p>
+    9:         <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+   10:       <% else %>
+  
+app/views/render/index.html.erb:7
+Started GET "/favicon.ico" for ::1 at 2024-09-29 15:09:50 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/" for ::1 at 2024-09-29 15:16:08 -0300
+Started GET "/" for ::1 at 2024-09-29 15:16:08 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RenderController#index as HTML
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 39.1ms | GC: 0.0ms)
+  Rendered render/index.html.erb within layouts/application (Duration: 43.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 55.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 49.9ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 552ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Completed 500 Internal Server Error in 544ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+  
+ActionView::Template::Error (undefined method `user_signed_in?' for #<RenderController:0x0000000000b888>):
+
+Causes:
+NoMethodError (undefined method `user_signed_in?' for #<RenderController:0x0000000000b888>)
+    4:       <h1 class="display-4"><p>Receta del choripán chileno</p>
+    5: 
+    6:       <p>¡Deporte ya!</p>
+    7:       <% if user_signed_in? %>
+    8:         <p>Welcome <%= current_user.email %></p>
+    9:         <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+   10:       <% else %>
+  
+app/controllers/render_controller.rb:6:in `user_signed_in?'
+app/views/render/index.html.erb:7
+  
+ActionView::Template::Error (undefined method `user_signed_in?' for #<RenderController:0x0000000000b8b0>):
+
+Causes:
+NoMethodError (undefined method `user_signed_in?' for #<RenderController:0x0000000000b8b0>)
+    4:       <h1 class="display-4"><p>Receta del choripán chileno</p>
+    5: 
+    6:       <p>¡Deporte ya!</p>
+    7:       <% if user_signed_in? %>
+    8:         <p>Welcome <%= current_user.email %></p>
+    9:         <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+   10:       <% else %>
+  
+app/controllers/render_controller.rb:6:in `user_signed_in?'
+app/views/render/index.html.erb:7
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8169279968912869485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(8169279968912869485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2024-09-29 15:21:40 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 48.7ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 57.5ms | GC: 0.2ms)
+Completed 200 OK in 422ms (Views: 107.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.5ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:21:43 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/" for ::1 at 2024-09-29 15:22:39 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 48.8ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 58.4ms | GC: 0.2ms)
+Completed 200 OK in 754ms (Views: 133.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 2.7ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:22:41 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/users/sign_in" for ::1 at 2024-09-29 15:22:42 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 5.2ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 210.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 212.9ms | GC: 0.0ms)
+Completed 200 OK in 292ms (Views: 235.0ms | ActiveRecord: 10.5ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:22:43 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:22:46 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/users/sign_up" for ::1 at 2024-09-29 15:22:47 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 9.1ms | GC: 0.0ms)
+  Rendered devise/shared/_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 46.9ms | GC: 1.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 51.1ms | GC: 1.0ms)
+Completed 200 OK in 84ms (Views: 82.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:22:48 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:22:52 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/users/sign_in" for ::1 at 2024-09-29 15:22:59 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 8.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.0ms | GC: 0.0ms)
+Completed 200 OK in 18ms (Views: 15.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:22:59 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:23:02 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/" for ::1 at 2024-09-29 15:34:46 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (2.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 100.5ms | GC: 0.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 114.1ms | GC: 0.7ms)
+Completed 200 OK in 593ms (Views: 195.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 2.0ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:34:48 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/users/sign_up" for ::1 at 2024-09-29 15:34:50 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 14.3ms | GC: 0.0ms)
+  Rendered devise/shared/_links.html.erb (Duration: 14.7ms | GC: 0.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 209.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 213.6ms | GC: 0.0ms)
+Completed 200 OK in 331ms (Views: 275.0ms | ActiveRecord: 24.2ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:34:51 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started POST "/users" for ::1 at 2024-09-29 15:35:09 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (8.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[31mROLLBACK[0m
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 7.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 802ms (Views: 13.3ms | ActiveRecord: 10.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:35:10 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started POST "/users" for ::1 at 2024-09-29 15:35:23 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (5.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mUser Create (15.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "[FILTERED]"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-09-29 18:35:23.779294"], ["updated_at", "2024-09-29 18:35:23.779294"]]
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 322ms (ActiveRecord: 24.1ms (2 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/" for ::1 at 2024-09-29 15:35:23 -0300
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/render_controller.rb:6:in `user_signed_in?'
+  Rendered render/index.html.erb within layouts/application (Duration: 11.9ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.3ms | GC: 0.1ms)
+Completed 200 OK in 16ms (Views: 14.2ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:35:24 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/users/sign_out" for ::1 at 2024-09-29 15:35:30 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 102ms (ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/" for ::1 at 2024-09-29 15:35:31 -0300
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  Rendered render/index.html.erb within layouts/application (Duration: 2.6ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.0ms | GC: 0.3ms)
+Completed 200 OK in 10ms (Views: 9.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:35:31 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started GET "/users/sign_in" for ::1 at 2024-09-29 15:35:32 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 30.6ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 32.9ms | GC: 0.2ms)
+Completed 200 OK in 64ms (Views: 62.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:35:33 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
+Started POST "/users/sign_in" for ::1 at 2024-09-29 15:35:35 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 367ms (ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/" for ::1 at 2024-09-29 15:35:36 -0300
+Processing by RenderController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering render/index.html.erb within layouts/application
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/render_controller.rb:6:in `user_signed_in?'
+  Rendered render/index.html.erb within layouts/application (Duration: 8.6ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.1ms | GC: 0.3ms)
+Completed 200 OK in 13ms (Views: 11.6ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-29 15:35:36 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/manifest.json"):
+  
