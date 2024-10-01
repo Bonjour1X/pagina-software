@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
   get 'render/index'
-  
+  root "render#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,22 +9,21 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-   #USER
+  # USER
 
-  root "render#index"
-  #resources :users
-  devise_for :users
-  devise_scope :user do
-    get 'users/sign_out', to: 'devise/sessions#destroy'
-
+  devise_for :users, controllers: { 
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+  }
 
   
 
-
-
-   
+  
+  devise_scope :user do
+    get 'users/sign_out', to: 'devise/sessions#destroy'
   end
 end
+
 
 
 
