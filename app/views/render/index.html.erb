@@ -1,25 +1,12 @@
-<main class="container">
-  <div class="row text-center justify-content-center">
-    <div class="col">
-      <h1 class="display-4">
 
-      <p>¡Deporte ya!</p>
-      <% if user_signed_in? %>
-        <p>Sesión iniciada <%= current_user.email %></p>
-        <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-        <%= link_to 'Actualizar Datos', edit_user_registration_path %>
+<h1>¡Deporte ya!</h1>
+<% if user_signed_in? %>
+  <h2>Sesión iniciada <%= current_user.email %></h2>
+  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>&nbsp;&nbsp;
+  <%= link_to 'Ajustes', render_ajustes_path %>
 
+<% else %>
+  <%= link_to 'Sign in', new_user_session_path %>&nbsp;&nbsp;
+  <%= link_to 'Sign up', new_user_registration_path %>
+<% end %>
 
-      <% else %>
-        <%= link_to 'Sign in', new_user_session_path %> |
-        <%= link_to 'Sign up', new_user_registration_path %>
-      <% end %>
-
-
-
-
-
-
-    </div>
-  </div>
-</main>
