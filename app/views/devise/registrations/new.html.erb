@@ -23,6 +23,10 @@
   <%= f.text_field :description, autofocus: true, autocomplete: "description" %>
   </div>
 
+  <div class="field">
+  <%= f.label :tipo %><br />
+  <%= f.select :tipo, ["Estudiante", "Profesor"], { prompt: "Seleccione un tipo" } %>
+  </div>
 
   <div class="field">
     <%= f.label :password %>

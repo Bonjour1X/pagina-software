@@ -23,6 +23,12 @@
     <%= f.text_field :description, autofocus: true, autocomplete: "description" %>
   </div>
 
+  <div class="field">
+    <%= f.label :tipo %><br />
+    <%= f.select :tipo, ["Estudiante", "Profesor"], { prompt: "Seleccione un tipo" } %>
+  </div>
+
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
