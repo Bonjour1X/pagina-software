@@ -1,0 +1,13 @@
+# Idex/htmll que nos muestra las vistas de las clases creadas
+<h1>Todas las Clases</h1>
+
+<% @classes.each do |class| %>
+  <div>
+    <h2><%= link_to class.title, class_path(class) %></h2>
+    <p>Profesor: <%= class.user.name %></p>
+    <p>Fecha: <%= class.scheduled_date %></p>
+    <p>Modalidad: <%= class.modality %></p>
+  </div>
+<% end %>
+
+<%= link_to 'Crear Nueva Clase', new_class_path if current_user.tipo == "Profesor" %>
