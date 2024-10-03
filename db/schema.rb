@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_03_042624) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_03_143230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_042624) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "clases", force: :cascade do |t|
+  create_table "courses", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
     t.datetime "scheduled_date"
@@ -51,7 +51,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_042624) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_clases_on_user_id"
+    t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
   create_table "enrollment_requests", force: :cascade do |t|
@@ -72,7 +72,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_042624) do
     t.bigint "class_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "course_id", null: false
     t.index ["class_id"], name: "index_evaluations_on_class_id"
+    t.index ["course_id"], name: "index_evaluations_on_course_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -93,8 +95,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_042624) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "clases", "users"
-  add_foreign_key "enrollment_requests", "clases", column: "class_id"
+  add_foreign_key "courses", "users"
+  add_foreign_key "enrollment_requests", "courses", column: "class_id"
   add_foreign_key "enrollment_requests", "users"
-  add_foreign_key "evaluations", "clases", column: "class_id"
+  add_foreign_key "evaluations", "courses"
+  add_foreign_key "evaluations", "courses", column: "class_id"
 end

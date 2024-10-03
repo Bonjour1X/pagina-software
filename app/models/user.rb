@@ -8,5 +8,6 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :phone, presence: true
   # Habilita la cantidad de clases
-  has_many :classes
+  has_many :courses #cambio de classes -> courses
+  has_many :enrollment_requests
 end

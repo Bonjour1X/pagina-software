@@ -1,0 +1,11 @@
+<h1>Mis Clases</h1>
+
+<% @courses.each do |course| %>
+  <div>
+    <h2><%= link_to course.title, course_path(course) %></h2>
+    <p>Fecha: <%= course.scheduled_date %></p>
+    <p>Modalidad: <%= course.modality %></p>
+  </div>
+<% end %>
+
+<%= link_to 'Crear Nueva Clase', new_course_path %>

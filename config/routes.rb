@@ -27,14 +27,14 @@ Rails.application.routes.draw do
     get 'users/sign_out', to: 'devise/sessions#destroy'
   end
 
-  resources :classes do
-    resources :evaluations, only: [:new, :create]
+  resources :courses do
+    resources :evaluations #, only: [:new, :create]
     resources :enrollment_requests, only: [:create]
   end
 
   # Se Añade estas rutas para manejar las clases y evaluaciones :D
-  get '/my_classes', to: 'classes#my_classes', as: 'my_classes'
-  get '/available_classes', to: 'classes#available_classes', as: 'available_classes'
+  get '/my_courses', to: 'courses#my_courses', as: 'my_courses'
+  get '/available_courses', to: 'courses#available_courses', as: 'available_courses'
 
 end
 

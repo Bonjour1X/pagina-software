@@ -1,5 +1,5 @@
-# Modelos de Evaluacion
+# Creacion de evaluacion simple
 class Evaluation < ApplicationRecord
-    belongs_to :class
-    validates :name, :questions, :evaluation_method, presence: true
+  belongs_to :course
+  validates :name, :questions, :solution, presence: true
 end

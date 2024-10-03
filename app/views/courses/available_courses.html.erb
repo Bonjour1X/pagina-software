@@ -1,0 +1,9 @@
+<h1>Clases Disponibles</h1>
+
+<% @courses.each do |course| %>
+  <div>
+    <h2><%= link_to course.title, course_path(course) %></h2>
+    <p>Profesor: <%= course.user.name %></p>
+    <p>Fecha: <%= course.scheduled_date %></p>
+  </div>
+<% end %>
