@@ -1,7 +1,5 @@
 # Nuevas vistas de inscribir ramos formulario
 <%= form_with(model: [@course, @evaluation], local: true) do |form| %>
-  <%= form.hidden_field :course_id, value: @course.id %>
-
   <div>
     <%= form.label :name, "Nombre" %>
     <%= form.text_field :name %>
@@ -15,6 +13,11 @@
   <div>
     <%= form.label :solution, "Solución" %>
     <%= form.text_area :solution %>
+  </div>
+
+  <div>
+    <%= form.label :evaluation_method, "Tipo de evaluación" %>
+    <%= form.select :evaluation_method, ['Multiple Choice', 'Essay', 'Mixed'] %>
   </div>
 
   <%= form.submit 'Crear Evaluación' %>

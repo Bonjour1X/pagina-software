@@ -19,4 +19,6 @@
       <%= link_to 'Eliminar Evaluación', course_evaluation_path(@course, evaluation), method: :delete, data: { confirm: '¿Estás seguro?' } %>
     </div>
   <% end %>
+
+  <%= link_to 'Eliminar Clase', course_path(@course), method: :delete, data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer.' }, class: 'btn btn-danger' %>
 <% end %>

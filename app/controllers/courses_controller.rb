@@ -32,8 +32,12 @@ class CoursesController < ApplicationController
   # Eliminar clases
   def destroy
     @course = Course.find(params[:id])
-    @course.destroy
-    redirect_to courses_path, notice: 'Clase eliminada exitosamente.'
+    if current_user == @course.user
+      @course.destroy
+      redirect_to courses_path, notice: 'La clase ha sido eliminada exitosamente.'
+    else
+      redirect_to @course, alert: 'No tienes permiso para eliminar esta clase.'
+    end
   end
   
   def available_courses
