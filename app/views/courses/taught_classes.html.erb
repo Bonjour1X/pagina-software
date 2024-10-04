@@ -1,0 +1,17 @@
+<!-- app/views/courses/taught_classes.html.erb -->
+<h1>Clases Dictadas</h1>
+
+<% if @courses.any? %>
+  <ul>
+    <% @courses.each do |course| %>
+      <li>
+        <strong><%= course.title %></strong><br>
+        Descripción: <%= course.description %><br>
+        Fecha programada: <%= course.scheduled_date %><br>
+        Modalidad: <%= course.modality %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No tienes clases dictadas.</p>
+<% end %>

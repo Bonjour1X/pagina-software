@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.2].define(version: 2024_10_04_141700) do
+=======
+ActiveRecord::Schema[7.2].define(version: 2024_10_04_063759) do
+>>>>>>> origin/fz6rama
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,12 +60,28 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_04_141700) do
 
   create_table "enrollment_requests", force: :cascade do |t|
     t.bigint "user_id", null: false
+<<<<<<< HEAD
     t.string "status", default: "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "course_id", null: false
+=======
+    t.bigint "course_id", null: false
+    t.string "status", default: "pending"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+>>>>>>> origin/fz6rama
     t.index ["course_id"], name: "index_enrollment_requests_on_course_id"
     t.index ["user_id"], name: "index_enrollment_requests_on_user_id"
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
   create_table "evaluations", force: :cascade do |t|
@@ -107,6 +127,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_04_141700) do
   add_foreign_key "courses", "users"
   add_foreign_key "enrollment_requests", "courses"
   add_foreign_key "enrollment_requests", "users"
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "users"
   add_foreign_key "evaluations", "courses"
   add_foreign_key "questions", "evaluations"
 end

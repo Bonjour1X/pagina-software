@@ -8,6 +8,9 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+    @evaluation = Evaluation.new
+    @enrollment_request = EnrollmentRequest.new
+    #@students_with_grades = @course.users.includes(:evaluations)  # Aquí se obtiene la lista de usuarios inscritos
   end
 
   def new
@@ -38,6 +41,21 @@ class CoursesController < ApplicationController
   
   def available_courses
     @courses = Course.where.not(user: current_user)
+  end
+
+  # Acción para mostrar las clases dictadas por el profesor
+  def taught_classes
+    @courses = current_user.courses
+  end
+
+  def leave
+    @course = Course.find(params[:id])
+    enrollment_request = current_user.enrollment_requests.find_by(course: @course)
+    if enrollment_request&.destroy
+      redirect_to courses_path, notice: 'Has salido de la clase exitosamente.'
+    else
+      redirect_to @course, alert: 'No se pudo salir de la clase.'
+    end
   end
 
   private

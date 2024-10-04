@@ -1,30 +1,34 @@
-# app/controllers/enrollment_requests_controller.rb
 class EnrollmentRequestsController < ApplicationController
+  before_action :set_course
+
   def index
-    @course = Course.find(params[:course_id])
     @enrollment_requests = @course.enrollment_requests.where(status: 'pending')
   end
 
   def create
-    @course = Course.find(params[:course_id])
     @enrollment_request = current_user.enrollment_requests.new(course: @course)
     if @enrollment_request.save
-      flash[:notice] = "Solicitud de inscripción enviada para #{@course.title}"
+      redirect_to @course, notice: 'Solicitud de inscripción enviada.'
     else
-      flash[:alert] = "No se pudo enviar la solicitud"
+      redirect_to @course, alert: 'No se pudo enviar la solicitud de inscripción.'
     end
-    redirect_to @course
   end
 
   def approve
-    @enrollment_request = EnrollmentRequest.find(params[:id])
+    @enrollment_request = @course.enrollment_requests.find(params[:id])
     @enrollment_request.update(status: 'approved')
-    redirect_to course_enrollment_requests_path(@enrollment_request.course), notice: 'Solicitud aprobada'
+    redirect_to course_enrollment_requests_path(@course), notice: 'Solicitud aprobada.'
   end
 
   def reject
-    @enrollment_request = EnrollmentRequest.find(params[:id])
+    @enrollment_request = @course.enrollment_requests.find(params[:id])
     @enrollment_request.update(status: 'rejected')
-    redirect_to course_enrollment_requests_path(@enrollment_request.course), notice: 'Solicitud rechazada'
+    redirect_to course_enrollment_requests_path(@course), notice: 'Solicitud rechazada.'
+  end
+
+  private
+
+  def set_course
+    @course = Course.find(params[:course_id])
   end
 end
