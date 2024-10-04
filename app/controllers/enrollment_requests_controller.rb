@@ -1,5 +1,9 @@
 # app/controllers/enrollment_requests_controller.rb
 class EnrollmentRequestsController < ApplicationController
+
+  before_action :set_course
+
+
   def index
     @course = Course.find(params[:course_id])
     @enrollment_requests = @course.enrollment_requests.where(status: 'pending')
@@ -27,14 +31,18 @@ class EnrollmentRequestsController < ApplicationController
   end
 
   def create
-    @course = Course.find(params[:course_id])
-    @enrollment_request = current_user.enrollment_requests.new(course: @course)
+    # Eliminar cualquier solicitud existente para este curso y usuario
+    existing_request = @course.enrollment_requests.find_by(user: current_user)
+    existing_request.destroy if existing_request
+
+    # Crear una nueva solicitud
+    @enrollment_request = @course.enrollment_requests.new(user: current_user, status: 'pending')
+    
     if @enrollment_request.save
-      flash[:notice] = "Solicitud de inscripción enviada para #{@course.title}"
+      redirect_to @course, notice: 'Solicitud de inscripción enviada.'
     else
-      flash[:alert] = "No se pudo enviar la solicitud"
+      redirect_to @course, alert: 'No se pudo enviar la solicitud de inscripción.'
     end
-    redirect_to @course
   end
 
   def approve
@@ -49,10 +57,16 @@ class EnrollmentRequestsController < ApplicationController
     redirect_to course_enrollment_requests_path(@enrollment_request.course), notice: 'Solicitud rechazada'
   end
 
-  private
 
   # Encuentra la solicitud de inscripción por su ID
   def find_enrollment_request
     @enrollment_request = EnrollmentRequest.find(params[:id])
   end
+
+  private
+
+  def set_course
+    @course = Course.find(params[:course_id])
+  end
+
 end

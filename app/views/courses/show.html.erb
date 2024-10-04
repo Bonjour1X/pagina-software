@@ -21,7 +21,7 @@
   <% elsif enrollment_request&.pending? %>
     <p>Solicitud de inscripción pendiente</p>
   <% else %>
-    <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary' %>
+    <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary', data: { disable_with: 'Enviando solicitud...' } %>
   <% end %>
 <% end %>
 
