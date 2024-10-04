@@ -8,7 +8,6 @@
     <p>Fecha: <%= course.scheduled_date %></p>
     <p>Modalidad: <%= course.modality %></p>
     <% if current_user.tipo == "Profesor" && current_user == course.user %>
-      <%= link_to 'Eliminar', course_path(course), method: :delete, data: { confirm: '¿Estás seguro?' } %>
     <% end %>
   </div>
 <% end %>

@@ -1,0 +1,10 @@
+<!-- app/views/enrollment_requests/index.html.erb -->
+<h1>Solicitudes de Inscripción para <%= @course.title %></h1>
+
+<% @enrollment_requests.each do |request| %>
+  <div>
+    <p>Usuario: <%= request.user.name %></p>
+    <%= button_to 'Aprobar', approve_course_enrollment_request_path(@course, request), method: :patch %>
+    <%= button_to 'Rechazar', reject_course_enrollment_request_path(@course, request), method: :patch %>
+  </div>
+<% end %>

@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.find(params[:id])
+    @course = Course.includes(:user).find(params[:id])
     @evaluation = Evaluation.new
     @enrollment_request = EnrollmentRequest.new
   end
@@ -30,14 +30,12 @@ class CoursesController < ApplicationController
   end
 
   # Eliminar clases
+  # app/controllers/courses_controller.rb
   def destroy
     @course = Course.find(params[:id])
-    if current_user == @course.user
-      @course.destroy
-      redirect_to courses_path, notice: 'La clase ha sido eliminada exitosamente.'
-    else
-      redirect_to @course, alert: 'No tienes permiso para eliminar esta clase.'
-    end
+    @course.destroy
+    flash[:notice] = "Clase eliminada: #{@course.title}"
+    redirect_to courses_path
   end
   
   def available_courses

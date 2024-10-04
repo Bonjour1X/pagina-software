@@ -1,12 +1,13 @@
 # Funcion creadora de Evaluaciones
-class CreateEvaluations < ActiveRecord::Migration[7.2]
+class CreateEvaluations < ActiveRecord::Migration[6.1]
   def change
     create_table :evaluations do |t|
-      t.string :name, null: false
-      t.text :questions
-      t.text :solution
+      t.string :name
       t.string :evaluation_method
-      t.references :class, foreign_key: true, null: false
+      t.datetime :start_date
+      t.datetime :end_date
+      t.text :instructions
+      t.references :course, null: false, foreign_key: true
 
       t.timestamps
     end

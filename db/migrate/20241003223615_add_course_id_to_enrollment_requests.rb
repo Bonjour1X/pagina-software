@@ -1,0 +1,5 @@
+class AddCourseIdToEnrollmentRequests < ActiveRecord::Migration[7.2]
+  def change
+    add_reference :enrollment_requests, :course, null: false, foreign_key: true
+  end
+end

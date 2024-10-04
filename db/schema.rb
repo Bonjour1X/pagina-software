@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_03_143230) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_04_030738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,11 +56,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_143230) do
 
   create_table "enrollment_requests", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "class_id", null: false
     t.string "status", default: "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["class_id"], name: "index_enrollment_requests_on_class_id"
+    t.bigint "course_id", null: false
+    t.index ["course_id"], name: "index_enrollment_requests_on_course_id"
     t.index ["user_id"], name: "index_enrollment_requests_on_user_id"
   end
 
@@ -73,8 +73,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_143230) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "course_id", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text "instructions"
     t.index ["class_id"], name: "index_evaluations_on_class_id"
     t.index ["course_id"], name: "index_evaluations_on_course_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.text "content"
+    t.bigint "evaluation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evaluation_id"], name: "index_questions_on_evaluation_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,8 +107,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_143230) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "courses", "users"
-  add_foreign_key "enrollment_requests", "courses", column: "class_id"
+  add_foreign_key "enrollment_requests", "courses"
   add_foreign_key "enrollment_requests", "users"
   add_foreign_key "evaluations", "courses"
   add_foreign_key "evaluations", "courses", column: "class_id"
+  add_foreign_key "questions", "evaluations"
 end

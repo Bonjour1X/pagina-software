@@ -1,4 +1,6 @@
 # Crea la parte de nuevas evaluaciones
+# app/views/evaluations/new.html.erb
+<!-- app/views/evaluations/new.html.erb -->
 <h1>Nueva Evaluación para <%= @course.title %></h1>
 
 <%= form_with(model: [@course, @evaluation], local: true) do |form| %>
@@ -14,24 +16,37 @@
   <% end %>
 
   <div>
-    <%= form.label :name %>
+    <%= form.label :name, "Nombre" %>
     <%= form.text_field :name %>
   </div>
 
   <div>
-    <%= form.label :questions %>
-    <%= form.text_area :questions %>
+    <%= form.label :evaluation_method, "Tipo de evaluación" %>
+    <%= form.select :evaluation_method, [['Opción múltiple', 'multiple_choice'], ['Desarrollo', 'essay'], ['Mixto', 'mixed']] %>
   </div>
 
   <div>
-    <%= form.label :solution %>
-    <%= form.text_area :solution %>
+    <%= form.label :start_date, "Fecha de inicio" %>
+    <%= form.datetime_local_field :start_date %>
   </div>
 
   <div>
-    <%= form.label :evaluation_method %>
-    <%= form.select :evaluation_method, ['Multiple Choice', 'Essay', 'Mixed'] %>
+    <%= form.label :end_date, "Fecha de fin" %>
+    <%= form.datetime_local_field :end_date %>
   </div>
+
+  <div>
+    <%= form.label :instructions, "Instrucciones" %>
+    <%= form.text_area :instructions %>
+  </div>
+
+  <h3>Preguntas</h3>
+  <% 3.times do |i| %>
+    <div>
+      <%= label_tag "questions[#{i}]", "Pregunta #{i + 1}" %>
+      <%= text_area_tag "questions[#{i}]" %>
+    </div>
+  <% end %>
 
   <%= form.submit 'Crear Evaluación' %>
 <% end %>

@@ -28,8 +28,13 @@ Rails.application.routes.draw do
   end
 
   resources :courses do
-    resources :evaluations #, only: [:new, :create]
-    resources :enrollment_requests, only: [:create]
+    resources :enrollment_requests, only: [:index, :create] do
+      member do
+        patch :approve
+        patch :reject
+      end
+    end
+    resources :evaluations
   end
 
   # Se Añade estas rutas para manejar las clases y evaluaciones :D
