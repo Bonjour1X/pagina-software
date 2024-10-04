@@ -1,3 +1,4 @@
+# app/views/layouts/application.html.erb
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,6 +28,7 @@
           <%= link_to 'Crear Clase', new_course_path %>
         <% else %>
           <%= link_to 'Clases Disponibles', available_courses_path %>
+          <%= link_to 'Mis Clases Inscritas', enrolled_courses_path %>
         <% end %>
         <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete %>
       <% else %>

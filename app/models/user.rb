@@ -11,4 +11,7 @@ class User < ApplicationRecord
   # Habilita la cantidad de clases
   has_many :courses #cambio de classes -> courses
   has_many :enrollment_requests
+  has_many :enrolled_courses, -> { where(enrollment_requests: { status: 'approved' }) }, 
+           through: :enrollment_requests, 
+           source: :course
 end

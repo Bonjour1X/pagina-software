@@ -3,13 +3,16 @@ class CoursesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @courses = Course.all
+    #@courses = Course.all
+    @available_courses = Course.where.not(user: current_user)
+    @enrolled_courses = current_user.enrolled_courses
   end
 
   def show
     @course = Course.find(params[:id])
-    @evaluation = Evaluation.new
-    @enrollment_request = EnrollmentRequest.new
+    @enrollment_request = EnrollmentRequest.find_by(user: current_user, course: @course)
+    #@evaluation = Evaluation.new
+    #@enrollment_request = EnrollmentRequest.new
     #@students_with_grades = @course.users.includes(:evaluations)  # Aquí se obtiene la lista de usuarios inscritos
   end
 
@@ -27,7 +30,11 @@ class CoursesController < ApplicationController
   end
 
   def my_courses
-    @courses = current_user.courses
+    if current_user.tipo == "Profesor"
+      @courses = current_user.courses
+    else
+      @courses = current_user.enrolled_courses
+    end
   end
 
   # Eliminar clases
@@ -40,7 +47,8 @@ class CoursesController < ApplicationController
   end
   
   def available_courses
-    @courses = Course.where.not(user: current_user)
+    @courses = Course.where.not(id: current_user.enrolled_courses.pluck(:id))
+                     .where.not(user: current_user)
   end
 
   # Acción para mostrar las clases dictadas por el profesor
@@ -58,6 +66,11 @@ class CoursesController < ApplicationController
     end
   end
 
+  # Ver mis cursos idea
+  def enrolled_courses
+    @enrolled_courses = current_user.enrolled_courses
+  end
+  
   private
 
   def course_params

@@ -1,25 +1,27 @@
+# show.html.erb
 <h1><%= @course.title %></h1>
 <p>Profesor: <%= @course.user&.name %></p>
 <p>Fecha: <%= @course.scheduled_date %></p>
 <p>Modalidad: <%= @course.modality %></p>
 
 <% if current_user.tipo == "Estudiante" %>
-  <% if @course.enrolled_users.include?(current_user) %>
+  <% enrollment_request = @course.enrollment_requests.find_by(user: current_user) %>
+  
+  <% if enrollment_request&.approved? %>
     <%= button_to 'Salir de clase', leave_course_path(@course), method: :delete, data: { confirm: '¿Estás seguro de que deseas salir de esta clase?' }, class: 'btn btn-warning' %>
-  <% else %>
-    <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary' %>
-  <% end %>
-
-  <% if @course.enrolled_users.include?(current_user) %>
+    
     <h2>Evaluaciones disponibles</h2>
     <% @course.evaluations.each do |evaluation| %>
       <div>
         <h3><%= evaluation.name %></h3>
         <p>Fecha de inicio: <%= evaluation.start_date %></p>
         <p>Fecha de fin: <%= evaluation.end_date %></p>
-        <!-- Aquí puedes añadir un enlace para que el estudiante tome la evaluación -->
       </div>
     <% end %>
+  <% elsif enrollment_request&.pending? %>
+    <p>Solicitud de inscripción pendiente</p>
+  <% else %>
+    <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary' %>
   <% end %>
 <% end %>
 

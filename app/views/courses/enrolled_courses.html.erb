@@ -1,9 +1,9 @@
-# app/view/courses/my_courses.html.erb
-<h1>Mis Clases</h1>
+# app/views/courses/enrolled_courses.html.erb
+<h1>Mis Clases Inscritas</h1>
 
-<% if @courses.any? %>
-  <% @courses.each do |course| %>
-    <div>
+<% if @enrolled_courses.any? %>
+  <% @enrolled_courses.each do |course| %>
+    <div class="course-card">
       <h2><%= link_to course.title, course_path(course) %></h2>
       <p>Profesor: <%= course.user.name %></p>
       <p>Fecha: <%= course.scheduled_date %></p>
@@ -11,5 +11,5 @@
     </div>
   <% end %>
 <% else %>
-  <p>No tienes clases creadas o inscritas.</p>
+  <p>No estás inscrito en ninguna clase actualmente.</p>
 <% end %>
