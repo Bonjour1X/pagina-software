@@ -1,0 +1,37 @@
+# Crea la parte de nuevas evaluaciones
+<h1>Nueva Evaluación para <%= @course.title %></h1>
+
+<%= form_with(model: [@course, @evaluation], local: true) do |form| %>
+  <% if @evaluation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@evaluation.errors.count, "error") %> prohibited this evaluation from being saved:</h2>
+      <ul>
+        <% @evaluation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :questions %>
+    <%= form.text_area :questions %>
+  </div>
+
+  <div>
+    <%= form.label :solution %>
+    <%= form.text_area :solution %>
+  </div>
+
+  <div>
+    <%= form.label :evaluation_method %>
+    <%= form.select :evaluation_method, ['Multiple Choice', 'Essay', 'Mixed'] %>
+  </div>
+
+  <%= form.submit 'Crear Evaluación' %>
+<% end %>

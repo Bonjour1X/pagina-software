@@ -21,11 +21,30 @@ Rails.application.routes.draw do
   }
 
   
-
-  
   devise_scope :user do
     get 'users/sign_out', to: 'devise/sessions#destroy'
   end
+
+  resources :courses do
+    resources :evaluations #, only: [:new, :create]
+    resources :enrollment_requests, only: [:create]do
+      member do
+        patch :accept
+        patch :reject
+      end
+    end
+    member do
+      delete :leave # Ruta para salir de la clase
+    end
+  end
+
+  # Ruta para ver las clases dictadas por el profesor
+  get 'taught_classes', to: 'courses#taught_classes', as: 'taught_classes'
+
+  # Se Añade estas rutas para manejar las clases y evaluaciones :D
+  get '/my_courses', to: 'courses#my_courses', as: 'my_courses'
+  get '/available_courses', to: 'courses#available_courses', as: 'available_courses'
+
 end
 
 
