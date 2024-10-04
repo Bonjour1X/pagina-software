@@ -40,20 +40,20 @@
 
 
   <h2>Evaluaciones</h2>
-<% @course.evaluations.each do |evaluation| %>
-  <div>
-    <h3><%= evaluation.name %></h3>
-    <p>Tipo: <%= evaluation.evaluation_method %></p>
-    <p>Fecha de inicio: <%= evaluation.start_date %></p>
-    <p>Fecha de fin: <%= evaluation.end_date %></p>
-    <h4>Preguntas:</h4>
-    <ol>
-      <% evaluation.questions.each do |question| %>
-        <li><%= question %></li>
-      <% end %>
-    </ol>
-  </div>
-<% end %>
-
-<%= link_to 'Nueva Evaluación', new_course_evaluation_path(@course) %>
+  <% @course.evaluations.each do |evaluation| %>
+    <div>
+      <h3><%= evaluation.name %></h3>
+      <p>Tipo: <%= evaluation.evaluation_method %></p>
+      <p>Fecha de inicio: <%= evaluation.start_date %></p>
+      <p>Fecha de fin: <%= evaluation.end_date %></p>
+      <h4>Preguntas:</h4>
+      <ol>
+        <% evaluation.questions.each do |question| %>
+          <li><%= question %></li>
+        <% end %>
+      </ol>
+    </div>
+  <% end %>
+        
+  <%= link_to 'Nueva Evaluación', new_course_evaluation_path(@course) %>
 <% end %>

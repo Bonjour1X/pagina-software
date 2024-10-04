@@ -7,9 +7,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.includes(:user).find(params[:id])
-    @evaluation = Evaluation.new
-    @enrollment_request = EnrollmentRequest.new
+    @course = Course.find(params[:id])
   end
 
   def new
