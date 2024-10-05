@@ -24,7 +24,11 @@ La aplicación facilita un entorno de aprendizaje interactivo y eficiente tanto 
 - **Acceso a Evaluaciones y Material:** Una vez aceptada la solicitud, el usuario puede realizar las evaluaciones, conversar con otros participantes del curso, y acceder a material y videos de enseñanza.
 - **Reseñas:** Al concluir el curso, los usuarios tienen la opción de dejar una reseña evaluando tanto el curso como a los profesores involucrados, proporcionando información adicional a futuros usuarios.
   
-## Información del Proyecto
+## Información del Proyecto (sprint1)
+Hasta ahora un visitante puede crear una cuenta, logearse a ella, cambiar sus datos y eliminarla.
+Un usuario registrado puede ver las clases ofrecidas (uno no registrado también) y enviar una solicitud a alguna de ellas, además puede ver las clases de las cuales forma parte.
+Por otro lado un profesor puede crear una clase, manejar las solicitudes de su clase y eliminar su clase.
+
 ### Ruby version
 
 - Ruby 3.1.0
@@ -38,6 +42,9 @@ La aplicación facilita un entorno de aprendizaje interactivo y eficiente tanto 
 
 El archivo de configuración para RuboCop está incluido en el proyecto para mantener el código conforme a las mejores prácticas.
 
+### Sprint1 (no completado)
+Crear evaluación (si se crea pero no contiene preguntas aún)
+Ver perticipantes incritos
 
 
  
