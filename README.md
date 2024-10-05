@@ -1,6 +1,6 @@
-# README
-# Sprint_0
- # Aplicación Ruby on Rails - Grupo 23
+#  README
+#  Sprint_1
+ #  Aplicación Ruby on Rails - Grupo 23
 
 Puedes acceder a la aplicación en el siguiente enlace:
 
