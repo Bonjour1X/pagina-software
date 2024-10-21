@@ -11,8 +11,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
    #POST /resource
    def create
-     super
-   end
+    super do |resource|
+      if resource.persisted?
+        flash[:notice] = "Welcome! You have signed up successfully."
+      end
+    end  # Cierra el bloque de super
+  end  # Cierra el método create
 
    #GET /resource/edit
    def edit

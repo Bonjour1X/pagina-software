@@ -33,6 +33,8 @@ Rails.application.routes.draw do
       member do
         patch :approve
         patch :reject
+        get :participants
+        get :show
       end
     end
     resources :evaluations, only: [:new, :create]

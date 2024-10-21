@@ -64,17 +64,26 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_04_141700) do
     t.index ["user_id"], name: "index_enrollment_requests_on_user_id"
   end
 
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
+  end
+
   create_table "evaluations", force: :cascade do |t|
     t.string "name", null: false
     t.text "questions"
     t.text "solution"
     t.string "evaluation_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "course_id", null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.text "instructions"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_evaluations_on_course_id"
   end
 
@@ -107,6 +116,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_04_141700) do
   add_foreign_key "courses", "users"
   add_foreign_key "enrollment_requests", "courses"
   add_foreign_key "enrollment_requests", "users"
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "users"
   add_foreign_key "evaluations", "courses"
   add_foreign_key "questions", "evaluations"
 end

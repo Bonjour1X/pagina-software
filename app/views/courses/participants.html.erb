@@ -1,0 +1,20 @@
+<h1>Participantes de <%= @course.title %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Calificaciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @students.each do |enrollment| %>
+      <tr>
+        <td><%= enrollment.user.name %></td>
+        <td>Sin calificación disponible</td> <!-- Dejar vacío o mostrar un mensaje -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Volver', course_path(@course), class: 'btn btn-secondary' %>

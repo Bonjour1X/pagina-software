@@ -42,9 +42,28 @@
     </div>
   <% end %>
 
+  <h2>Participantes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Calificaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @course.enrollments.includes(:user).each do |enrollment| %>
+        <tr>
+          <td><%= enrollment.user.name %></td>
+          <td>Sin calificación disponible</td> <!-- Mensaje por ahora -->
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
   <div class="button-group">
     <%= button_to 'Crear nueva evaluación', new_course_evaluation_path(@course), method: :get, class: 'btn btn-primary' %>
     <%= button_to 'Ver solicitudes de inscripción', course_enrollment_requests_path(@course), method: :get, class: 'btn btn-info' %>
     <%= button_to 'Eliminar Clase', @course, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger' %>
+    <#%= link_to 'Ver Participantes y Calificaciones', participants_course_path(@course), class: 'btn btn-info' %> 
   </div>
 <% end %>
