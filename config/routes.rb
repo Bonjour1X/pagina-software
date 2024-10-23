@@ -50,7 +50,9 @@ Rails.application.routes.draw do
   get '/my_courses', to: 'courses#my_courses', as: 'my_courses'
   get '/available_courses', to: 'courses#available_courses', as: 'available_courses'
   
-
+  authenticated :user do
+    get 'profile', to: 'users#profile', as: 'profile'
+  end
 end
 
 

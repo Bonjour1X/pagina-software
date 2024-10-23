@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-10-22T20:08:23-03:00">2024-10-22T20:08:23-03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-10-23T14:21:00-03:00">2024-10-23T14:21:00-03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -22,7 +22,7 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  94.89%
+  94.96%
 </span>
 
      </span>
@@ -42,11 +42,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>137</b> relevant lines,
-    <span class="green"><b>130</b> lines covered</span> and
+    <b>139</b> relevant lines,
+    <span class="green"><b>132</b> lines covered</span> and
     <span class="red"><b>7</b> lines missed. </span>
     (<span class="green">
-  94.89%
+  94.96%
 </span>
 )
   </div>
@@ -204,7 +204,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#1ba2dbd553491e719849bc7d2f5c8a7502634a81" class="src_link" title="app/models/user.rb">app/models/user.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">17</td>
+            <td class="cell--number">19</td>
             <td class="cell--number">8</td>
             <td class="cell--number">8</td>
             <td class="cell--number">0</td>
@@ -314,9 +314,9 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#36b7c0f8d9ed30238e68d5bace7d30118ad32ade" class="src_link" title="config/routes.rb">config/routes.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">58</td>
-            <td class="cell--number">23</td>
-            <td class="cell--number">23</td>
+            <td class="cell--number">60</td>
+            <td class="cell--number">25</td>
+            <td class="cell--number">25</td>
             <td class="cell--number">0</td>
             <td class="cell--number">1.00</td>
             
@@ -2303,7 +2303,7 @@
 
             
 
-            <code class="ruby">  # Include default devise modules. Others available are:</code>
+            <code class="ruby">  #validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }</code>
           </li>
         </div>
       
@@ -2313,12 +2313,32 @@
 
             
 
+            <code class="ruby">  #validates :encrypted_password, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="5">
+            
+
+            
+
+            <code class="ruby">  # Include default devise modules. Others available are:</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="6">
+            
+
+            
+
             <code class="ruby">  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="5">
+          <li class="covered" data-hits="1" data-linenumber="7">
             
               <span class="hits">1</span>
             
@@ -2330,7 +2350,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="6">
+          <li class="never" data-hits="" data-linenumber="8">
             
 
             
@@ -2340,36 +2360,12 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="7">
+          <li class="never" data-hits="" data-linenumber="9">
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="8">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  validates :tipo, presence: true, inclusion: { in: [&quot;Estudiante&quot;, &quot;Profesor&quot;], message: &quot;no es válido&quot; }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="9">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  validates :name, presence: true</code>
           </li>
         </div>
       
@@ -2381,17 +2377,19 @@
 
             
 
-            <code class="ruby">  validates :phone, presence: true</code>
+            <code class="ruby">  validates :tipo, presence: true, inclusion: { in: [&quot;Estudiante&quot;, &quot;Profesor&quot;], message: &quot;no es válido&quot; }</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="11">
+          <li class="covered" data-hits="1" data-linenumber="11">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  # Habilita la cantidad de clases</code>
+            <code class="ruby">  validates :name, presence: true</code>
           </li>
         </div>
       
@@ -2403,19 +2401,17 @@
 
             
 
-            <code class="ruby">  has_many :courses #cambio de classes -&gt; courses</code>
+            <code class="ruby">  validates :phone, presence: true</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="13">
-            
-              <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="13">
             
 
             
 
-            <code class="ruby">  has_many :enrollment_requests</code>
+            <code class="ruby">  # Habilita la cantidad de clases</code>
           </li>
         </div>
       
@@ -2427,12 +2423,36 @@
 
             
 
+            <code class="ruby">  has_many :courses #cambio de classes -&gt; courses</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="15">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  has_many :enrollment_requests</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="16">
+            
+              <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  has_many :enrolled_courses, -&gt; { where(enrollment_requests: { status: &#39;approved&#39; }) }, </code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="15">
+          <li class="never" data-hits="" data-linenumber="17">
             
 
             
@@ -2442,7 +2462,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="16">
+          <li class="never" data-hits="" data-linenumber="18">
             
 
             
@@ -2452,7 +2472,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="17">
+          <li class="never" data-hits="" data-linenumber="19">
             
 
             
@@ -7719,8 +7739,8 @@
     
 
     <div class="t-line-summary">
-      <b>23</b> relevant lines.
-      <span class="green"><b>23</b> lines covered</span> and
+      <b>25</b> relevant lines.
+      <span class="green"><b>25</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -8298,22 +8318,26 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="53">
+          <li class="covered" data-hits="1" data-linenumber="53">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  authenticated :user do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="54">
+          <li class="covered" data-hits="1" data-linenumber="54">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">end</code>
+            <code class="ruby">    get &#39;profile&#39;, to: &#39;users#profile&#39;, as: &#39;profile&#39;</code>
           </li>
         </div>
       
@@ -8323,7 +8347,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -8333,7 +8357,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">end</code>
           </li>
         </div>
       
@@ -8349,6 +8373,26 @@
       
         <div>
           <li class="never" data-hits="" data-linenumber="58">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="59">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="60">
             
 
             

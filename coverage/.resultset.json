@@ -578,6 +578,8 @@
           1,
           1,
           null,
+          1,
+          1,
           null,
           null,
           null,
@@ -590,6 +592,8 @@
         "lines": [
           null,
           1,
+          null,
+          null,
           null,
           null,
           1,
@@ -799,7 +803,7 @@
         ]
       }
     },
-    "timestamp": 1729638503
+    "timestamp": 1729704060
   },
   "Minitest": {
     "coverage": {

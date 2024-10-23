@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class Users::RegistrationsController < Devise::RegistrationsController
    before_action :configure_sign_up_params, only: [:create]
    before_action :configure_account_update_params, only: [:update]
@@ -11,22 +10,33 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
    #POST /resource
    def create
-    super do |resource|
-      if resource.persisted?
-        flash[:notice] = "Welcome! You have signed up successfully."
-      end
-    end  # Cierra el bloque de super
-  end  # Cierra el método create
+    super
+   end
+    #super do |resource|
+    #  if resource.persisted?
+    #    flash[:notice] = "Welcome! You have signed up successfully."
+    #  end
+    #end  
 
    #GET /resource/edit
    def edit
      super
    end
 
-   #PUT /resource
-   def update
-     super
-   end
+  # PUT /resource
+  def update
+    super
+  end
+  #  super do |resource|
+  #    if resource.errors.any?
+  #      puts resource.errors.full_messages # Imprime errores en la consola
+  #      render :edit and return # Detenemos la ejecución con return
+  #    else
+  #      flash[:notice] = "Profile updated successfully."
+  #      redirect_to after_update_path_for(resource) and return # Detenemos la ejecución con return
+  #    end
+  #  end
+
 
    #DELETE /resource
    def destroy
@@ -53,6 +63,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
    def configure_account_update_params
      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :phone, :description, :tipo])
    end
+
+  # La ruta utilizada después de la actualización
+  #def after_update_path_for(resource)
+  #  profile_path 
+    
+  #end
 
   # The path used after sign up.
    def after_sign_up_path_for(resource)
