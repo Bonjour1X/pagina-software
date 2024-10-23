@@ -4,3 +4,9 @@ user_one:
   name: "Test User"
   tipo: "Estudiante"
   phone: "1234567890"
+
+profesor_one:
+  email: "profesor@example.com"
+  name: "Test Profesor"
+  tipo: "Profesor"
+  phone: "1234567890"

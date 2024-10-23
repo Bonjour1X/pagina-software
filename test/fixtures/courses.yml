@@ -1,1 +1,16 @@
 # test/fixtures/courses.yml
+course_one:
+  title: "Course Title One"
+  description: "Description for course one"
+  scheduled_date: <%= 1.day.from_now %> # O puedes usar una fecha específica
+  materials: "Material for course one"
+  modality: "Online"
+  user: profesor_one 
+
+course_two:
+  title: "Course Title Two"
+  description: "Description for course two"
+  scheduled_date: <%= 2.days.from_now %>
+  materials: "Material for course two"
+  modality: "In-person"
+  user: profesor_one 
