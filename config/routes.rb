@@ -23,23 +23,45 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
   }
 
-  
   devise_scope :user do
     get 'users/sign_out', to: 'devise/sessions#destroy'
   end
 
   resources :courses do
+    # Rutas para enrollment_requests
     resources :enrollment_requests, only: [:index, :create] do
       member do
         patch :approve
         patch :reject
       end
     end
-    resources :evaluations, only: [:new, :create]
+
+    # Rutas para evaluations
+    resources :evaluations do
+      member do
+        get :edit
+        patch :update
+        delete :destroy
+        get 'student_results'
+        post 'update_grade'
+        get 'show_answer'
+        post 'save_answer'
+        post 'grade_question/:question_id', to: 'evaluations#grade_question', as: 'grade_question'
+        post 'save_changes'
+        post 'submit'
+      end
+    end
+
+    # Rutas para reviews
+    resources :reviews
+
+    # Member routes para courses
     member do
       delete :leave
+      get 'student_evaluations'
     end
   end
+
   
   # Ruta para ver las clases dictadas por el profesor
   get 'taught_classes', to: 'courses#taught_classes', as: 'taught_classes'
@@ -47,10 +69,4 @@ Rails.application.routes.draw do
   # Se Añade estas rutas para manejar las clases y evaluaciones :D
   get '/my_courses', to: 'courses#my_courses', as: 'my_courses'
   get '/available_courses', to: 'courses#available_courses', as: 'available_courses'
-  
-
 end
-
-
-
-

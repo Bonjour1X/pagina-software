@@ -51,13 +51,6 @@ class EnrollmentRequestsController < ApplicationController
     redirect_to course_enrollment_requests_path(@enrollment_request.course), notice: 'Solicitud aprobada'
   end
 
-  def reject
-    @enrollment_request = EnrollmentRequest.find(params[:id])
-    @enrollment_request.update(status: 'rejected')
-    redirect_to course_enrollment_requests_path(@enrollment_request.course), notice: 'Solicitud rechazada'
-  end
-
-
   # Encuentra la solicitud de inscripción por su ID
   def find_enrollment_request
     @enrollment_request = EnrollmentRequest.find(params[:id])

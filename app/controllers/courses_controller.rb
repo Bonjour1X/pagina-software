@@ -14,7 +14,22 @@ class CoursesController < ApplicationController
     #@evaluation = Evaluation.new
     #@enrollment_request = EnrollmentRequest.new
     #@students_with_grades = @course.users.includes(:evaluations)  # Aquí se obtiene la lista de usuarios inscritos
+    
+    # Agregamos esto para obtener los alumnos inscritos y sus evaluaciones
+    if current_user.tipo == "Profesor" && current_user == @course.user
+      @enrolled_students = @course.enrolled_users.includes(:enrollment_requests)
+      @student_evaluations = {}
+      @enrolled_students.each do |student|
+        @student_evaluations[student.id] = @course.evaluations.map do |evaluation|
+          {
+            evaluation: evaluation,
+            status: evaluation_status(student, evaluation)
+          }
+        end
+      end
+    end
   end
+  
 
   def new
     @course = Course.new
@@ -32,6 +47,7 @@ class CoursesController < ApplicationController
   def my_courses
     if current_user.tipo == "Profesor"
       @courses = current_user.courses
+      @enrolled_courses = current_user.enrolled_courses  # Agregar esto para cursos donde está inscrito
     else
       @courses = current_user.enrolled_courses
     end
@@ -70,8 +86,49 @@ class CoursesController < ApplicationController
   def enrolled_courses
     @enrolled_courses = current_user.enrolled_courses
   end
+
+  def student_evaluations
+    @course = Course.find(params[:id])
+    @enrolled_students = @course.enrolled_users.includes(:enrollment_requests)
+    @student_evaluations = {}
+    
+    @enrolled_students.each do |student|
+      @student_evaluations[student.id] = @course.evaluations.map do |evaluation|
+        {
+          evaluation: evaluation,
+          status: evaluation_status(student, evaluation),
+          score: calculate_score(student, evaluation)
+        }
+      end
+    end
+  end
   
   private
+
+  def evaluation_status(_student, evaluation)
+    if Time.current < evaluation.start_date
+      'Pendiente'
+    elsif Time.current > evaluation.end_date
+      'Finalizada'
+    else
+      'En curso'
+    end
+  end
+
+  def calculate_score(student, evaluation)
+    # Aquí implementaremos la lógica de calificación
+    total_questions = evaluation.questions.count
+    correct_answers = evaluation.questions.count { |question| correct_answer?(student, q) }
+    
+    return 0 if total_questions == 0
+    (correct_answers.to_f / total_questions * 7).round(1)
+  end
+  
+  def correct_answer?(_student, _question)
+    # Implementar lógica según tipo de pregunta
+    # Por ahora retornamos nil hasta implementar respuestas
+    nil
+  end
 
   def course_params
     params.require(:course).permit(:title, :description, :scheduled_date, :materials, :modality)

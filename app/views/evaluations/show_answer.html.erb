@@ -1,0 +1,95 @@
+# app/views/evaluations/show_answer.html.erb 
+<div class="container">
+  <h1>Respuestas de <%= @student.name %> - <%= @evaluation.name %></h1>
+
+  <%= link_to 'Volver a Resultados', 
+              student_results_course_evaluation_path(@course, @evaluation) %>
+
+  <% @evaluation.questions.each_with_index do |question, index| %>
+    <div class="question-block">
+      <h3>Pregunta <%= index + 1 %></h3>
+      <p><%= question.content.split('|').first %></p>
+
+      <% if question.question_type == 'multiple_choice' %>
+        <div class="alternatives">
+          <p>Alternativas:</p>
+          <% alternatives = question.content.split('|')[1..-1] # Ignorar el primer elemento (pregunta) %>
+          <% alternatives.each_with_index do |alt, i| %>
+            <% alt = alt.delete_prefix('*') %>
+            <div class="alternative">
+              <p>Alternativa <%= i + 1 %>: <%= alt %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="student-response">
+          <p class="font-medium">Respuesta del alumno:</p>
+          <div class="answer-content">
+            <% student_answer = StudentResponse.find_by(question: question, user: @student) %>
+            <% if student_answer&.content.present? %>
+              <p><%= student_answer.content %></p>
+            <% else %>
+              <p>Respuesta pendiente</p>
+            <% end %>
+          </div>
+        </div>
+
+      <% else # Para preguntas de desarrollo %>
+        <div class="essay-response">
+          <p class="font-medium">Respuesta del alumno:</p>
+          <div class="answer-content">
+            <% student_answer = StudentResponse.find_by(question: question, user: @student) %>
+            <% if student_answer&.content.present? %>
+              <div class="development-answer">
+                <%= student_answer.content %>
+              </div>
+            <% else %>
+              <p>Respuesta pendiente</p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<style>
+.question-block {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.alternatives {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.alternative {
+  margin: 5px 0;
+  padding: 5px;
+}
+
+.student-response,
+.essay-response {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.answer-content {
+  margin-left: 20px;
+  padding: 10px;
+  border-left: 3px solid #4CAF50;
+}
+
+.development-answer {
+  white-space: pre-wrap;
+}
+</style>

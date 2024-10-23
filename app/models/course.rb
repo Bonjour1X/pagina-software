@@ -7,6 +7,8 @@ class Course < ApplicationRecord
   
   #has_many :enrollments # Agregado
   has_many :enrolled_users, through: :enrollment_requests, source: :user
+  # Para reviews
+  has_many :reviews, dependent: :destroy
   #has_many :users, through: :enrollments # Agregado
   validates :title, :scheduled_date, :modality, presence: true
   

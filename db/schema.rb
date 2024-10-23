@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_04_141700) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_23_112742) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,12 +78,45 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_04_141700) do
     t.index ["course_id"], name: "index_evaluations_on_course_id"
   end
 
+  create_table "grades", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "evaluation_id", null: false
+    t.decimal "score", precision: 3, scale: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evaluation_id"], name: "index_grades_on_evaluation_id"
+    t.index ["student_id", "evaluation_id"], name: "index_grades_on_student_id_and_evaluation_id", unique: true
+    t.index ["student_id"], name: "index_grades_on_student_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "content"
     t.bigint "evaluation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "question_type"
     t.index ["evaluation_id"], name: "index_questions_on_evaluation_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.text "content"
+    t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_reviews_on_course_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "student_responses", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "question_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_student_responses_on_question_id"
+    t.index ["user_id"], name: "index_student_responses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,5 +141,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_04_141700) do
   add_foreign_key "enrollment_requests", "courses"
   add_foreign_key "enrollment_requests", "users"
   add_foreign_key "evaluations", "courses"
+  add_foreign_key "grades", "evaluations"
+  add_foreign_key "grades", "users", column: "student_id"
   add_foreign_key "questions", "evaluations"
+  add_foreign_key "reviews", "courses"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "student_responses", "questions"
+  add_foreign_key "student_responses", "users"
 end

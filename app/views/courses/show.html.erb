@@ -1,21 +1,173 @@
-# show.html.erb
-<h1><%= @course.title %></h1>
-<p>Profesor: <%= @course.user&.name %></p>
-<p>Fecha: <%= @course.scheduled_date %></p>
-<p>Modalidad: <%= @course.modality %></p>
+# app/views/courses/show.html.erb
+<div class="course-info">
+  <h1><%= @course.title %></h1>
+  <p>Profesor: <%= @course.user&.name %></p>
+  <p>Fecha: <%= @course.scheduled_date %></p>
+  <p>Modalidad: <%= @course.modality %></p>
+  
+  <%= link_to course_reviews_path(@course), class: 'btn btn-info' do %>
+    Ver Reseñas (<%= @course.reviews.count %>)
+  <% end %>
+</div>
 
-<% if current_user.tipo == "Estudiante" %>
+<% if current_user == @course.user %>
+  <!-- Sección de Evaluaciones -->
+  <h2>Evaluaciones</h2>
+  <% @course.evaluations.group_by(&:evaluation_method).each do |method, evaluations| %>
+    <h3><%= method.titleize %></h3>
+    <% evaluations.each do |evaluation| %>
+      <li>
+        <%= link_to evaluation.name, course_evaluation_path(@course, evaluation) %>
+        (<%= evaluation.start_date.strftime("%d/%m/%Y") %> - <%= evaluation.end_date.strftime("%d/%m/%Y") %>)
+        <%= link_to 'Editar', edit_course_evaluation_path(@course, evaluation), class: 'btn btn-sm btn-secondary' %>
+        <%= button_to 'Eliminar', 
+            course_evaluation_path(@course, evaluation),
+            method: :delete,
+            data: { confirm: '¿Estás seguro?' },
+            class: 'btn btn-sm btn-danger' %>
+        <%= link_to "Ver resultados", 
+            student_results_course_evaluation_path(@course, evaluation), 
+            class: 'btn btn-sm btn-info' %>
+      </li>
+    <% end %>
+  <% end %>
+
+  <!-- Sección de Alumnos Inscritos -->
+  <div class="enrolled-students mt-6">
+    <h2 class="text-xl font-bold mb-4">Alumnos Inscritos</h2>
+    <% if @enrolled_students.any? %>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Nombre
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Email
+              </th>
+              <% @course.evaluations.each do |evaluation| %>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <%= evaluation.name %>
+                </th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% @enrolled_students.each do |student| %>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= student.name %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= student.email %>
+                </td>
+                <% @student_evaluations[student.id].each do |eval_info| %>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                      <%= case eval_info[:status]
+                        when 'Pendiente' then 'bg-yellow-100 text-yellow-800'
+                        when 'En curso' then 'bg-green-100 text-green-800'
+                        when 'Finalizada' then 'bg-gray-100 text-gray-800'
+                      end %>">
+                      <%= eval_info[:status] %>
+                    </span>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p class="text-gray-500 italic">No hay alumnos inscritos en este curso.</p>
+    <% end %>
+
+    <div class="grades-summary mt-6">
+    <h2 class="text-xl font-bold mb-4">Resumen de Calificaciones</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Alumno
+            </th>
+            <% @course.evaluations.each do |evaluation| %>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <%= evaluation.name %>
+              </th>
+            <% end %>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Promedio
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Estado
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @enrolled_students.each do |student| %>
+            <% grades = [] %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= student.name %>
+              </td>
+              
+              <% @course.evaluations.each do |evaluation| %>
+                <% grade = Grade.find_by(student: student, evaluation: evaluation)&.score %>
+                <% grades << grade if grade.present? %>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= grade ? sprintf('%.1f', grade) : '-' %>
+                </td>
+              <% end %>
+              
+              <% average = grades.any? ? (grades.sum / grades.size).round(1) : nil %>
+              <td class="px-6 py-4 whitespace-nowrap <%= average && average >= 4.0 ? 'text-green-600' : 'text-red-600' %>">
+                <%= average ? sprintf('%.1f', average) : '-' %>
+              </td>
+              
+              <td class="px-6 py-4 whitespace-nowrap">
+                <% if average %>
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                    <%= average >= 4.0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                    <%= average >= 4.0 ? 'Aprobado' : 'Reprobado' %>
+                  </span>
+                <% else %>
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                    Pendiente
+                  </span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Botones de Acción -->
+  <div class="button-group mt-6">
+    <%= button_to 'Crear nueva evaluación', new_course_evaluation_path(@course), method: :get, class: 'btn btn-primary' %>
+    <%= button_to 'Ver solicitudes de inscripción', course_enrollment_requests_path(@course), method: :get, class: 'btn btn-info' %>
+    <%= button_to 'Eliminar Clase', @course, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger' %>
+  </div>
+
+<% else %>
   <% enrollment_request = @course.enrollment_requests.find_by(user: current_user) %>
   
   <% if enrollment_request&.approved? %>
     <%= button_to 'Salir de clase', leave_course_path(@course), method: :delete, data: { confirm: '¿Estás seguro de que deseas salir de esta clase?' }, class: 'btn btn-warning' %>
     
     <h2>Evaluaciones disponibles</h2>
+    <% if current_user.tipo == "Profesor" %>
+      <p class="text-info">Aunque seas profesor, aquí eres un estudiante más.</p>
+    <% end %>
     <% @course.evaluations.each do |evaluation| %>
       <div>
-        <h3><%= evaluation.name %></h3>
-        <p>Fecha de inicio: <%= evaluation.start_date %></p>
-        <p>Fecha de fin: <%= evaluation.end_date %></p>
+        <h3><%= link_to evaluation.name, course_evaluation_path(@course, evaluation) %></h3>
+        <p>Tipo: <%= evaluation.evaluation_method %></p>
+        <p>Fecha de inicio: <%= evaluation.start_date.strftime("%d/%m/%Y %H:%M") %></p>
+        <p>Fecha de fin: <%= evaluation.end_date.strftime("%d/%m/%Y %H:%M") %></p>
       </div>
     <% end %>
   <% elsif enrollment_request&.pending? %>
@@ -23,28 +175,4 @@
   <% else %>
     <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary', data: { disable_with: 'Enviando solicitud...' } %>
   <% end %>
-<% end %>
-
-<% if current_user.tipo == "Profesor" && current_user == @course.user %>
-  <h2>Evaluaciones</h2>
-  <% @course.evaluations.each do |evaluation| %>
-    <div>
-      <h3><%= evaluation.name %></h3>
-      <p>Tipo: <%= evaluation.evaluation_method %></p>
-      <p>Fecha de inicio: <%= evaluation.start_date %></p>
-      <p>Fecha de fin: <%= evaluation.end_date %></p>
-      <h4>Preguntas:</h4>
-      <ol>
-        <% evaluation.questions.each do |question| %>
-          <li><%= question %></li>
-        <% end %>
-      </ol>
-    </div>
-  <% end %>
-
-  <div class="button-group">
-    <%= button_to 'Crear nueva evaluación', new_course_evaluation_path(@course), method: :get, class: 'btn btn-primary' %>
-    <%= button_to 'Ver solicitudes de inscripción', course_enrollment_requests_path(@course), method: :get, class: 'btn btn-info' %>
-    <%= button_to 'Eliminar Clase', @course, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger' %>
-  </div>
 <% end %>

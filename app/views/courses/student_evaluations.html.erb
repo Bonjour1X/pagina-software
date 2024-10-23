@@ -1,0 +1,60 @@
+# app/views/courses/student_evaluations.html.erb
+<div class="container mx-auto px-4 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">Evaluaciones de Alumnos - <%= @course.title %></h1>
+    <%= link_to 'Volver al Curso', course_path(@course), class: 'btn btn-secondary' %>
+  </div>
+
+  <% if @enrolled_students.any? %>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+            <% @course.evaluations.each do |evaluation| %>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                <%= evaluation.name %>
+              </th>
+            <% end %>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @enrolled_students.each do |student| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap"><%= student.name %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= student.email %></td>
+              <% @student_evaluations[student.id].each do |eval_info| %>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex flex-col">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                      <%= case eval_info[:status]
+                          when 'Pendiente' then 'bg-yellow-100 text-yellow-800'
+                          when 'En curso' then 'bg-green-100 text-green-800'
+                          when 'Finalizada' then 'bg-gray-100 text-gray-800'
+                        end %>">
+                      <%= eval_info[:status] %>
+                    </span>
+                    <% if eval_info[:score] %>
+                      <span class="mt-1 text-sm <%= eval_info[:score] >= 4.0 ? 'text-green-600' : 'text-red-600' %>">
+                        Nota: <%= eval_info[:score] %>
+                      </span>
+                    <% end %>
+                  </div>
+                </td>
+              <% end %>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= link_to 'Ver Detalle',
+                    student_evaluation_details_course_path(@course, student_id: student.id),
+                    class: 'text-blue-600 hover:text-blue-900' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="text-gray-500 italic">No hay alumnos inscritos en este curso.</p>
+  <% end %>
+</div>

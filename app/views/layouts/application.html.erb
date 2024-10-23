@@ -20,22 +20,24 @@
 
   <body>
   # Agrego texto a body para ver nuevos botones de clases
-    <nav>
-      <%= link_to 'Inicio', root_path %>
-      <% if user_signed_in? %>
-        <% if current_user.tipo == "Profesor" %>
-          <%= link_to 'Mis Clases', my_courses_path %>
-          <%= link_to 'Crear Clase', new_course_path %>
-        <% else %>
-          <%= link_to 'Clases Disponibles', available_courses_path %>
-          <%= link_to 'Mis Clases Inscritas', enrolled_courses_path %>
-        <% end %>
-        <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete %>
+  <nav>
+  <%= link_to 'Inicio', root_path %>
+    <% if user_signed_in? %>
+      <% if current_user.tipo == "Profesor" %>
+        <%= link_to 'Mis Clases Dictadas', taught_classes_path %>
+        <%= link_to 'Crear Clase', new_course_path %>
+        <%= link_to 'Clases Disponibles', available_courses_path %>
+        <%= link_to 'Mis Clases Inscritas', enrolled_courses_path %>
       <% else %>
-        <%= link_to 'Iniciar Sesión', new_user_session_path %>
-        <%= link_to 'Registrarse', new_user_registration_path %>
+        <%= link_to 'Clases Disponibles', available_courses_path %>
+        <%= link_to 'Mis Clases Inscritas', enrolled_courses_path %>
       <% end %>
-    </nav>
+      <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Iniciar Sesión', new_user_session_path %>
+      <%= link_to 'Registrarse', new_user_registration_path %>
+    <% end %>
+  </nav>
   
     <%= yield %>
   </body>

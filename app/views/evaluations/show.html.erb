@@ -1,0 +1,168 @@
+<div class="evaluation-details">
+  <h1><%= @evaluation.name %></h1>
+  <p>Tipo: <%= @evaluation.evaluation_method.titleize %></p>
+  <p>Fecha de inicio: <%= @evaluation.start_date.strftime("%d/%m/%Y %H:%M") %></p>
+  <p>Fecha de fin: <%= @evaluation.end_date.strftime("%d/%m/%Y %H:%M") %></p>
+  
+  <h2>Preguntas:</h2>
+  <% if @evaluation.questions.any? %>
+    <form id="evaluation-form">
+      <% @evaluation.questions.each_with_index do |question, index| %>
+        <div class="question">
+          <div class="question-header">
+            <strong>Pregunta <%= index + 1 %></strong>
+          </div>
+          
+          <p class="question-content"><%= question.content.split('|').first %></p>
+          
+          <% if question.question_type == 'multiple_choice' %>
+            <% alternatives = question.content.split('|')[1..-1] # Ignorar el primer elemento %>
+            <% correct_alt = alternatives.find { |alt| alt.start_with?('*') }&.delete_prefix('*') %>
+                
+            <div class="alternatives">
+              <% alternatives.each_with_index do |alt, i| %>
+                <% alt = alt.delete_prefix('*') %>
+                <div class="alternative">
+                  <% if current_user.tipo == "Estudiante" %>
+                    <input type="radio" 
+                           name="question_<%= question.id %>" 
+                           value="<%= alt %>"
+                           id="q<%= question.id %>_a<%= i %>">
+                    <label for="q<%= question.id %>_a<%= i %>">
+                      Alternativa <%= i + 1 %>: <%= alt %>
+                    </label>
+                  <% else %>
+                    <p>Alternativa <%= i + 1 %>: <%= alt %>
+                       <% if alt == correct_alt %>
+                         <span class="correct-answer">(Correcta)</span>
+                       <% end %>
+                    </p>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="essay-answer">
+              <% if current_user.tipo == "Estudiante" %>
+                <textarea id="answer_<%= question.id %>" 
+                         rows="4" 
+                         class="development-answer"
+                         placeholder="Escribe tu respuesta aquí"></textarea>
+              <% else %>
+                <div class="student-answers">
+                  <p class="development-prompt">Respuesta esperada:</p>
+                  <div class="expected-answer">
+                    <%= question.content %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+          
+          <% if current_user.tipo == "Estudiante" %>
+            <button type="button" class="save-btn" onclick="saveResponse(<%= question.id %>)">
+              Guardar Respuesta
+            </button>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <% if current_user.tipo == "Estudiante" %>
+        <button type="button" onclick="submitEvaluation()" class="submit-evaluation-btn">
+          Enviar Evaluación
+        </button>
+      <% end %>
+    </form>
+  <% else %>
+    <p>No hay preguntas para esta evaluación.</p>
+  <% end %>
+</div>
+
+<script>
+function saveResponse(questionId) {
+  const question = document.querySelector(`#answer_${questionId}`) || 
+                  document.querySelector(`input[name="question_${questionId}"]:checked`);
+  
+  if (!question || !question.value) {
+    alert('Por favor ingresa una respuesta');
+    return;
+  }
+
+  fetch(`/courses/<%= @course.id %>/evaluations/<%= @evaluation.id %>/save_answer`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+    },
+    body: JSON.stringify({
+      question_id: questionId,
+      content: question.value
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    const button = event.target;
+    button.textContent = '¡Guardado!';
+    setTimeout(() => button.textContent = 'Guardar Respuesta', 2000);
+  });
+}
+
+function submitEvaluation() {
+  if (!confirm('¿Seguro que deseas enviar la evaluación? No podrás modificar tus respuestas después.')) return;
+  
+  fetch(`/courses/<%= @course.id %>/evaluations/<%= @evaluation.id %>/submit`, {
+    method: 'POST',
+    headers: {
+      'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status === 'success') {
+      window.location.href = '<%= course_path(@course) %>';
+    }
+  });
+}
+</script>
+
+<style>
+.question {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.alternative {
+  margin: 10px 0;
+  padding: 5px;
+}
+
+.development-answer {
+  width: 100%;
+  min-height: 100px;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.save-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-evaluation-btn {
+  background-color: #2196F3;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+}
+</style>
