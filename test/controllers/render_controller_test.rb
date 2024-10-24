@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'test_helper'
 
 class RenderControllerTest < ActionDispatch::IntegrationTest
@@ -8,3 +6,4 @@ class RenderControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 end
+  

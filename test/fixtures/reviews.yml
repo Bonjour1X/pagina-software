@@ -1,13 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-#
-#one:
-#  user: one
-#  course: one
-#  content: MyText
-#  rating: 1
-#
-#two:
-#  user: two
-#  course: two
-#  content: MyText
-#  rating: 1
+review_one:
+  content: "This is a great course!"
+  rating: 5
+  course: course_one  # Asociamos la review al curso 'course_one'
+  user: user_one      # Asociamos la review al usuario 'user_one'
+
+review_two:
+  content: "Could be improved in some areas."
+  rating: 3
+  course: course_two  # Asociamos la review al curso 'course_two'
+  user: user_one      # También puede ser el mismo usuario o diferente

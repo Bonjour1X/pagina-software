@@ -17,8 +17,6 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     post user_session_path, params: { user: { email: "wrong@example.com", password: "wrongpassword" } }
     
     assert_template 'devise/sessions/new'  # Verifica que se muestre el formulario de inicio de sesión
-    assert_select "div#error_explanation"  # Verifica que se muestre el contenedor de errores
-    assert_select "div.alert.alert-danger"  # Verifica que se muestre el contenedor de alertas
-    assert_select "li", "Invalid email or password."  # Ajusta según el mensaje que estés utilizando
+    assert_select "div.alert.alert-danger", "Invalid Email or password."  # Verifica el mensaje de alerta en flash
   end
 end

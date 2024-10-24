@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
+  resources :posts
   # USER
-
   devise_for :users, controllers: { 
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -64,16 +64,12 @@ Rails.application.routes.draw do
     end
   end
 
-  
-  # Ruta para ver las clases dictadas por el profesor
   get 'taught_classes', to: 'courses#taught_classes', as: 'taught_classes'
-
-  # Se Añade estas rutas para manejar las clases y evaluaciones :D
   get '/my_courses', to: 'courses#my_courses', as: 'my_courses'
   get '/available_courses', to: 'courses#available_courses', as: 'available_courses'
 
-  #authenticated :user do
-    #get 'profile', to: 'users#profile', as: 'profile'
-  #end
+  authenticated :user do
+    get 'profile', to: 'users#profile', as: 'profile'
+  end
 end
 

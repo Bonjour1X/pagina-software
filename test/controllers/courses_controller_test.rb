@@ -24,7 +24,7 @@ class CourseTest < ActiveSupport::TestCase
     assert_not @course.valid?
   end
   
-  #Creo qno esta implementado
+  #No esta implementado
   #test "scheduled_date should not be in the past" do
   #  @course.scheduled_date = 1.day.ago
   #  assert_not @course.valid?
