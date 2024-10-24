@@ -7,23 +7,13 @@ class Users::SessionsController < Devise::SessionsController
     super
   end
 
-  # POST /resource/sign_in
+
+   #POST /resource/sign_in
   def create
-    self.resource = warden.authenticate(auth_options) # Autenticación de usuario
-    if resource
-      set_flash_message!(:notice, :signed_in)
-      sign_in(resource_name, resource)
-      yield resource if block_given?
-      respond_with resource, location: after_sign_in_path_for(resource)
-    else
-      flash.now[:alert] = "Invalid email or password."
-      self.resource = User.new # Inicializa el recurso
-      resource.errors.add(:base, flash.now[:alert]) # Agrega el mensaje de error
-      render :new and return # Asegúrate de detener la ejecución aquí
-    end
+    super
   end
 
-  # DELETE /resource/sign_out
+  #DELETE /resource/sign_out
   def destroy
     super
   end

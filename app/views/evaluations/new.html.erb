@@ -1,11 +1,10 @@
-# Crea la parte de nuevas evaluaciones
 # app/views/evaluations/new.html.erb
-<<h1>Nueva Evaluación para <%= @course.title %></h1>
+<h1>Nueva Evaluación para <%= @course.title %></h1>
 
 <%= form_with(model: [@course, @evaluation], local: true) do |form| %>
   <% if @evaluation.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@evaluation.errors.count, "error") %> prohibited this evaluation from being saved:</h2>
+      <h2><%= pluralize(@evaluation.errors.count, "error") %></h2>
       <ul>
         <% @evaluation.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -15,24 +14,30 @@
   <% end %>
 
   <div>
-    <%= form.label :name %>
+    <%= form.label :name, "Nombre de la Evaluación" %>
     <%= form.text_field :name %>
   </div>
 
   <div>
-    <%= form.label :evaluation_method %>
-    <%= form.select :evaluation_method, [['Opción múltiple', 'multiple_choice'], ['Desarrollo', 'essay'], ['Mixto', 'mixed']] %>
+    <%= form.label :evaluation_method, "Tipo de Evaluación" %>
+    <%= form.select :evaluation_method, [
+      ['Opción múltiple', 'multiple_choice'],
+      ['Desarrollo', 'essay'],
+      ['Mixto', 'mixed']
+    ], prompt: "Selecciona un tipo" %>
   </div>
 
   <div>
-    <%= form.label :start_date %>
+    <%= form.label :start_date, "Fecha de Inicio" %>
     <%= form.datetime_local_field :start_date %>
   </div>
 
   <div>
-    <%= form.label :end_date %>
+    <%= form.label :end_date, "Fecha de Término" %>
     <%= form.datetime_local_field :end_date %>
   </div>
 
-  <%= form.submit %>
+  <%= form.submit "Crear Evaluación", data: { disable_with: 'Creando...' } %>
 <% end %>
+
+<%= link_to 'Volver al Curso', course_path(@course) %>

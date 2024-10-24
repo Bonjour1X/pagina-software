@@ -1,0 +1,99 @@
+# app/views/reviews/show.html.erb
+<div class="review-container">
+  <div class="review-header">
+    <h2>Reseña para <%= @course.title %></h2>
+    <%= link_to 'Volver a Reseñas', course_path(@course), class: 'btn btn-secondary' %>
+  </div>
+
+  <div class="review-card">
+    <div class="metadata">
+      <strong>Por: <%= @review.user.name %></strong>
+      <span><%= @review.created_at.strftime("%d/%m/%Y") %></span>
+    </div>
+
+    <div class="rating">
+      <% @review.rating.times do %>★<% end %>
+      <% (5 - @review.rating).times do %>☆<% end %>
+    </div>
+
+    <div class="content">
+      <%= @review.content %>
+    </div>
+
+    <% if @review.user == current_user %>
+      <div class="actions">
+        <%= link_to 'Editar', edit_course_review_path(@course, @review), class: 'btn btn-secondary' %>
+        <%= button_to 'Eliminar', 
+            course_review_path(@course, @review),
+            method: :delete,
+            data: { confirm: '¿Estás seguro?' },
+            class: 'btn btn-danger' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<style>
+.review-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.review-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background: white;
+}
+
+.metadata {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.rating {
+  color: #ffd700;
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.content {
+  margin: 15px 0;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+</style>

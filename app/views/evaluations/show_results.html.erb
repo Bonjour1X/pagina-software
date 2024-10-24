@@ -1,0 +1,74 @@
+# app/views/evaluations/show_results.html.erb
+<div class="container mx-auto px-4 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">Resultados - <%= @evaluation.name %></h1>
+    <%= link_to 'Volver al Curso', course_path(@course), class: 'btn btn-secondary' %>
+  </div>
+
+  <% if @enrolled_students.any? %>
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left">Estudiante</th>
+          <th class="px-6 py-3 text-left">Estado</th>
+          <th class="px-6 py-3 text-left">Nota</th>
+          <th class="px-6 py-3 text-left">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @enrolled_students.each do |student| %>
+          <tr>
+            <td class="px-6 py-4"><%= student.name %></td>
+            <td class="px-6 py-4">
+              <span class="px-2 py-1 rounded-full text-sm
+                <%= case @student_answers[student.id][:status]
+                    when 'Finalizada' then 'bg-green-100 text-green-800'
+                    when 'En curso' then 'bg-yellow-100 text-yellow-800'
+                    else 'bg-gray-100 text-gray-800'
+                    end %>">
+                <%= @student_answers[student.id][:status] %>
+              </span>
+            </td>
+            <td class="px-6 py-4">
+              <% if @student_answers[student.id][:status] == 'Finalizada' %>
+                <%= form_tag update_grade_course_evaluation_path(@course, @evaluation), 
+                            method: :post, 
+                            class: 'flex items-center space-x-2' do %>
+                  <%= hidden_field_tag :student_id, student.id %>
+                  <%= number_field_tag :score, 
+                      @student_answers[student.id][:grade], 
+                      step: 0.1, 
+                      min: 1.0, 
+                      max: 7.0, 
+                      class: 'w-20 rounded border-gray-300' %>
+                  <%= submit_tag 'Guardar', 
+                      class: 'px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700' %>
+                <% end %>
+              <% else %>
+                No disponible
+              <% end %>
+            </td>
+            <td class="px-6 py-4">
+              <%= link_to 'Ver Respuestas', 
+                  student_answers_course_evaluation_path(@course, @evaluation, student_id: student.id),
+                  class: 'text-blue-600 hover:text-blue-900' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      <% if @enrolled_students.any? && @student_answers.values.any? { |a| a[:grade].present? } %>
+        <tfoot>
+          <tr class="bg-gray-50">
+            <td colspan="2" class="px-6 py-4 font-bold">Promedio del curso:</td>
+            <td class="px-6 py-4">
+              <%= calculate_average_grade(@student_answers).round(1) %>
+            </td>
+            <td></td>
+          </tr>
+        </tfoot>
+      <% end %>
+    </table>
+  <% else %>
+    <p class="text-gray-500">No hay estudiantes inscritos en este curso.</p>
+  <% end %>
+</div>

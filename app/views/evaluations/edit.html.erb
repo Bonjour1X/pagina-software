@@ -1,0 +1,333 @@
+# app/views/evaluations/edit.html.erb 
+<h1>Editar Evaluación</h1>
+
+<div class="help-message" style="background-color: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
+  <h4 style="margin-top: 0; color: #1976D2;">Instrucciones para crear preguntas:</h4>
+  <ol style="margin-bottom: 0; color: #333;">
+    <li>Primero, escriba la pregunta y seleccione el tipo (múltiple o desarrollo)</li>
+    <li>Haga clic en "Actualizar Evaluación" para guardar la pregunta</li>
+    <li>Si es de alternativas, ahora puede editar las opciones y marcar la correcta</li>
+    <li>Vuelva a hacer clic en "Actualizar Evaluación" para guardar las alternativas</li>
+    <li>Para preguntas de desarrollo:
+      <ul>
+        <li>El proceso de editar preguntas de estas mismas, se hace al eliminar la pregunta y crear una nueva</li>
+      </ul>
+    </li>
+  </ol>
+  <p style="margin-top: 10px; font-style: italic; color: #666;">
+    Nota: Es necesario guardar dos veces para asegurar que tanto la pregunta como las alternativas se guarden correctamente.
+  </p>
+</div>
+
+<%= form_with(model: [@course, @evaluation], local: true) do |form| %>
+  <% if @evaluation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@evaluation.errors.count, "error") %></h2>
+      <ul>
+        <% @evaluation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "Nombre" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :evaluation_method, "Tipo de evaluación" %>
+    <%= form.select :evaluation_method, [
+      ['Opción múltiple', 'multiple_choice'],
+      ['Desarrollo', 'essay'],
+      ['Mixto', 'mixed']
+    ], {}, { onchange: 'handleEvaluationTypeChange(this.value)' } %>
+  </div>
+
+  <div>
+    <%= form.label :start_date, "Fecha de inicio" %>
+    <%= form.datetime_local_field :start_date %>
+  </div>
+
+  <div>
+    <%= form.label :end_date, "Fecha de fin" %>
+    <%= form.datetime_local_field :end_date %>
+  </div>
+
+  <h3>Preguntas</h3>
+  <div id="questions-container">
+    <%= form.fields_for :questions do |question_form| %>
+      <div class="question-field">
+        <div class="question-content">
+          <%= question_form.label :actual_question, "Pregunta" %>
+          <%= question_form.text_area :actual_question, 
+              class: "question-text",
+              placeholder: "Escribe la pregunta aquí",
+              value: question_form.object.content&.split('|')&.first %>
+        </div>
+                    
+        <%= question_form.label :question_type, "Tipo de pregunta" %>
+        <%= question_form.select :question_type, [
+          ['Opción múltiple', 'multiple_choice'],
+          ['Desarrollo', 'essay']
+        ], {}, { onchange: 'handleQuestionTypeChange(this)' } %>
+                
+        <%= question_form.hidden_field :_destroy, class: 'destroy-flag', value: 'false' %>
+        <%= question_form.hidden_field :content, class: 'alternatives-storage' %>
+              
+        <div class="alternatives" style="display: <%= question_form.object&.question_type == 'multiple_choice' ? 'block' : 'none' %>">
+          <div class="alternatives-list">
+            <%= question_form.hidden_field :id %>
+                    
+            <% alternatives = question_form.object&.content&.split('|')&.[](1..-1) || [] %>
+            <% 4.times do |i| %>
+              <% alternative = alternatives[i]&.delete_prefix('*') || '' %>
+              <% is_correct = alternatives[i]&.start_with?('*') || false %>
+              <div class="alternative-field">
+                <label>Alternativa <%= i + 1 %></label>
+                <%= text_field_tag "evaluation[questions_attributes][#{question_form.index}][alternatives][#{i}]",
+                    alternative,
+                    class: "alternative-input",
+                    placeholder: "Alternativa #{i + 1}",
+                    onchange: "updateQuestionContent(this)" %>
+                <%= check_box_tag "evaluation[questions_attributes][#{question_form.index}][alternatives_correct][#{i}]",
+                    "1",
+                    is_correct,
+                    class: "alternative-correct",
+                    onchange: "updateQuestionContent(this)" %>
+                <label>Correcta</label>
+              </div>
+            <% end %>
+          </div>
+        </div>
+                    
+        <div class="essay-answer" style="display: <%= question_form.object&.question_type == 'essay' ? 'block' : 'none' %>">
+          <div class="essay-field">
+            <%= question_form.text_area :actual_question,
+                value: question_form.object.content,
+                rows: 4,
+                placeholder: "Espacio para respuesta",
+                class: "w-full border rounded p-2" %>
+          </div>
+        </div>
+
+        <%= question_form.hidden_field :id if question_form.object.persisted? %>
+        <button type="button" class="remove-question" onclick="removeQuestion(this)">
+          Eliminar Pregunta
+        </button>
+      </div>
+    <% end %>
+  </div>
+
+  <button type="button" onclick="addQuestion()" class="add-question">
+    Añadir pregunta
+  </button>
+
+  <%= form.submit "Actualizar Evaluación" %>
+<% end %>
+
+<%= link_to 'Volver', course_path(@course) %>
+
+<script>
+function handleEvaluationTypeChange(type) {
+  const container = document.getElementById('questions-container');
+  if (confirm('¿Cambiar el tipo de evaluación? Se resetearán las preguntas según el tipo seleccionado')) {
+    if (type === 'multiple_choice') {
+      container.querySelectorAll('.question-field select').forEach(select => {
+        select.value = 'multiple_choice';
+        handleQuestionTypeChange(select);
+      });
+    } else if (type === 'essay') {
+      container.querySelectorAll('.question-field select').forEach(select => {
+        select.value = 'essay';
+        handleQuestionTypeChange(select);
+      });
+    }
+  }
+}
+
+function updateQuestionContent(input) {
+  const questionField = input.closest('.question-field');
+  const alternativesList = questionField.querySelector('.alternatives-list');
+  const actualQuestion = questionField.querySelector('.question-text').value;
+  const alternativesStorage = questionField.querySelector('.alternatives-storage');
+  
+  const alternatives = Array.from(alternativesList.querySelectorAll('.alternative-field')).map(field => {
+    const text = field.querySelector('input[type="text"]').value;
+    const isCorrect = field.querySelector('input[type="checkbox"]').checked;
+    return isCorrect ? `*${text}` : text;
+  });
+  
+  alternativesStorage.value = `${actualQuestion}|${alternatives.join('|')}`;
+}
+
+function handleQuestionTypeChange(select) {
+  const questionField = select.closest('.question-field');
+  const alternatives = questionField.querySelector('.alternatives');
+  const essayAnswer = questionField.querySelector('.essay-answer');
+  const actualQuestion = questionField.querySelector('.question-text');
+  
+  if (select.value === 'multiple_choice') {
+    alternatives.style.display = 'block';
+    essayAnswer.style.display = 'none';
+  } else if (select.value === 'essay') {
+    alternatives.style.display = 'none';
+    essayAnswer.style.display = 'block';
+    actualQuestion.value = '';
+  }
+}
+
+function addQuestion() {
+  const container = document.getElementById('questions-container');
+  if (container.children.length >= 10) {
+    alert('Máximo 10 preguntas permitidas');
+    return;
+  }
+
+  const questionCount = container.children.length;
+  const newQuestion = `
+    <div class="question-field">
+      <label>Pregunta</label>
+      <textarea name="evaluation[questions_attributes][${questionCount}][content]"></textarea>
+      
+      <label>Tipo de pregunta</label>
+      <select name="evaluation[questions_attributes][${questionCount}][question_type]" onchange="handleQuestionTypeChange(this)">
+        <option value="multiple_choice">Opción múltiple</option>
+        <option value="essay">Desarrollo</option>
+      </select>
+
+      <input type="hidden" name="evaluation[questions_attributes][${questionCount}][_destroy]" value="false" class="destroy-flag">
+
+      <div class="alternatives" style="display: none;">
+        <div class="alternatives-list">
+          <% 4.times do |i| %>
+            <div class="alternative-field">
+              <label>Alternativa <%= i + 1 %></label>
+              <input type="text" 
+                     name="evaluation[questions_attributes][${questionCount}][alternatives][<%= i %>]"
+                     class="alternative-input"
+                     placeholder="Alternativa <%= i + 1 %>"
+                     onchange="updateQuestionContent(this)">
+              <input type="checkbox"
+                     name="evaluation[questions_attributes][${questionCount}][alternatives_correct][<%= i %>]"
+                     value="1"
+                     class="alternative-correct"
+                     onchange="updateQuestionContent(this)">
+              <label>Correcta</label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="essay-answer" style="display: none;">
+        <div class="essay-field">
+          <textarea class="development-response"
+                    name="evaluation[questions_attributes][${questionCount}][development_response]"
+                    rows="4"
+                    placeholder="Espacio para respuesta"></textarea>
+        </div>
+      </div>
+
+      <button type="button" class="remove-question" onclick="removeQuestion(this)">
+        Eliminar Pregunta
+      </button>
+    </div>
+  `;
+  container.insertAdjacentHTML('beforeend', newQuestion);
+}
+
+function removeQuestion(button) {
+  if (confirm('¿Está seguro de eliminar esta pregunta?')) {
+    const questionField = button.closest('.question-field');
+    const destroyFlag = questionField.querySelector('.destroy-flag');
+    if (destroyFlag) {
+      destroyFlag.value = 'true';
+      questionField.style.display = 'none';
+    } else {
+      questionField.remove();
+    }
+  }
+}
+
+// Inicializar los manejadores de eventos cuando carga la página
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.alternative-input, .alternative-correct').forEach(input => {
+    input.addEventListener('change', function() {
+      updateQuestionContent(this);
+    });
+  });
+});
+</script>
+
+<style>
+.question-field {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.alternatives {
+  margin-top: 10px;
+}
+
+.alternative-field {
+  margin: 10px 0;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alternative-input {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.remove-question {
+  margin-top: 10px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.add-question {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+input[type="text"], 
+textarea, 
+select {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.essay-field textarea {
+  width: 100%;
+  min-height: 100px;
+}
+
+input[type="checkbox"] {
+  margin: 0 5px;
+}
+
+label {
+  margin-right: 10px;
+}
+</style>

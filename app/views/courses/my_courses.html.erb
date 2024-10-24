@@ -5,11 +5,23 @@
   <% @courses.each do |course| %>
     <div>
       <h2><%= link_to course.title, course_path(course) %></h2>
-      <p>Profesor: <%= course.user.name %></p>
+      <p>Profesor: <%= course.user&.name %></p>
       <p>Fecha: <%= course.scheduled_date %></p>
       <p>Modalidad: <%= course.modality %></p>
     </div>
   <% end %>
 <% else %>
-  <p>No tienes clases creadas o inscritas.</p>
+  <p>No hay clases disponibles.</p>
+<% end %>
+
+<% if current_user.tipo == "Profesor" && @enrolled_courses.any? %>
+  <h2>Clases en las que Estoy Inscrito</h2>
+  <% @enrolled_courses.each do |course| %>
+    <div>
+      <h2><%= link_to course.title, course_path(course) %></h2>
+      <p>Profesor: <%= course.user&.name %></p>
+      <p>Fecha: <%= course.scheduled_date %></p>
+      <p>Modalidad: <%= course.modality %></p>
+    </div>
+  <% end %>
 <% end %>
