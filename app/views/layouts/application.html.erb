@@ -18,20 +18,7 @@
   </head>
 
   <body>
-<<<<<<< HEAD
-    <!Agrego texto a body para ver nuevos botones de clases>
-    <nav>
-      <%= link_to 'Inicio', root_path %>
-      <% if user_signed_in? %>
-        <% if current_user.tipo == "Profesor" %>
-          <%= link_to 'Mis Clases', my_courses_path %>
-          <%= link_to 'Crear Clase', new_course_path %>
-        <% else %>
-          <%= link_to 'Clases Disponibles', available_courses_path %>
-          <%= link_to 'Mis Clases Inscritas', enrolled_courses_path %>
-        <% end %>
-        <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete %>
-=======
+
   # Agrego texto a body para ver nuevos botones de clases
   <nav>
   <%= link_to 'Inicio', root_path %>
@@ -41,7 +28,6 @@
         <%= link_to 'Crear Clase', new_course_path %>
         <%= link_to 'Clases Disponibles', available_courses_path %>
         <%= link_to 'Mis Clases Inscritas', enrolled_courses_path %>
->>>>>>> respaldo-bonjour1X
       <% else %>
         <%= link_to 'Clases Disponibles', available_courses_path %>
         <%= link_to 'Mis Clases Inscritas', enrolled_courses_path %>

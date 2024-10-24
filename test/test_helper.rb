@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 require 'simplecov'
-SimpleCov.start
-
+SimpleCov.start do 
+  add_group 'models', 'app/models'
+  add_group 'controllers', 'app/controllers'
+  add_group 'helpers', 'app/helpers'
+end
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'

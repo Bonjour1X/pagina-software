@@ -175,50 +175,47 @@
   <% else %>
     <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary', data: { disable_with: 'Enviando solicitud...' } %>
   <% end %>
-<<<<<<< HEAD
 <% end %>
 
-<% if current_user.tipo == "Profesor" && current_user == @course.user %>
-  <h2>Evaluaciones</h2>
-  <% @course.evaluations.each do |evaluation| %>
-    <div>
-      <h3><%= evaluation.name %></h3>
-      <p>Tipo: <%= evaluation.evaluation_method %></p>
-      <p>Fecha de inicio: <%= evaluation.start_date %></p>
-      <p>Fecha de fin: <%= evaluation.end_date %></p>
-      <h4>Preguntas:</h4>
-      <ol>
-        <% evaluation.questions.each do |question| %>
-          <li><%= question %></li>
-        <% end %>
-      </ol>
-    </div>
-  <% end %>
-
-  <h2>Participantes</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Calificaciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @course.enrollments.includes(:user).each do |enrollment| %>
-        <tr>
-          <td><%= enrollment.user.name %></td>
-          <td>Sin calificación disponible</td> <!-- Mensaje por ahora -->
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <div class="button-group">
-    <%= button_to 'Crear nueva evaluación', new_course_evaluation_path(@course), method: :get, class: 'btn btn-primary' %>
-    <%= button_to 'Ver solicitudes de inscripción', course_enrollment_requests_path(@course), method: :get, class: 'btn btn-info' %>
-    <%= button_to 'Eliminar Clase', @course, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger' %>
-    <#%= link_to 'Ver Participantes y Calificaciones', participants_course_path(@course), class: 'btn btn-info' %> 
-  </div>
-=======
->>>>>>> respaldo-bonjour1X
-<% end %>
+#<% if current_user.tipo == "Profesor" && current_user == @course.user %>
+#  <h2>Evaluaciones</h2>
+#  <% @course.evaluations.each do |evaluation| %>
+#    <div>
+#      <h3><%= evaluation.name %></h3>
+#      <p>Tipo: <%= evaluation.evaluation_method %></p>
+#      <p>Fecha de inicio: <%= evaluation.start_date %></p>
+#      <p>Fecha de fin: <%= evaluation.end_date %></p>
+#      <h4>Preguntas:</h4>
+#      <ol>
+#        <% evaluation.questions.each do |question| %>
+#          <li><%= question %></li>
+#        <% end %>
+#      </ol>
+#    </div>
+#  <% end %>
+#
+#  <h2>Participantes</h2>
+#  <table>
+#    <thead>
+#      <tr>
+#        <th>Nombre</th>
+#        <th>Calificaciones</th>
+#      </tr>
+#    </thead>
+#    <tbody>
+#      <% @course.enrollments.includes(:user).each do |enrollment| %>
+#        <tr>
+#          <td><%= enrollment.user.name %></td>
+#          <td>Sin calificación disponible</td> <!-- Mensaje por ahora -->
+#        </tr>
+#      <% end %>
+#    </tbody>
+#  </table>
+#
+#  <div class="button-group">
+#    <%= button_to 'Crear nueva evaluación', new_course_evaluation_path(@course), method: :get, class: 'btn btn-primary' %>
+#    <%= button_to 'Ver solicitudes de inscripción', course_enrollment_requests_path(@course), method: :get, class: 'btn btn-info' %>
+#    <%= button_to 'Eliminar Clase', @course, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger' %>
+#    <#%= link_to 'Ver Participantes y Calificaciones', participants_course_path(@course), class: 'btn btn-info' %> 
+#  </div>
+#<% end %>
