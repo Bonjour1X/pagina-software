@@ -71,16 +71,9 @@ Rails.application.routes.draw do
   # Se Añade estas rutas para manejar las clases y evaluaciones :D
   get '/my_courses', to: 'courses#my_courses', as: 'my_courses'
   get '/available_courses', to: 'courses#available_courses', as: 'available_courses'
-<<<<<<< HEAD
-  
-  authenticated :user do
-    get 'profile', to: 'users#profile', as: 'profile'
-  end
+
+  #authenticated :user do
+    #get 'profile', to: 'users#profile', as: 'profile'
+  #end
 end
 
-
-
-
-=======
-end
->>>>>>> respaldo-bonjour1X
