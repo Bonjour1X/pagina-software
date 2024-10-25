@@ -1,31 +1,32 @@
-# Nuevas clases
-# new.html.erb
-<h1>Crear Nueva Clase</h1>
+<h1 class="title has-text-centered" style="color: #4CAF50;">Crear Nueva Clase</h1>
 
-<%= form_with(model: @course, local: true) do |form| %>  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+<%= form_with(model: @course, local: true, class: 'form-container') do |form| %>
+  <div class="field">
+    <%= form.label :title, class: 'label' %>
+    <%= form.text_field :title, class: 'input' %>
   </div>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="field">
+    <%= form.label :description, class: 'label' %>
+    <%= form.text_area :description, class: 'textarea' %>
   </div>
 
-  <div>
-    <%= form.label :scheduled_date %>
-    <%= form.datetime_field :scheduled_date %>
+  <div class="field">
+    <%= form.label :scheduled_date, class: 'label' %>
+    <%= form.datetime_field :scheduled_date, class: 'input' %>
   </div>
 
-  <div>
-    <%= form.label :materials %>
-    <%= form.text_area :materials %>
+  <div class="field">
+    <%= form.label :materials, class: 'label' %>
+    <%= form.text_area :materials, class: 'textarea' %>
   </div>
 
-  <div>
-    <%= form.label :modality %>
-    <%= form.select :modality, ['Presencial', 'Virtual'] %>
+  <div class="field">
+    <%= form.label :modality, class: 'label' %>
+    <%= form.select :modality, ['Presencial', 'Virtual'], {}, class: 'select' %>
   </div>
 
-  <%= form.submit 'Crear Clase' %>
+  <div class="control has-text-centered">
+    <%= form.submit 'Crear Clase', class: 'button is-primary' %>
+  </div>
 <% end %>

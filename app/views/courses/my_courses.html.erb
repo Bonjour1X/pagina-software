@@ -1,13 +1,14 @@
-# app/view/courses/my_courses.html.erb
-<h1>Mis Clases</h1>
+<h1 class="title has-text-centered" style="color: #4CAF50;">Mis Clases</h1>
 
 <% if @courses.any? %>
   <% @courses.each do |course| %>
-    <div>
-      <h2><%= link_to course.title, course_path(course) %></h2>
-      <p>Profesor: <%= course.user&.name %></p>
-      <p>Fecha: <%= course.scheduled_date %></p>
-      <p>Modalidad: <%= course.modality %></p>
+    <div class="box" style="margin: 15px 0; border: 2px solid #4CAF50; border-radius: 5px; padding: 15px;">
+      <h2 class="subtitle" style="color: #333;">
+        <%= link_to course.title, course_path(course), class: "has-text-link" %>
+      </h2>
+      <p><strong>Profesor:</strong> <%= course.user&.name %></p>
+      <p><strong>Fecha:</strong> <%= course.scheduled_date %></p>
+      <p><strong>Modalidad:</strong> <%= course.modality %></p>
     </div>
   <% end %>
 <% else %>
@@ -15,13 +16,15 @@
 <% end %>
 
 <% if current_user.tipo == "Profesor" && @enrolled_courses.any? %>
-  <h2>Clases en las que Estoy Inscrito</h2>
+  <h2 class="title" style="color: #4CAF50;">Clases en las que Estoy Inscrito</h2>
   <% @enrolled_courses.each do |course| %>
-    <div>
-      <h2><%= link_to course.title, course_path(course) %></h2>
-      <p>Profesor: <%= course.user&.name %></p>
-      <p>Fecha: <%= course.scheduled_date %></p>
-      <p>Modalidad: <%= course.modality %></p>
+    <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+      <h2 class="subtitle" style="color: #333;">
+        <%= link_to course.title, course_path(course), class: "has-text-link" %>
+      </h2>
+      <p><strong>Profesor:</strong> <%= course.user&.name %></p>
+      <p><strong>Fecha:</strong> <%= course.scheduled_date %></p>
+      <p><strong>Modalidad:</strong> <%= course.modality %></p>
     </div>
   <% end %>
 <% end %>

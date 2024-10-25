@@ -1,15 +1,16 @@
-# app/views/courses/enrolled_courses.html.erb
-<h1>Mis Clases Inscritas</h1>
+<h1 class="title has-text-centered" style="color: #4CAF50;">Mis Clases Inscritas</h1>
 
 <% if @enrolled_courses.any? %>
   <% @enrolled_courses.each do |course| %>
-    <div class="course-card">
-      <h2><%= link_to course.title, course_path(course) %></h2>
-      <p>Profesor: <%= course.user.name %></p>
-      <p>Fecha: <%= course.scheduled_date %></p>
-      <p>Modalidad: <%= course.modality %></p>
+    <div class="box" style="margin: 15px 0; border: 2px solid #4CAF50; border-radius: 5px; padding: 15px;">
+      <h2 class="subtitle">
+        <%= link_to course.title, course_path(course), class: "has-text-link" %>
+      </h2>
+      <p><strong>Profesor:</strong> <%= course.user.name %></p>
+      <p><strong>Fecha:</strong> <%= course.scheduled_date %></p>
+      <p><strong>Modalidad:</strong> <%= course.modality %></p>
     </div>
   <% end %>
 <% else %>
-  <p>No estás inscrito en ninguna clase actualmente.</p>
+  <p class="has-text-grey">No estás inscrito en ninguna clase actualmente.</p>
 <% end %>

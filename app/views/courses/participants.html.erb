@@ -1,20 +1,28 @@
-<h1>Participantes de <%= @course.title %></h1>
+<h1 class="title has-text-centered" style="color: #4CAF50;">Participantes de <%= @course.title %></h1>
 
-<table>
+<table class="table is-fullwidth has-text-centered">
   <thead>
     <tr>
-      <th>Nombre</th>
-      <th>Calificaciones</th>
+      <th class="has-text-weight-bold">Nombre</th>
+      <th class="has-text-weight-bold">Calificaciones</th>
     </tr>
   </thead>
   <tbody>
     <% @students.each do |enrollment| %>
       <tr>
         <td><%= enrollment.user.name %></td>
-        <td>Sin calificación disponible</td> <!-- Dejar vacío o mostrar un mensaje -->
+        <td>
+          <% if enrollment.grade.present? %>
+            <%= enrollment.grade %>
+          <% else %>
+            Sin calificación disponible
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Volver', course_path(@course), class: 'btn btn-secondary' %>
+<div class="has-text-centered" style="margin-top: 20px;">
+  <%= link_to 'Volver', course_path(@course), class: 'button is-secondary' %>
+</div>

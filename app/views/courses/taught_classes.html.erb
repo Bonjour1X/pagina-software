@@ -1,18 +1,16 @@
-# taught_classes.html.erb
-<!-- app/views/courses/taught_classes.html.erb -->
-<h1>Clases Dictadas</h1>
+<h1 class="title has-text-centered" style="color: #4CAF50;">Clases Dictadas</h1>
 
 <% if @courses.any? %>
-  <ul>
+  <ul class="list">
     <% @courses.each do |course| %>
-      <li>
-        <strong><%= course.title %></strong><br>
-        Descripción: <%= course.description %><br>
-        Fecha programada: <%= course.scheduled_date %><br>
-        Modalidad: <%= course.modality %>
+      <li class="box" style="margin: 15px 0; border: 2px solid #4CAF50; border-radius: 5px; padding: 15px;">
+        <strong class="is-size-4"><%= course.title %></strong><br>
+        <p><strong>Descripción:</strong> <%= course.description %></p>
+        <p><strong>Fecha programada:</strong> <%= course.scheduled_date %></p>
+        <p><strong>Modalidad:</strong> <%= course.modality %></p>
       </li>
     <% end %>
   </ul>
 <% else %>
-  <p>No tienes clases dictadas.</p>
+  <p class="has-text-grey">No tienes clases dictadas.</p>
 <% end %>

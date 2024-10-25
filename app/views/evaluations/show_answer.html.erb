@@ -1,4 +1,3 @@
-# app/views/evaluations/show_answer.html.erb 
 <div class="container">
   <h1>Respuestas de <%= @student.name %> - <%= @evaluation.name %></h1>
 
@@ -13,7 +12,7 @@
       <% if question.question_type == 'multiple_choice' %>
         <div class="alternatives">
           <p>Alternativas:</p>
-          <% alternatives = question.content.split('|')[1..-1] # Ignorar el primer elemento (pregunta) %>
+          <% alternatives = question.content.split('|')[1..-1] 
           <% alternatives.each_with_index do |alt, i| %>
             <% alt = alt.delete_prefix('*') %>
             <div class="alternative">
@@ -34,7 +33,7 @@
           </div>
         </div>
 
-      <% else # Para preguntas de desarrollo %>
+      <% else
         <div class="essay-response">
           <p class="font-medium">Respuesta del alumno:</p>
           <div class="answer-content">

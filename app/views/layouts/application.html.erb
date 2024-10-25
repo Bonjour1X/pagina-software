@@ -1,44 +1,112 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= content_for(:title) || "Sprint3" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+<html lang="es">
+<head>
+    <title><%= content_for(:title) || "Cursos de Deporte" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%# <%= stylesheet_link_tag "application", "data-turbo-track": "reload"  
-    <%# <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>     
-  </head>
+    <!-- CSS Personalizado -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+            margin: 0; /* Eliminar margen por defecto */
+        }
+        .container {
+            flex-grow: 1; /* Permite que el contenedor ocupe el espacio restante */
+            padding: 20px; /* Espaciado interno */
+            background-color: white; /* Fondo blanco */
+        }
+        .navbar {
+            background-color: #4CAF50; /* Color de la barra de navegación */
+        }
+        .navbar-item {
+            color: white; /* Texto blanco para los botones de la navbar */
+            font-weight: bold; /* Texto en negrita */
+        }
+        .navbar-item:hover {
+            background-color: #45a049; /* Color al pasar el mouse */
+        }
+        .footer {
+            background-color: #4CAF50; /* Color del pie */
+            color: white; /* Texto blanco */
+            padding: 10px; /* Espaciado mínimo */
+            text-align: center; /* Centrar texto */
+            margin-top: auto; /* Empujar el pie de página hacia abajo */
+        }
+        .button {
+            margin: 5px; /* Margen entre botones */
+        }
+        .button.is-info {
+            background-color: #2196F3; /* Color azul para ajustes */
+            color: white; /* Texto blanco */
+        }
+        .button.is-info:hover {
+            background-color: #1976D2; /* Color al pasar el mouse */
+        }
+        .button.is-danger {
+            background-color: #f44336; /* Color rojo para cerrar sesión */
+            color: white; /* Texto blanco */
+        }
+        .button.is-danger:hover {
+            background-color: #d32f2f; /* Color al pasar el mouse */
+        }
+    </style>
+</head>
 
-  <body>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <%= link_to 'Inicio', root_path, class: "navbar-item" %>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <% if user_signed_in? %>
+                    <% if current_user.tipo == "Profesor" %>
+                        <%= link_to 'Mis Clases Dictadas', taught_classes_path, class: "navbar-item" %>
+                        <%= link_to 'Crear Clase', new_course_path, class: "navbar-item" %>
+                    <% end %>
+                    <%= link_to 'Clases Disponibles', available_courses_path, class: "navbar-item" %>
+                    <%= link_to 'Mis Clases Inscritas', enrolled_courses_path, class: "navbar-item" %>
+                <% end %>
+            </div>
+        </div>
+    </nav>
 
-  # Agrego texto a body para ver nuevos botones de clases
-  <nav>
-  <%= link_to 'Inicio', root_path %>
+    <div class="container">
+        <% if user_signed_in? %>
+            <p class="subtitle">Bienvenido, <strong><%= current_user.email %></strong></p>
+        <% else %>
+            <h1 class="title">Cursos de Deporte</h1>
+        <% end %>
+
+        <%= yield %> <!-- Aquí se renderizará el contenido de las vistas específicas -->
+    </div>
+
     <% if user_signed_in? %>
-      <% if current_user.tipo == "Profesor" %>
-        <%= link_to 'Mis Clases Dictadas', taught_classes_path %>
-        <%= link_to 'Crear Clase', new_course_path %>
-        <%= link_to 'Clases Disponibles', available_courses_path %>
-        <%= link_to 'Mis Clases Inscritas', enrolled_courses_path %>
-      <% else %>
-        <%= link_to 'Clases Disponibles', available_courses_path %>
-        <%= link_to 'Mis Clases Inscritas', enrolled_courses_path %>
-      <% end %>
-      <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to 'Iniciar Sesión', new_user_session_path %>
-      <%= link_to 'Registrarse', new_user_registration_path %>
+    <footer class="footer">
+        <div class="buttons are-centered">
+            <%= link_to 'Ajustes', edit_user_registration_path, class: "button is-info" %>
+            <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: "button is-danger" %>
+        </div>
+    </footer>
     <% end %>
-  </nav>
-  
-    <%= yield %>
-  </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burger = document.querySelector('.navbar-burger');
+            const menu = document.querySelector('.navbar-menu');
+
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('is-active');
+                menu.classList.toggle('is-active');
+            });
+        });
+    </script>
+</body>
 </html>
