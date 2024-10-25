@@ -163,7 +163,7 @@
     <% end %>
   <% end %>
 
-  <% if current_user != @course.user && enrollment_request&.approved? %>
+  <% if current_user != @course.user && @enrollment_request&.approved? %>
     <h2>Documentos públicos</h2>
     <% if @course.documents.attached? %>
       <ul>
@@ -202,15 +202,19 @@
         <p>Fecha de fin: <%= evaluation.end_date.strftime("%d/%m/%Y %H:%M") %></p>
       </div>
     <% end %>
+    
   <% elsif enrollment_request&.pending? %>
     <p>Solicitud de inscripción pendiente</p>
+
   <% else %>
     <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary', data: { disable_with: 'Enviando solicitud...' } %>
   <% end %>
+
+  <% if enrollment_request&.approved? || current_user == @course.user %>
+    <h2>Chat</h2>
+    <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course) %>
+  <% end %>
 <% end %>
 
-<% if enrollment_request&.approved? || current_user == @course.user %>
-  <h2>Chat</h2>
-  <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course) %>
-<% end %>
+
 
