@@ -88,6 +88,47 @@ class CoursesController < ApplicationController
     @enrolled_courses = current_user.enrolled_courses
   end
 
+  #SUBIDA DE ARCHIVOS
+  def form_documents
+    @course = Course.find(params[:id]) 
+  end
+
+  def form_subir_documents
+    @course = Course.find(params[:id]) 
+  end
+
+  def upload_documents
+    @course = Course.find(params[:id])
+    Rails.logger.info "CLOUDINARY_CLOUD_NAME: #{ENV['CLOUDINARY_CLOUD_NAME']}"
+    Rails.logger.info "CLOUDINARY_API_KEY: #{ENV['CLOUDINARY_API_KEY']}"
+    Rails.logger.info "CLOUDINARY_API_SECRET: #{ENV['CLOUDINARY_API_SECRET']}" 
+    if @course.update(course_params)
+      redirect_to course_path(@course)
+    else
+      render :upload_documents
+    end
+  end
+
+  def subir_documents
+    @course = Course.find(params[:id])
+    params[:course][:documents].each do |document|
+      @course.documents.attach(document)
+    Rails.logger.info "CLOUDINARY_CLOUD_NAME: #{ENV['CLOUDINARY_CLOUD_NAME']}"
+    Rails.logger.info "CLOUDINARY_API_KEY: #{ENV['CLOUDINARY_API_KEY']}"
+    Rails.logger.info "CLOUDINARY_API_SECRET: #{ENV['CLOUDINARY_API_SECRET']}"
+      
+    end
+    redirect_to course_path(@course)
+  end
+
+  def eliminar_documents
+    @course = Course.find(params[:id])
+    @document = @course.documents.find_by(blob_id: params[:blob_id])
+    @document.purge
+    redirect_to course_path(@course)
+  end
+
+
   def student_evaluations
     @course = Course.find(params[:id])
     @enrolled_students = @course.enrolled_users.includes(:enrollment_requests)
@@ -137,6 +178,6 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:title, :description, :scheduled_date, :materials, :modality)
+    params.require(:course).permit(:title, :description, :scheduled_date, :materials, :modality, documents: [])
   end
 end

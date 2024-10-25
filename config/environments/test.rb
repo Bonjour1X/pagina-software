@@ -32,7 +32,12 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
 
   # Store uploaded files on the local file system in a temporary directory.
-  config.active_storage.service = :test
+  config.active_storage.service = :cloudinary
+  config.cloudinary = {
+  cloud_name: ENV['dj7pf1flw'],
+  api_key: ENV['359647569526992'],
+  api_secret: ENV['dNtUIYJz_BP4_jJk4bJxcOH23DM']
+  }
 
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.

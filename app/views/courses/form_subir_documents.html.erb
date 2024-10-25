@@ -1,0 +1,12 @@
+<%= form_with model: @course, url: subir_documents_course_path(@course), local: true, multipart: true do |form| %>
+    <div>
+      <%= form.label :documents, "Subir documentos" %>
+      <%= form.file_field :documents, multiple: true %>
+    </div>
+    
+    <div>
+      <%= form.submit "Enviar" %>
+    </div>
+  <% end %>
+  
+

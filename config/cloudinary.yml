@@ -1,0 +1,9 @@
+development:
+  cloud_name: 'dj7pf1flw'
+  api_key: '359647569526992'
+  api_secret: 'dNtUIYJz_BP4_jJk4bJxcOH23DM'
+
+production:
+  cloud_name: 'dj7pf1flw'
+  api_key: '359647569526992'
+  api_secret: 'dNtUIYJz_BP4_jJk4bJxcOH23DM'

@@ -21,6 +21,5 @@ class User < ApplicationRecord
   has_many :enrolled_courses, -> { where(enrollment_requests: { status: 'approved' }) }, 
            through: :enrollment_requests, 
            source: :course
-           
-
+  has_many :messages, dependent: :destroy
 end

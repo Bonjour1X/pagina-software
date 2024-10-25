@@ -1,0 +1,27 @@
+<h1>Mensajes del Chat para el Curso: <%= @course.title %></h1>
+
+<div class="chat-messages">
+  <% if @chat&.messages&.any? %>
+    <% @chat.messages.each do |message| %>
+      <div class="message">
+        <strong><%= message.user.name %>:</strong>
+        <%= message.content %>
+        <small><%= message.created_at.strftime("%d/%m/%Y %H:%M") %></small>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No hay mensajes aún.</p>
+  <% end %>
+</div>
+
+<% if current_user == @course.user || @course.enrollment_requests.find_by(user: current_user)&.approved? %>
+  <%= form_with url: crear_mensaje_course_path(@course), local: true do |form| %>
+    <div>
+      <%= form.label :content, "Escribe tu mensaje:" %>
+      <%= form.text_area :content %>
+    </div>
+    <%= form.submit "Enviar mensaje" %>
+  <% end %>
+<% end %>
+
+<%= link_to 'Volver al curso', course_path(@course) %>

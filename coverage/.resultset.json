@@ -930,7 +930,7 @@
   },
   "Minitest": {
     "coverage": {
-      "/home/felipe/carpetafusion/2024-2-grupo-23/config/environment.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -939,7 +939,7 @@
           1
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/config/environments/test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -976,6 +976,11 @@
           null,
           null,
           1,
+          1,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -1010,7 +1015,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/config/initializers/assets.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -1027,7 +1032,17 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/config/initializers/content_security_policy.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/config/initializers/cloudinary.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -1056,7 +1071,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/config/initializers/devise.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/config/initializers/devise.rb": {
         "lines": [
           null,
           null,
@@ -1373,7 +1388,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/config/initializers/filter_parameter_logging.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -1385,28 +1400,11 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/config/initializers/inflections.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/config/initializers/permissions_policy.rb": {
-        "lines": [
           null,
           null,
           null,
@@ -1422,7 +1420,24 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/config/initializers/simple_form.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/config/initializers/permissions_policy.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/config/initializers/simple_form.rb": {
         "lines": [
           null,
           null,
@@ -1602,7 +1617,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/config/routes.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/config/routes.rb": {
         "lines": [
           1,
           1,
@@ -1669,6 +1684,16 @@
           1,
           null,
           null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
           null,
           1,
           1,
@@ -1676,12 +1701,11 @@
           null,
           1,
           1,
-          null,
           null,
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/models/user.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/user.rb": {
         "lines": [
           null,
           1,
@@ -1706,12 +1730,11 @@
           1,
           null,
           null,
-          null,
-          null,
+          1,
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/models/application_record.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/application_record.rb": {
         "lines": [
           null,
           null,
@@ -1721,7 +1744,18 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/controllers/courses_controller_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/controllers/chats_controller_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/test/controllers/courses_controller_test.rb": {
         "lines": [
           1,
           null,
@@ -1757,25 +1791,18 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/controllers/enrollment_requests_controller_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/controllers/enrollment_requests_controller_test.rb": {
         "lines": [
           1,
           null,
           1,
           1,
           1,
-          0,
-          null,
-          1,
-          1,
-          0,
-          0,
-          null,
           null,
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/controllers/posts_controller_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/controllers/posts_controller_test.rb": {
         "lines": [
           1,
           null,
@@ -1787,7 +1814,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/controllers/render_controller_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/controllers/render_controller_test.rb": {
         "lines": [
           1,
           null,
@@ -1800,7 +1827,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/controllers/reviews_controller_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/controllers/reviews_controller_test.rb": {
         "lines": [
           1,
           null,
@@ -1854,7 +1881,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/controllers/sessions_controller_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/controllers/sessions_controller_test.rb": {
         "lines": [
           1,
           null,
@@ -1880,7 +1907,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/controllers/users/profile_edit_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/controllers/users/profile_edit_test.rb": {
         "lines": [
           1,
           null,
@@ -1942,7 +1969,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/controllers/users/registrations_controller_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/controllers/users/registrations_controller_test.rb": {
         "lines": [
           1,
           null,
@@ -2004,7 +2031,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/models/enrollment_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/models/chat_test.rb": {
         "lines": [
           1,
           null,
@@ -2015,7 +2042,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/models/review_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/models/enrollment_test.rb": {
         "lines": [
           1,
           null,
@@ -2026,7 +2053,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/test/models/user_test.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/models/message_test.rb": {
         "lines": [
           1,
           null,
@@ -2037,7 +2064,38 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/models/course.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/test/models/review_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/test/models/user_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/chat.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/course.rb": {
         "lines": [
           null,
           null,
@@ -2045,6 +2103,12 @@
           1,
           1,
           1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
           1,
           null,
           null,
@@ -2055,11 +2119,15 @@
           1,
           null,
           1,
+          null,
+          1,
+          0,
+          null,
           null,
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/models/enrollment_request.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/enrollment_request.rb": {
         "lines": [
           null,
           null,
@@ -2082,25 +2150,15 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/models/enrollment.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/enrollment.rb": {
         "lines": [
-          null,
           1,
           1,
           1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/models/evaluation.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/evaluation.rb": {
         "lines": [
           null,
           null,
@@ -2116,7 +2174,15 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/models/question.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/message.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/question.rb": {
         "lines": [
           null,
           1,
@@ -2127,7 +2193,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/models/review.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/review.rb": {
         "lines": [
           1,
           1,
@@ -2139,38 +2205,17 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/controllers/users/sessions_controller.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/posts_controller.rb": {
         "lines": [
           null,
-          1,
-          1,
           null,
           null,
           1,
           1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          2,
-          null,
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/controllers/application_controller.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/application_controller.rb": {
         "lines": [
           null,
           null,
@@ -2181,7 +2226,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/helpers/application_helper.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/helpers/application_helper.rb": {
         "lines": [
           null,
           null,
@@ -2190,7 +2235,13 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/helpers/posts_helper.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/helpers/chats_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/app/helpers/posts_helper.rb": {
         "lines": [
           null,
           null,
@@ -2199,7 +2250,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/helpers/render_helper.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/helpers/render_helper.rb": {
         "lines": [
           null,
           null,
@@ -2208,33 +2259,13 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/helpers/reviews_helper.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/helpers/reviews_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/controllers/render_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/controllers/reviews_controller.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/reviews_controller.rb": {
         "lines": [
           null,
           1,
@@ -2298,17 +2329,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/controllers/posts_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/controllers/users/registrations_controller.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/users/registrations_controller.rb": {
         "lines": [
           null,
           1,
@@ -2381,7 +2402,7 @@
           null
         ]
       },
-      "/home/felipe/carpetafusion/2024-2-grupo-23/app/models/student_response.rb": {
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/student_response.rb": {
         "lines": [
           null,
           1,
@@ -2390,10 +2411,61 @@
           null,
           1,
           1,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/render_controller.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/users/sessions_controller.rb": {
+        "lines": [
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1729806629
+    "timestamp": 1729824120
   }
 }

@@ -42,6 +42,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_112742) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.text "activity"
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_chats_on_course_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
@@ -98,6 +106,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_112742) do
     t.index ["student_id"], name: "index_grades_on_student_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "chat_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "content"
     t.bigint "evaluation_id", null: false
@@ -125,6 +143,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_112742) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_student_responses_on_question_id"
+    t.index ["user_id", "question_id"], name: "index_student_responses_on_user_id_and_question_id", unique: true
     t.index ["user_id"], name: "index_student_responses_on_user_id"
   end
 
@@ -146,6 +165,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_112742) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chats", "courses"
   add_foreign_key "courses", "users"
   add_foreign_key "enrollment_requests", "courses"
   add_foreign_key "enrollment_requests", "users"
@@ -154,6 +174,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_112742) do
   add_foreign_key "evaluations", "courses"
   add_foreign_key "grades", "evaluations"
   add_foreign_key "grades", "users", column: "student_id"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "questions", "evaluations"
   add_foreign_key "reviews", "courses"
   add_foreign_key "reviews", "users"

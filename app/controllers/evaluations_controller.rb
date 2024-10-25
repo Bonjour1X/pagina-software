@@ -52,7 +52,6 @@ class EvaluationsController < ApplicationController
   
   
 
-  # app/controllers/evaluations_controller.rb
   def show_results
     @evaluation = @course.evaluations.find(params[:id])
     @enrolled_students = @course.enrolled_users

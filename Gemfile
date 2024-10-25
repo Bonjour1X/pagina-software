@@ -73,3 +73,7 @@ group :test do
 end
 
 gem 'devise'
+gem 'activestorage'
+gem 'activestorage-cloudinary-service'
+gem 'cloudinary'
+gem "dotenv-rails"

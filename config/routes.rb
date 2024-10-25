@@ -61,9 +61,19 @@ Rails.application.routes.draw do
     member do
       delete :leave
       get 'student_evaluations'
+
+      #Archivos clase
+      get 'form_documents', to: 'courses#form_documents'
+      patch 'upload_documents', to: 'courses#upload_documents'
+      get 'form_subir_documents', to: 'courses#form_subir_documents'
+      patch 'subir_documents', to: 'courses#subir_documents'
+      delete 'courses/:id/eliminar_documents.:blob_id', to: 'courses#eliminar_documents', as: 'eliminar_documents'
+      get 'foro', to: 'chats#foro', as: 'foro'
+      post 'crear_mensaje', to: 'chats#crear_mensaje'
+      
     end
   end
-
+  # Ruta para ver las clases dictadas por el profesor
   get 'taught_classes', to: 'courses#taught_classes', as: 'taught_classes'
   get '/my_courses', to: 'courses#my_courses', as: 'my_courses'
   get '/available_courses', to: 'courses#available_courses', as: 'available_courses'
@@ -72,4 +82,3 @@ Rails.application.routes.draw do
     get 'profile', to: 'users#profile', as: 'profile'
   end
 end
-

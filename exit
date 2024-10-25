@@ -1,0 +1,37 @@
+[33m3ad6846[m[33m ([m[1;31morigin/ramaflos2[m[33m)[m cloudly
+[33m4446789[m chat / casi documentos
+[33mcb3df6c[m subir/borrar archivos
+[33me2ae17e[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m Merge pull request #26 from IIC2143/development
+[33m8b02f03[m[33m ([m[1;31morigin/development[m[33m)[m read me 2.0
+[33ma436492[m readme s1
+[33m1b4765e[m[33m ([m[1;32mdevelopment[m[33m)[m E/R
+[33m1f8f5ab[m agregar documentos (ER)
+[33mb8770a4[m Verificar todo
+[33m1a6aa61[m Problemas de migraciones y actualizar estructura de la base de datos
+[33m2c3f0af[m Eliminar.env
+[33m096a1a8[m[33m ([m[1;31morigin/desarrollo-Bonjour1X[m[33m, [m[1;32mdesarrollo-Bonjour1X[m[33m)[m enviar solicitud y ver cursos inscritos listo
+[33m218b8d7[m Enviar solicitud listo
+[33m2855ddc[m Clases vinculadas desde crear evaluaciones y eliminar clases ya combinados
+[33me78d500[m Se pueden guardar evaluaciones pero aun no tengo creacion de preguntas, pero se crean
+[33m584e03d[m[33m ([m[1;31morigin/fz6rama[m[33m)[m modificacion de controladores/model/rutas... para manejo de solicitudes
+[33m84e3684[m Se agregó casi todo pero falta crear evaluaciones de buena forma y tenemos muchas migraciones por cosas para ayudarlo
+[33ma12fefa[m Implementada funcionalidad para iniciar sesión
+[33md27d4eb[m Crea las evaluaciones
+[33m7d29f40[m Crear clases listos, crear evaluaciones y solicitudes ya se crearon sus cuadros de texto para crear pero hasta ahí, falta terminar para evitar error (quizas los modifique denuevo) y se creó idea de eliminar clases porque hay muchas clases (para profesores y alumnos) que me gustaria eliminar
+[33m359ca51[m Implementacion temporal de los 3 puntos, en botones para crear una clase,evaluacion y enviar una solicitud
+[33m1d6c285[m[33m ([m[1;31morigin/ramaflo[m[33m, [m[1;32mrama-shiappacase[m[33m, [m[1;32mmi-rama-de-prueba[m[33m, [m[1;32mfeature/enviar-solicitud[m[33m, [m[1;32mfeature/crear-evaluacion[m[33m, [m[1;32mfeature/crear-clase[m[33m)[m Tipo (Estudiantes/profesores)
+[33mb3a6860[m Organizacion ajustes
+[33m8237154[m Más atributos de user (no foto)
+[33m4b129b4[m Update + Delete basico
+[33m2efd04f[m Inicio sesión + registro
+[33m22520c6[m Estatus 0 ofensas con el rubocop del syllabus del curso ahora si
+[33m76c9a41[m Ejecutar render-build.sh y aplicar correcciones de RuboCop
+[33meeda06a[m Update README.md
+[33m9cca049[m Update README.md
+[33m124d8d5[m Create placeholder
+[33m8f6f6f7[m Render y robocup
+[33m0113d90[m historias de ususario
+[33mddaf215[m Paso 3
+[33mce21a7b[m 1.1 sin caché
+[33mf3a2114[m version 1, sin render aun :(
+[33m0cfd909[m Initial commit
