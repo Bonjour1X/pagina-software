@@ -2348,59 +2348,6 @@
           null
         ]
       },
-      "/home/felipe/FZ6/2024-2-grupo-23/app/models/student_response.rb": {
-        "lines": [
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/users/sessions_controller.rb": {
-        "lines": [
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/posts_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
       "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/reviews_controller.rb": {
         "lines": [
           null,
@@ -2464,8 +2411,61 @@
           null,
           null
         ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/posts_controller.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/app/models/student_response.rb": {
+        "lines": [
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/felipe/FZ6/2024-2-grupo-23/app/controllers/users/sessions_controller.rb": {
+        "lines": [
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1729825249
+    "timestamp": 1729902565
   }
 }

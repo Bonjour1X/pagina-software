@@ -4,7 +4,9 @@
   <ul class="list">
     <% @courses.each do |course| %>
       <li class="box" style="margin: 15px 0; border: 2px solid #4CAF50; border-radius: 5px; padding: 15px;">
-        <strong class="is-size-4"><%= course.title %></strong><br>
+        <strong class="is-size-4">
+          <%= link_to course.title, course_path(course), style: "color: #4CAF50;" %>
+        </strong><br>
         <p><strong>Descripción:</strong> <%= course.description %></p>
         <p><strong>Fecha programada:</strong> <%= course.scheduled_date %></p>
         <p><strong>Modalidad:</strong> <%= course.modality %></p>

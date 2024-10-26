@@ -9,7 +9,7 @@
   <% end %>
 </div>
 
-<% if current_user == @course.user %>
+<% if current_user.tipo == "Profesor" && current_user == @course.user %>
   <!-- Sección de Evaluaciones -->
   <h2>Evaluaciones</h2>
   <% @course.evaluations.group_by(&:evaluation_method).each do |method, evaluations| %>
@@ -143,39 +143,6 @@
       </table>
     </div>
   </div>
-  
-  <h2>Archivos</h2>
-    <%= button_to 'Actualizar documentos', form_documents_course_path(@course), method: :get, class: 'btn btn-primary' %>
-    <%= button_to 'Subir documentos', form_subir_documents_course_path(@course), method: :get, class: 'btn btn-primary' %>
-
-    <h2>Documentos subidos</h2>
-    <% if @course.documents.attached? %>
-      <ul>
-        <% @course.documents.each do |document| %>
-          <li>
-            <%= link_to document.filename, url_for(document) %>
-            <%= button_to "Eliminar", eliminar_documents_course_path(@course.id, document.blob_id), method: :delete %>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>No hay documentos subidos.</p>
-    <% end %>
-  <% end %>
-
-  <% if current_user != @course.user && @enrollment_request&.approved? %>
-    <h2>Documentos públicos</h2>
-    <% if @course.documents.attached? %>
-      <ul>
-        <% @course.documents.each do |document| %>
-          <li>
-            <%= link_to document.filename, url_for(document) %>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>No hay documentos públicos.</p>
-    <% end %>
 
   <!-- Botones de Acción -->
   <div class="button-group mt-6">
@@ -183,6 +150,23 @@
     <%= button_to 'Ver solicitudes de inscripción', course_enrollment_requests_path(@course), method: :get, class: 'btn btn-info' %>
     <%= button_to 'Eliminar Clase', @course, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger' %>
   </div>
+  <h2>Archivos</h2>
+  <%= button_to 'Reemplazar documentos', form_documents_course_path(@course), method: :get, class: 'btn btn-primary' %>
+  <%= button_to 'Subir documentos', form_subir_documents_course_path(@course), method: :get, class: 'btn btn-primary' %>
+
+  <h2>Documentos subidos</h2>
+  <% if @course.documents.attached? %>
+    <ul>
+      <% @course.documents.each do |document| %>
+        <li>
+          <%= link_to document.filename, url_for(document) %>
+          <%= button_to "Eliminar", eliminar_documents_course_path(@course.id, document.blob_id), method: :delete %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No hay documentos subidos.</p>
+  <% end %>
 
 <% else %>
   <% enrollment_request = @course.enrollment_requests.find_by(user: current_user) %>
@@ -202,19 +186,30 @@
         <p>Fecha de fin: <%= evaluation.end_date.strftime("%d/%m/%Y %H:%M") %></p>
       </div>
     <% end %>
-    
   <% elsif enrollment_request&.pending? %>
     <p>Solicitud de inscripción pendiente</p>
-
   <% else %>
     <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary', data: { disable_with: 'Enviando solicitud...' } %>
   <% end %>
 
-  <% if enrollment_request&.approved? || current_user == @course.user %>
-    <h2>Chat</h2>
-    <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course) %>
+<% if current_user != @course.user && enrollment_request&.approved? %>
+  <h2>Documentos públicos</h2>
+  <% if @course.documents.attached? %>
+    <ul>
+      <% @course.documents.each do |document| %>
+        <li>
+          <%= link_to document.filename, url_for(document) %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No hay documentos públicos.</p>
   <% end %>
 <% end %>
 
+<% if enrollment_request&.approved? || current_user == @course.user %>
+  <h2>Chat</h2>
+  <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course) %>
+<% end %>
 
-
+<% end %>
