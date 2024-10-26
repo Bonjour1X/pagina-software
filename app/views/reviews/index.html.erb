@@ -3,7 +3,7 @@
 
 <%= link_to 'Volver al Curso', course_path(@course), class: 'btn btn-secondary' %>
 
-<% if @course.enrolled_users.include?(current_user) && current_user.tipo == "Estudiante" %>
+<% if @course.enrollment_requests.find_by(user: current_user)&.status == "approved" && current_user.tipo == "Estudiante" %>
   <%= link_to 'Escribir Reseña', new_course_review_path(@course), class: 'btn btn-primary' %>
 <% end %>
 

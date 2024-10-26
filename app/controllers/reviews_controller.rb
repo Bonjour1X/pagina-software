@@ -2,6 +2,7 @@
 class ReviewsController < ApplicationController
   before_action :set_course
   before_action :set_review, only: [:edit, :update, :destroy]
+  before_action :verify_enrollment, only: [:new, :create] 
 
   def index
     @reviews = @course.reviews.order(created_at: :desc)
@@ -56,5 +57,14 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:content, :rating)
+  end
+
+  def verify_enrollment
+    enrollment_request = @course.enrollment_requests.find_by(user: current_user)
+    
+    unless enrollment_request&.status == "approved"  # Verificación específica de estado aprobado
+      redirect_to course_path(@course), 
+        alert: 'Solo los estudiantes con inscripción aprobada pueden escribir reseñas.'
+    end
   end
 end
