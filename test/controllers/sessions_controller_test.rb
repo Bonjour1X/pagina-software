@@ -2,7 +2,8 @@ require "test_helper"
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = User.create!(email: "user@example.com", password: "securepassword", name: "Test User", tipo: "Estudiante", phone: "0987654321")
+    @user = User.create!(email: "user@example.com", password: "securepassword", name: "Test User", tipo: "Estudiante", 
+                         phone: "0987654321")
   end
 
   test "should log in user with valid credentials" do

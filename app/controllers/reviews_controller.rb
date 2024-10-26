@@ -64,7 +64,7 @@ class ReviewsController < ApplicationController
     
     unless enrollment_request&.status == "approved"  # Verificación específica de estado aprobado
       redirect_to course_path(@course), 
-        alert: 'Solo los estudiantes con inscripción aprobada pueden escribir reseñas.'
+                  alert: 'Solo los estudiantes con inscripción aprobada pueden escribir reseñas.'
     end
   end
 end

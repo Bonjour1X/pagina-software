@@ -39,7 +39,8 @@ class ChatsController < ApplicationController
     if @message.save
       redirect_to request.referrer || root_path, notice: "Mensaje enviado exitosamente"
     else
-      redirect_to foro_course_path(@course), alert: "Error al enviar el mensaje: #{@message.errors.full_messages.join(', ')}"
+      redirect_to foro_course_path(@course), 
+                  alert: "Error al enviar el mensaje: #{@message.errors.full_messages.join(', ')}"
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path, alert: 'Curso no encontrado'
