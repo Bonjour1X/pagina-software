@@ -1,5 +1,5 @@
 #  README
-#  Sprint_1
+#  Sprint_2
  #  Aplicación Ruby on Rails - Grupo 23
 
 Puedes acceder a la aplicación en el siguiente enlace:
@@ -22,12 +22,18 @@ La aplicación facilita un entorno de aprendizaje interactivo y eficiente tanto 
 - **Registro y Perfil:** Una vez registrado e iniciado sesión, el usuario puede subir una foto e información personal. 
 - **Solicitud de Cursos:** Los usuarios pueden enviar solicitudes para integrarse a uno o varios cursos ofrecidos simultáneamente. Estas solicitudes pueden ser aceptadas o rechazadas por los profesores de los cursos.
 - **Acceso a Evaluaciones y Material:** Una vez aceptada la solicitud, el usuario puede realizar las evaluaciones, conversar con otros participantes del curso, y acceder a material y videos de enseñanza.
-- **Reseñas:** Al concluir el curso, los usuarios tienen la opción de dejar una reseña evaluando tanto el curso como a los profesores involucrados, proporcionando información adicional a futuros usuarios.
+- **Reseñas:** Al cursar el curso, los usuarios tienen la opción de dejar una reseña evaluando tanto el curso como a los profesores involucrados, proporcionando información adicional a futuros usuarios.
   
-## Información del Proyecto (sprint1)
+## Información del Proyecto (sprint2)
 Hasta ahora un visitante puede crear una cuenta, logearse a ella, cambiar sus datos y eliminarla.
 Un usuario registrado puede ver las clases ofrecidas (uno no registrado también) y enviar una solicitud a alguna de ellas, además puede ver las clases de las cuales forma parte.
 Por otro lado un profesor puede crear una clase, manejar las solicitudes de su clase y eliminar su clase.
+Además un usuario puede hacer reseñas en los cursos a los cuales pertenece.
+Por otro lado, cada curso tiene un foro, donde solo pueden participar integrantes del curso 
+y el profesor.
+Además el profesor material en forma de archivos (recomendado en PDF), subiendo, reemplazando o 
+eliminando archivos. Los alumnos incritos al curso pueden ver estos archivos.
+También se usó bulma para mejorar la interfaz gráfica. 
 
 ### Ruby version
 
@@ -37,15 +43,15 @@ Por otro lado un profesor puede crear una clase, manejar las solicitudes de su c
 
 - Rails 7.x.x
 - Bundler
+- Cloudinary
+- ActiveStorage
 
 ### Configuración
 
 El archivo de configuración para RuboCop está incluido en el proyecto para mantener el código conforme a las mejores prácticas.
 
-### Sprint1 (no completado)
-Crear evaluación (si se crea pero no contiene preguntas aún)
-Ver perticipantes incritos
-
+### Sprint2 (no completado)
+Decidimos obviar lo de ocultar archivos (no tiene sentido sin calendario, es lo mismo que subirlo después)
 
  
 
