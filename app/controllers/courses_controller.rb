@@ -123,6 +123,11 @@ class CoursesController < ApplicationController
 
   def eliminar_documents
     @course = Course.find(params[:id])
+    Cloudinary.config do |config|
+      config.cloud_name = ENV['CLOUDINARY_CLOUD_NAME']
+      config.api_key = ENV['CLOUDINARY_API_KEY']
+      config.api_secret = ENV['CLOUDINARY_API_SECRET']
+    end
     @document = @course.documents.find_by(blob_id: params[:blob_id])
     @document.purge
     redirect_to course_path(@course)
