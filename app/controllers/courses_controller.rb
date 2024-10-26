@@ -11,8 +11,8 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @enrollment_request = EnrollmentRequest.find_by(user: current_user, course: @course)
-    @students = @course.enrollments.includes(:user) # Obtener estudiantes inscritos
-    @evaluations = @course.evaluations.includes(:questions) # Obtener evaluaciones del curso
+    #@students = @course.enrollments.includes(:user) # Obtener estudiantes inscritos
+    #@evaluations = @course.evaluations.includes(:questions) # Obtener evaluaciones del curso
     #@evaluation = Evaluation.new
     #@enrollment_request = EnrollmentRequest.new
     #@students_with_grades = @course.users.includes(:evaluations)  # Aquí se obtiene la lista de usuarios inscritos
