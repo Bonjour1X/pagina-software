@@ -1,7 +1,10 @@
-# app/views/reviews/index.html.erb 
 <h2>Reseñas para <%= @course.title %></h2>
 
-<%= link_to 'Volver al Curso', course_path(@course), class: 'btn btn-secondary' %>
+<% if current_user %>
+  <%= link_to 'Volver al Curso', course_path(@course), class: 'btn btn-secondary' %>
+<% else %>
+  <%= link_to 'Volver a la Visita', visitantes_course_path(@course), class: 'btn btn-secondary' %>
+<% end %>
 
 <% if @course.enrollment_requests.find_by(user: current_user)&.status == "approved" && current_user.tipo == "Estudiante" %>
   <%= link_to 'Escribir Reseña', new_course_review_path(@course), class: 'btn btn-primary' %>
@@ -41,6 +44,7 @@
 </div>
 
 <style>
+/* Estilos para las reseñas */
 .reviews-container {
   max-width: 800px;
   margin: 20px auto;

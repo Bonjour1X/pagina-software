@@ -80,9 +80,9 @@
 
     <div class="container">
         <% if user_signed_in? %>
-            <p class="subtitle">Bienvenido, <strong><%= current_user.email %></strong></p>
+            <p class="subtitle">Bienvenido, <strong><%= current_user.name %></strong></p>
         <% else %>
-            <h1 class="title">Cursos de Deporte</h1>
+            <h1 class="title">Bienvenido a nuestra app de cursos de deporte</h1>
         <% end %>
 
         <%= yield %> <!-- Aquí se renderizará el contenido de las vistas específicas -->
