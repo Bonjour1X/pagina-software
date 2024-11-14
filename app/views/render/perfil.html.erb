@@ -1,8 +1,20 @@
-<h1>¡Deporte ya!</h1>
-<h2>Mi perfil</h2>
-<p>Nombre: <%= current_user.name %></p>
-<p>Mail: <%= current_user.email %></p>
-<p>Teléfono: <%= current_user.phone %></p>
-<p>Descripción: <%= current_user.description %></p>
-<p>Tipo: <%= current_user.tipo %></p>
-<%= link_to 'Volver', render_ajustes_path %>
+<h2 style="font-size: 36px;"><strong>Mi perfil</strong></h2> <!-- Ajusta el tamaño aquí -->
+
+
+<div class="profile-info" style="font-size: 25px;"> 
+  <p class="mb-3"><strong>Nombre:</strong> <%= current_user.name %></p>
+  <p class="mb-3"><strong>Mail:</strong> <%= current_user.email %></p>
+  <p class="mb-3"><strong>Teléfono:</strong> <%= current_user.phone %></p>
+  <p class="mb-3"><strong>Descripción:</strong> <%= current_user.description %></p>
+  <p class="mb-3"><strong>Tipo:</strong> <%= current_user.tipo %></p>
+</div>
+
+
+
+<p style="font-size: 25px;"><strong>Foto de perfil:</strong></p>
+
+<% if @user.imagen.attached? %>
+  <%= image_tag url_for(@user.imagen), alt: "Imagen del usuario", size: "500x500" %>
+<% else %>
+  <p>No image uploaded.</p>
+<% end %>

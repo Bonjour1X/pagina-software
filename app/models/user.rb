@@ -25,4 +25,6 @@ class User < ApplicationRecord
 
   has_many :deseados, dependent: :destroy
   has_many :clases_deseadas, through: :deseados, source: :course
+
+  has_one_attached :imagen
 end

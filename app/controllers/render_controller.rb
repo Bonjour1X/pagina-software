@@ -11,6 +11,7 @@ class RenderController < ApplicationController
   end
 
   def perfil
+    @user = current_user 
     render 'perfil'
   end
 end
