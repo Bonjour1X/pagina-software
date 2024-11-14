@@ -1,0 +1,50 @@
+
+<h1>Pronóstico del Clima para Santiago</h1>
+
+<% if @tomorrow_forecast %>
+  <h3><%= @tomorrow_date %>:</h3></h3>
+  <p><strong>Máxima:</strong> <%= @tomorrow_forecast["day"]["maxtemp_c"] %>°C</p>
+  <p><strong>Mínima:</strong> <%= @tomorrow_forecast["day"]["mintemp_c"] %>°C</p>
+  <p><strong>Condición:</strong> <%= @tomorrow_forecast["day"]["condition"]["text"] %></p>
+<% end %>
+
+<% if @dia2 %>
+  <h3><%= @dia2_date %>:</h3></h3>
+  <p><strong>Máxima:</strong> <%= @dia2["day"]["maxtemp_c"] %>°C</p>
+  <p><strong>Mínima:</strong> <%= @dia2["day"]["mintemp_c"] %>°C</p>
+  <p><strong>Condición:</strong> <%= @dia2["day"]["condition"]["text"] %></p>
+<% end %>
+
+<% if @dia3 %>
+  <h3><%= @dia3_date %>:</h3></h3>
+  <p><strong>Máxima:</strong> <%= @dia3["day"]["maxtemp_c"] %>°C</p>
+  <p><strong>Mínima:</strong> <%= @dia3["day"]["mintemp_c"] %>°C</p>
+  <p><strong>Condición:</strong> <%= @dia3["day"]["condition"]["text"] %></p>
+<% end %>
+
+<% if @dia4 %>
+  <h3><%= @dia4_date %>:</h3></h3>
+  <p><strong>Máxima:</strong> <%= @dia4["day"]["maxtemp_c"] %>°C</p>
+  <p><strong>Mínima:</strong> <%= @dia4["day"]["mintemp_c"] %>°C</p>
+  <p><strong>Condición:</strong> <%= @dia4["day"]["condition"]["text"] %></p>
+<% end %>
+<% if @dia5 %>
+  <h3><%= @dia5_date %>:</h3></h3>
+  <p><strong>Máxima:</strong> <%= @dia5["day"]["maxtemp_c"] %>°C</p>
+  <p><strong>Mínima:</strong> <%= @dia5["day"]["mintemp_c"] %>°C</p>
+  <p><strong>Condición:</strong> <%= @dia5["day"]["condition"]["text"] %></p>
+<% end %>
+<% if @dia6 %>
+  <h3><%= @dia6_date %>:</h3></h3>
+  <p><strong>Máxima:</strong> <%= @dia6["day"]["maxtemp_c"] %>°C</p>
+  <p><strong>Mínima:</strong> <%= @dia6["day"]["mintemp_c"] %>°C</p>
+  <p><strong>Condición:</strong> <%= @dia6["day"]["condition"]["text"] %></p>
+<% end %>
+<% if @dia7 %>
+  <h3><%= @dia7_date %>:</h3></h3>
+  <p><strong>Máxima:</strong> <%= @dia7["day"]["maxtemp_c"] %>°C</p>
+  <p><strong>Mínima:</strong> <%= @dia7["day"]["mintemp_c"] %>°C</p>
+  <p><strong>Condición:</strong> <%= @dia7["day"]["condition"]["text"] %></p>
+<% end %>
+
+

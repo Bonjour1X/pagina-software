@@ -77,3 +77,5 @@ gem 'activestorage'
 gem 'activestorage-cloudinary-service'
 gem 'cloudinary'
 gem "dotenv-rails"
+
+gem "httparty", "~> 0.22.0"

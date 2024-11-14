@@ -88,6 +88,9 @@ Rails.application.routes.draw do
     end
   end
 
+
+  get 'clima', to: 'weather#index', as: 'clima'
+
   authenticated :user do
     get 'profile', to: 'users#profile', as: 'profile'
   end
