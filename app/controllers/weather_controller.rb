@@ -5,6 +5,8 @@ class WeatherController < ApplicationController
         @city = 'Santiago,cl'  # Default to Santiago, Chile
         weather_service = WeatherService.new
         @forecast = weather_service.forecast(@city)
+        @dia0 = @forecast["forecast"]["forecastday"][0]
+        @dia0_date = Date.today.strftime("%A, %d %B %Y")
         @tomorrow_forecast = @forecast["forecast"]["forecastday"][1]
         @tomorrow_date = Date.tomorrow.strftime("%A, %d %B %Y")
         @dia2 = @forecast["forecast"]["forecastday"][2]
