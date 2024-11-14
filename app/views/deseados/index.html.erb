@@ -1,0 +1,23 @@
+<!-- app/views/deseados/index.html.erb -->
+<br>
+<br>
+<h3>Lista de Deseos</h3>
+<br>
+<% if @deseados.any? %>
+  <ul>
+    <% @deseados.each do |course| %>
+      <li>
+        <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+          <h2 class="subtitle">
+            <%= link_to course.title, course_path(course), class: "has-text-link" %>
+          </h2>
+          <p><strong>Profesor:</strong> <%= course.user.name %></p>
+          <p><strong>Fecha:</strong> <%= course.scheduled_date %></p>
+          <p><strong>Modalidad:</strong> <%= course.modality %></p>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No tienes clases en tu lista de deseos.</p>
+<% end %>

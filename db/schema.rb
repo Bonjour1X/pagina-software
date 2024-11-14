@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_23_112742) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_14_130449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_112742) do
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
+  create_table "deseados", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_deseados_on_course_id"
+    t.index ["user_id"], name: "index_deseados_on_user_id"
+  end
+
   create_table "enrollment_requests", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
@@ -72,15 +81,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_112742) do
     t.index ["user_id"], name: "index_enrollment_requests_on_user_id"
   end
 
-  create_table "enrollments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "course_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_enrollments_on_course_id"
-    t.index ["user_id"], name: "index_enrollments_on_user_id"
-  end
-  
   create_table "evaluations", force: :cascade do |t|
     t.string "name", null: false
     t.text "questions"
@@ -167,6 +167,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_112742) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "courses"
   add_foreign_key "courses", "users"
+  add_foreign_key "deseados", "courses"
+  add_foreign_key "deseados", "users"
   add_foreign_key "enrollment_requests", "courses"
   add_foreign_key "enrollment_requests", "users"
   add_foreign_key "evaluations", "courses"

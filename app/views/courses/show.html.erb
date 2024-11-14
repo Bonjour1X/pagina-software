@@ -9,6 +9,13 @@
   <% end %>
 </div>
 
+<% if current_user && !current_user.clases_deseadas.exists?(id: @course.id) %> 
+<%= button_to 'Agregar a deseados', add_to_favorites_course_path(@course), method: :post, class: 'btn btn-primary' %>
+<% end %>
+<% if current_user && current_user.clases_deseadas.exists?(id: @course.id) %> 
+<%= button_to 'Sacar de deseados', eliminar_favorites_course_path(@course), method: :post, class: 'btn btn-primary' %>
+<% end %>
+
 <% if current_user.tipo == "Profesor" && current_user == @course.user %>
   <!-- Sección de Evaluaciones -->
   <h2>Evaluaciones</h2>

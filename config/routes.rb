@@ -78,6 +78,16 @@ Rails.application.routes.draw do
   get '/my_courses', to: 'courses#my_courses', as: 'my_courses'
   get '/available_courses', to: 'courses#available_courses', as: 'available_courses'
 
+
+  resources :deseados, only: [:index]
+
+  resources :courses do
+    member do
+      post 'add_to_favorites', to: 'deseados#add_to_favorites'
+      post 'eliminar_favorites', to: 'deseados#eliminar_favorites'
+    end
+  end
+
   authenticated :user do
     get 'profile', to: 'users#profile', as: 'profile'
   end

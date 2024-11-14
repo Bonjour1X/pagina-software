@@ -21,6 +21,9 @@ class Course < ApplicationRecord
 
   after_create :crear_chat
 
+  has_many :deseados, dependent: :destroy
+  has_many :usuarios_deseadores, through: :deseados, source: :user
+
   def crear_chat
     Chat.create(course: self)
   end

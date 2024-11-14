@@ -22,4 +22,7 @@ class User < ApplicationRecord
            through: :enrollment_requests, 
            source: :course
   has_many :messages, dependent: :destroy
+
+  has_many :deseados, dependent: :destroy
+  has_many :clases_deseadas, through: :deseados, source: :course
 end
