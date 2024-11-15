@@ -156,6 +156,13 @@ class CoursesController < ApplicationController
     redirect_to course_path(@course)
   end
 
+  def students
+    @course = Course.find(params[:id])
+    unless current_user.admin?
+      redirect_to course_path(@course), alert: 'Acceso no autorizado'
+    end
+  end
+
 
   def student_evaluations
     @course = Course.find(params[:id])

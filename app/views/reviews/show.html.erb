@@ -19,7 +19,8 @@
     <div class="content">
       <%= @review.content %>
     </div>
-
+    
+    
     <% if @review.user == current_user %>
       <div class="actions">
         <%= link_to 'Editar', edit_course_review_path(@course, @review), class: 'btn btn-secondary' %>
@@ -29,6 +30,14 @@
             data: { confirm: '¿Estás seguro?' },
             class: 'btn btn-danger' %>
       </div>
+    <% end %>
+
+    <% if current_user.admin? || review.user == current_user %>
+      <%= button_to 'Eliminar Reseña Administrador', 
+          course_review_path(@course, review), 
+          method: :delete, 
+          class: 'button is-danger',
+          data: { confirm: '¿Estás seguro?' } %>
     <% end %>
   </div>
 </div>

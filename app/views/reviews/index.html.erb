@@ -30,12 +30,20 @@
         <% if review.user == current_user %>
           <div class="review-actions">
             <%= link_to 'Editar', edit_course_review_path(@course, review), class: 'btn btn-sm btn-secondary' %>
-            <%= button_to 'Eliminar', course_review_path(@course, review),
-                method: :delete,
-                data: { confirm: '¿Estás seguro?' },
-                class: 'btn btn-sm btn-danger' %>
           </div>
         <% end %>
+            
+        <% if current_user.admin? || review.user == current_user %>
+          <div class="review-actions">
+            <%= button_to 'Eliminar', 
+                course_review_path(@course, review), 
+                method: :delete,
+                class: 'btn btn-sm btn-danger',
+                data: { confirm: '¿Estás seguro?' } %>
+          </div>
+        <% end %>
+
+
       </div>
     <% end %>
   <% else %>

@@ -7,6 +7,15 @@
         <strong><%= message.user.name %>:</strong>
         <%= message.content %>
         <small><%= message.created_at.strftime("%d/%m/%Y %H:%M") %></small>
+        
+        <!-- Agregar botón de eliminar solo para admin y dueño del mensaje -->
+        <% if current_user.admin? || message.user == current_user %>
+          <%= button_to 'Eliminar', 
+              course_path(@course, message_id: message.id), 
+              method: :delete,
+              form: { data: { turbo_confirm: '¿Estás seguro?' } },
+              class: 'button is-small is-danger' %>
+        <% end %>
       </div>
     <% end %>
   <% else %>
@@ -14,7 +23,8 @@
   <% end %>
 </div>
 
-<% if current_user == @course.user || @course.enrollment_requests.find_by(user: current_user)&.approved? %>
+<!-- Modificar la condición para incluir admin -->
+<% if current_user.admin? || current_user == @course.user || @course.enrollment_requests.find_by(user: current_user)&.approved? %>
   <%= form_with url: crear_mensaje_course_path(@course), local: true do |form| %>
     <div>
       <%= form.label :content, "Escribe tu mensaje:" %>

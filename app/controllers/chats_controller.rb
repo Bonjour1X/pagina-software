@@ -54,11 +54,26 @@ class ChatsController < ApplicationController
     redirect_to root_path, alert: 'Chat no encontrado'
   end
 
+  # admin quiere eliminar tu mensaje
+  def delete_message
+    @message = Message.find(params[:message_id])
+    @course = @message.chat.course
+    
+    if current_user.admin? || @message.user == current_user
+      @message.destroy
+      redirect_to foro_course_path(@course), notice: 'Mensaje eliminado'
+    else
+      redirect_to foro_course_path(@course), alert: 'No tienes permiso'
+    end
+  end
+
   private
 
   # Verifica si el usuario puede enviar mensajes en el curso
   def can_send_message?(course)
-    return true if current_user == course.user # El profesor siempre puede enviar mensajes
+    #return true if current_user == course.user # El profesor siempre puede enviar mensajes
+    return true if current_user.admin? || current_user == course.user # el admin igual
+
     
     # Los estudiantes necesitan estar inscritos y aprobados
     enrollment_request = EnrollmentRequest.find_by(course: course, user: current_user)

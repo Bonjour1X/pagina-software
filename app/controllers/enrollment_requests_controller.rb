@@ -56,6 +56,34 @@ class EnrollmentRequestsController < ApplicationController
     @enrollment_request = EnrollmentRequest.find(params[:id])
   end
 
+  def destroy
+    @enrollment_request = EnrollmentRequest.find(params[:id])
+    # Admin puede eliminar cualquier inscripción
+    if current_user.admin? || @enrollment_request.course.user == current_user
+      @enrollment_request.destroy
+      redirect_to course_path(@enrollment_request.course), notice: 'Estudiante removido del curso'
+    else
+      redirect_to course_path(@enrollment_request.course), alert: 'No tienes permiso'
+    end
+  end
+
+  # Admin puede inscribir directamente a un alumno
+  def direct_enroll
+    @course = Course.find(params[:course_id])
+    @user = User.find(params[:user_id])
+    
+    if current_user.admin?
+      EnrollmentRequest.create!(
+        user: @user,
+        course: @course,
+        status: 'approved'
+      )
+      redirect_to course_path(@course), notice: 'Estudiante inscrito exitosamente'
+    else
+      redirect_to course_path(@course), alert: 'No tienes permiso'
+    end
+  end
+
   private
 
   def set_course

@@ -41,9 +41,16 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review.destroy
-    redirect_to course_reviews_path(@course), notice: 'Reseña eliminada'
+    @review = Review.find(params[:id])
+    # Admin puede borrar cualquier reseña
+    if current_user.admin? || @review.user == current_user
+      @review.destroy
+      redirect_to course_reviews_path(@review.course), notice: 'Reseña eliminada'
+    else
+      redirect_to course_reviews_path(@review.course), alert: 'No tienes permiso'
+    end
   end
+
 
   private
 

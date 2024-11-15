@@ -58,10 +58,16 @@ Rails.application.routes.draw do
 
     # Rutas para reviews
     resources :reviews
+    resources :enrollment_requests do
+      member do
+        delete :remove_student  # Para que admin remueva estudiantes
+      end
+    end
 
     # Member routes para courses
     member do
       delete :leave
+      get 'students'
       get 'student_evaluations'
 
       #Archivos clase
@@ -88,6 +94,10 @@ Rails.application.routes.draw do
     member do
       post 'add_to_favorites', to: 'deseados#add_to_favorites'
       post 'eliminar_favorites', to: 'deseados#eliminar_favorites'
+      get 'foro'
+      post 'crear_mensaje'
+      # Cambiamos la ruta del delete para que coincida con el helper path
+      delete 'chat/:message_id', to: 'chats#delete_message', as: 'chat_message_delete'
     end
   end
 

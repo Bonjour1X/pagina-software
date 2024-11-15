@@ -151,6 +151,12 @@
     </div>
   </div>
 
+  <!-- Ver mensajes de chat -->
+  <div class="chat-section">
+    <h2>Chat del Curso</h2>
+    <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course), class: 'button is-info' %>
+  </div>
+
   <!-- Botones de Acción -->
   <div class="button-group mt-6">
     <%= button_to 'Crear nueva evaluación', new_course_evaluation_path(@course), method: :get, class: 'btn btn-primary' %>
@@ -220,6 +226,27 @@
       method: :delete, 
       data: { confirm: '¿Estás seguro?' }, 
       class: 'btn btn-danger' %>
+      
+  <!-- Agregar botones de admin -->
+  <% if current_user.admin? %>
+    <div class="admin-actions">
+      <h3>Panel de Administración</h3>
+      <%= link_to 'Gestionar Estudiantes', 
+          students_course_path(@course), 
+          class: 'button is-info' %>
+      <%= link_to 'Gestionar Reseñas', 
+          course_reviews_path(@course), 
+          class: 'button is-info' %>
+    </div>
+  <% end %>
+<% end %>
+
+# SECCION DE FORO
+<% if current_user.admin? || current_user == @course.user %>
+  <div class="chat-section">
+    <h2>Chat del Curso</h2>
+    <%= link_to 'Ver Mensajes del Chat Version admin', foro_course_path(@course), class: 'button is-info' %>
+  </div>
 <% end %>
 
 <% if enrollment_request&.approved? || current_user == @course.user %>

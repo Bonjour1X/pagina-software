@@ -23,11 +23,6 @@
     <%= f.text_field :description, autofocus: true, autocomplete: "description", style: "font-size: 18px; padding: 12px; width: 100%; box-sizing: border-box;" %>
   </div>
 
-  <div class="field" style="margin-bottom: 20px;">
-    <%= f.label :tipo, style: "font-size: 20px;" %><br />
-    <%= f.select :tipo, ["Estudiante", "Profesor"], { prompt: "Seleccione un tipo" }, style: "font-size: 18px; padding: 12px; width: 100%; box-sizing: border-box;" %>
-  </div>
-
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div style="font-size: 18px;">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
