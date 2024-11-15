@@ -59,7 +59,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_14_185113) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "approved", default: false, null: false
     t.boolean "public", default: false
     t.index ["user_id"], name: "index_courses_on_user_id"
   end

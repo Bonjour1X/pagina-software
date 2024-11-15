@@ -1,9 +1,9 @@
 # app/controllers/courses_controller.rb
 class CoursesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index]
 
   def index
-    #@courses = Course.all
+    @courses = Course.all
     @available_courses = Course.where.not(user: current_user)
     @enrolled_courses = current_user.enrolled_courses
   end
@@ -31,7 +31,16 @@ class CoursesController < ApplicationController
       end
     end
   end
+
+  def visitantes
+    if params[:id].present?
+      @course = Course.find(params[:id])
+
+    else
+      redirect_to courses_path, alert: 'Curso no encontrado'
+    end
   
+  end
 
   def new
     @course = Course.new
@@ -56,12 +65,26 @@ class CoursesController < ApplicationController
   end
 
   # Eliminar clases
+  #def destroy
+  #  @course = Course.find(params[:id])
+  #  @course.destroy
+  #  flash[:notice] = "Clase eliminada: #{@course.title}"
+  #  redirect_to courses_path
+  #end
+
   def destroy
     @course = Course.find(params[:id])
-    @course.destroy
-    flash[:notice] = "Clase eliminada: #{@course.title}"
-    redirect_to courses_path
+    if current_user.admin? || current_user == @course.user
+      if @course.destroy
+        redirect_to courses_path, notice: "Curso eliminado correctamente"
+      else
+        redirect_to courses_path, alert: "No se pudo eliminar el curso"
+      end
+    else
+      redirect_to courses_path, alert: "No tienes permiso para esta acción"
+    end
   end
+
   
   def available_courses
     @courses = Course.where.not(id: current_user.enrolled_courses.pluck(:id))
@@ -185,4 +208,19 @@ class CoursesController < ApplicationController
   def course_params
     params.require(:course).permit(:title, :description, :scheduled_date, :materials, :modality, documents: [])
   end
+
+  # Método para verificar la membresía y redirigir si no cumple los requisitos
+  def check_membership
+    unless user_signed_in?
+      redirect_to visitantes_path, alert: "Por favor, inicia sesión o regístrate para ver más detalles del curso."
+      return
+    end
+
+    # Suponiendo que `@course` es el curso actual cargado
+    @course = Course.find(params[:id])
+
+    unless current_user == @course.user || @course.enrollment_requests.find_by(user: current_user)&.approved?
+      redirect_to visitantes_path, alert: "Acceso restringido solo para miembros."
+    end
+end
 end

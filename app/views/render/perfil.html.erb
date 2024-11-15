@@ -18,3 +18,8 @@
 <% else %>
   <p>No image uploaded.</p>
 <% end %>
+
+<!-- Botón de retroceso -->
+<p>
+  <%= link_to "Volver", request.referer || root_path, class: "button is-info" %>
+</p>

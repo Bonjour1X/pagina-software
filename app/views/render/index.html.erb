@@ -1,15 +1,69 @@
-<h1>¡Deporte ya!</h1>
+<%= render 'shared/flash' %>
+
+<h1 class="title has-text-centered">¡Bienvenido a Deporte Ya!</h1>
+
 <% if user_signed_in? %>
-  <h2>Sesión iniciada <%= current_user.email %></h2>
-  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>&nbsp;&nbsp;
-  <%= link_to 'Ajustes', render_ajustes_path %>
-
+  <h2 class="subtitle has-text-centered">¡Hola, <%= current_user.name %>! Ya has iniciado sesión.</h2>
+  <div class="buttons is-centered">
+    <%= link_to 'Mis cursos', my_courses_path, class: 'button is-primary' %>
+  </div>
 <% else %>
-  <%= link_to 'Sign in', new_user_session_path %>&nbsp;&nbsp;
-  <%= link_to 'Sign up', new_user_registration_path %>
+  <p class="has-text-centered">Únete a nuestra comunidad deportiva. Regístrate o inicia sesión para acceder a más funciones.</p>
+  <div class="buttons is-centered">
+    <%= link_to 'Iniciar sesión', new_user_session_path, class: 'button is-link' %>&nbsp;&nbsp;
+    <%= link_to 'Registrarse', new_user_registration_path, class: 'button is-success' %>
+  </div>
 <% end %>
 
-<% if flash[:notice] %>
-  <p><%= flash[:notice] %></p>
-<% end %>
+<!-- Mostrar lista de cursos disponibles -->
+<h2 class="title is-4 has-text-centered">Cursos Disponibles</h2>
+<% if @courses.any? %>
+  <div class="columns is-multiline">
+    <% @courses.first(5).each do |course| %>
+      <div class="column is-one-third">
+        <!-- Tarjeta con estilos adicionales de Bulma para borde y sombra -->
+        <div class="card box has-background-light">
+          <div class="card-content">
+            <h3 class="title is-5"><%= course.title %></h3>
+            <p class="subtitle is-6 has-text-grey-dark"><%= course.description %></p>
+            <div class="content">
+              <p><strong>Fecha de inicio:</strong> <%= course.scheduled_date.strftime("%d %b %Y") %></p>
+              <p><strong>Modalidad:</strong> <%= course.modality %></p>
+            </div>
+          </div>
+          
+          <!-- Footer de la tarjeta con el botón -->
+          <footer class="card-footer">
+            <div class="card-footer-item">
+              <% if user_signed_in? %>
+                <%= link_to 'Acceder', course_path(course), class: 'button is-primary is-fullwidth' %> <!-- Usuario autenticado -->
+              <% else %>
+                <%= link_to 'Ver detalles', visitantes_course_path(course), class: 'button is-primary is-fullwidth' %> <!-- Usuario no autenticado -->
+              <% end %>
+            </div>
+          </footer>
+        </div>
+      </div>
+    <% end %>
 
+    <% if @courses.size > 5 %>
+      <div class="column is-one-third">
+        <div class="card box has-background-light">
+          <div class="card-content">
+            <h3 class="title is-5">¡Ingresa para ver más cursos!</h3>
+            <p class="subtitle is-6 has-text-grey-dark">Hay más cursos disponibles, pero solo mostramos los primeros 5.</p>
+            <div class="content">
+              <% if user_signed_in? %>
+                <%= link_to 'Ver más cursos', my_courses_path, class: 'button is-primary is-fullwidth' %>
+              <% else %>
+                <%= link_to 'Ver más cursos', new_user_session_path, class: 'button is-primary is-fullwidth' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="has-text-centered">No hay cursos disponibles en este momento. Vuelve pronto para ver nuevas opciones.</p>
+<% end %>

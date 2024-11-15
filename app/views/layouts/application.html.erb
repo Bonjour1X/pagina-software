@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+<head> 
+<!-- Lo que buscaba el agus --!>
     <% if current_user %>
     Bienvenido, <%= current_user.display_title %>
     <% end %>
@@ -85,9 +86,9 @@
 
     <div class="container">
         <% if user_signed_in? %>
-            <p class="subtitle">Bienvenido, <strong><%= current_user.email %></strong></p>
+            <p class="subtitle">Bienvenido, <strong><%= current_user.name %></strong></p>
         <% else %>
-            <h1 class="title">Cursos de Deporte</h1>
+            <h1 class="title">Bienvenido a nuestra app de cursos de deporte</h1>
         <% end %>
 
         <%= yield %> <!-- Aquí se renderizará el contenido de las vistas específicas -->
@@ -96,7 +97,7 @@
     <% if user_signed_in? %>
     <footer class="footer">
         <div class="buttons are-centered">
-            <%= link_to 'Ajustes', edit_user_registration_path, class: "button is-info" %>
+            <%= link_to 'Ajustes', render_ajustes_path, class: "button is-info" %>
             <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: "button is-danger" %>
         </div>
     </footer>

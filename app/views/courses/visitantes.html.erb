@@ -1,0 +1,22 @@
+<%= link_to 'Volver al Inicio', root_path, class: 'btn btn-primary' %>
+<div class="course-info">
+    <h1>Acceso Restringido</h1>
+    <p>Esta sección está disponible solo para miembros del curso.</p>
+    <p>Si deseas unirte, solicita acceso o comunícate con el profesor.</p>
+
+    <h1><%= @course.title %></h1>
+    <p>Profesor: <%= @course.user&.name %></p>
+    <p>Fecha: <%= @course.scheduled_date %></p>
+    <p>Modalidad: <%= @course.modality %></p>
+
+    <%= link_to course_reviews_path(@course), class: 'btn btn-info' do %>
+        Ver Reseñas (<%= @course.reviews.count %>)
+    <% end %>
+</div>
+
+
+
+<h2>Evaluaciones disponibles (solo disponibles para miembros del curso)</h2>
+
+<h2>Documentos públicos (solo disponible par miembors del cursoss)</h2>
+<h2>Chat (solo disponibles para miembros del curso)</h2>

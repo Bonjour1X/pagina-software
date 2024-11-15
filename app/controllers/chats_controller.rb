@@ -42,6 +42,7 @@ class ChatsController < ApplicationController
       redirect_to foro_course_path(@course), 
                   alert: "Error al enviar el mensaje: #{@message.errors.full_messages.join(', ')}"
     end
+    
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path, alert: 'Curso no encontrado'
   end

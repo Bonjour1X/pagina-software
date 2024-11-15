@@ -7,3 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Crea admins con poderes de profesor 
+admin_email = 'admin@admin.com'
+
+unless User.exists?(email: admin_email) # crear esto y no guardarlo antes del merge dió problemas
+  User.create!(
+    email: admin_email,
+    password: '123456',
+    name: 'Administrador',
+    phone: '123456789',
+    tipo: 'Profesor'
+  )
+end

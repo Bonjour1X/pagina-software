@@ -3,7 +3,7 @@
   <p>Profesor: <%= @course.user&.name %></p>
   <p>Fecha: <%= @course.scheduled_date %></p>
   <p>Modalidad: <%= @course.modality %></p>
-  
+
   <%= link_to course_reviews_path(@course), class: 'btn btn-info' do %>
     Ver Reseñas (<%= @course.reviews.count %>)
   <% end %>
@@ -118,7 +118,7 @@
               <td class="px-6 py-4 whitespace-nowrap">
                 <%= student.name %>
               </td>
-              
+
               <% @course.evaluations.each do |evaluation| %>
                 <% grade = Grade.find_by(student: student, evaluation: evaluation)&.score %>
                 <% grades << grade if grade.present? %>
@@ -131,7 +131,7 @@
               <td class="px-6 py-4 whitespace-nowrap <%= average && average >= 4.0 ? 'text-green-600' : 'text-red-600' %>">
                 <%= average ? sprintf('%.1f', average) : '-' %>
               </td>
-              
+                
               <td class="px-6 py-4 whitespace-nowrap">
                 <% if average %>
                   <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
@@ -177,10 +177,10 @@
 
 <% else %>
   <% enrollment_request = @course.enrollment_requests.find_by(user: current_user) %>
-  
+     
   <% if enrollment_request&.approved? %>
     <%= button_to 'Salir de clase', leave_course_path(@course), method: :delete, data: { confirm: '¿Estás seguro de que deseas salir de esta clase?' }, class: 'btn btn-warning' %>
-    
+        
     <h2>Evaluaciones disponibles</h2>
     <% if current_user.tipo == "Profesor" %>
       <p class="text-info">Aunque seas profesor, aquí eres un estudiante más.</p>
@@ -214,9 +214,16 @@
   <% end %>
 <% end %>
 
+<% if current_user.admin? || current_user == @course.user %>
+  <%= button_to 'Eliminar Curso', 
+      course_path(@course), 
+      method: :delete, 
+      data: { confirm: '¿Estás seguro?' }, 
+      class: 'btn btn-danger' %>
+<% end %>
+
 <% if enrollment_request&.approved? || current_user == @course.user %>
   <h2>Chat</h2>
   <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course) %>
 <% end %>
-
 <% end %>

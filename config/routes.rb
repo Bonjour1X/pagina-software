@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :posts
+
   # USER
   devise_for :users, controllers: { 
     registrations: 'users/registrations',
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
         patch :reject
         get :participants
         get :show
+        get :visitantes
       end
     end
 
@@ -70,9 +72,10 @@ Rails.application.routes.draw do
       delete 'courses/:id/eliminar_documents.:blob_id', to: 'courses#eliminar_documents', as: 'eliminar_documents'
       get 'foro', to: 'chats#foro', as: 'foro'
       post 'crear_mensaje', to: 'chats#crear_mensaje'
-      
+      get 'visitantes', to: 'courses#visitantes'
     end
   end
+
   # Ruta para ver las clases dictadas por el profesor
   get 'taught_classes', to: 'courses#taught_classes', as: 'taught_classes'
   get '/my_courses', to: 'courses#my_courses', as: 'my_courses'
@@ -94,4 +97,8 @@ Rails.application.routes.draw do
   authenticated :user do
     get 'profile', to: 'users#profile', as: 'profile'
   end
+
+  # Ruta para el perfil de usuario autenticado
+  get 'visitantes', to: 'courses#visitantes'
+
 end
