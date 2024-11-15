@@ -1,1 +1,6 @@
 # Para mostrar la información de un usuario específico.
+<% if current_user.admin? %>
+  <div class="admin-badge" style="color: gold; font-weight: bold;">
+    ★ Administrador Estrella ★
+  </div>
+<% end %>

@@ -10,6 +10,18 @@ class User < ApplicationRecord
   validates :tipo, presence: true, inclusion: { in: ["Estudiante", "Profesor"], message: "no es válido" }
   validates :name, presence: true
   validates :phone, presence: true
+  
+  def admin?
+    email == 'admin@admin.com'  # email del admin
+  end
+
+  def display_title
+    if admin?
+      "#{name} ★ Administrador Estrella ★"
+    else
+      "#{tipo}: #{name}"  # Mostrará "Profesor: Antonio" o "Estudiante: Juan"
+    end
+  end
 
   # Se encarga del historial de evaluaciones
   has_many :student_responses, dependent: :destroy

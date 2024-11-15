@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <% if current_user %>
+    Bienvenido, <%= current_user.display_title %>
+    <% end %>
     <title><%= content_for(:title) || "Cursos de Deporte" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>

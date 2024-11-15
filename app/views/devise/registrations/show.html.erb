@@ -1,0 +1,5 @@
+<h1>Mi perfil</h1>
+<% if current_user.admin? %>
+  <p style="color: gold; font-weight: bold;">★ Administrador Estrella ★</p>
+<% end %>
+<p>Nombre: <%= @user.name %></p>
