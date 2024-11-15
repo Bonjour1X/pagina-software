@@ -135,11 +135,17 @@ class CoursesController < ApplicationController
   def subir_documents
     @course = Course.find(params[:id])
     params[:course][:documents].each do |document|
-      @course.documents.attach(document)
+      # Verificar si el documento no está vacío y es un archivo válido
+      if document.present? && document.respond_to?(:content_type) && document.content_type == "application/pdf"
+        @course.documents.attach(document)
+      else
+        Rails.logger.warn "El archivo no es válido o está vacío: #{document.inspect}"
+      end
+    
     Rails.logger.info "CLOUDINARY_CLOUD_NAME: #{ENV['CLOUDINARY_CLOUD_NAME']}"
     Rails.logger.info "CLOUDINARY_API_KEY: #{ENV['CLOUDINARY_API_KEY']}"
     Rails.logger.info "CLOUDINARY_API_SECRET: #{ENV['CLOUDINARY_API_SECRET']}"
-      
+    
     end
     redirect_to course_path(@course)
   end
@@ -153,7 +159,11 @@ class CoursesController < ApplicationController
     end
     @document = @course.documents.find_by(blob_id: params[:blob_id])
     @document.purge
-    redirect_to course_path(@course)
+    #redirect_to course_path(@course)
+    respond_to do |format|
+      format.html { redirect_to course_path(@course), notice: "Documento eliminado correctamente." }
+      format.js   # Responde con un archivo .js.erb
+    end
   end
 
   def students

@@ -1,3 +1,18 @@
+<% if flash[:warning].present? %>
+  <div class="alert alert-warning">
+    <ul>
+      <% flash[:warning].each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<br>
+<h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+  Información
+  <%= image_tag 'info.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+</h1>
 <div class="course-info">
   <h1><%= @course.title %></h1>
   <p>Profesor: <%= @course.user&.name %></p>
@@ -6,19 +21,24 @@
 
   <%= link_to course_reviews_path(@course), class: 'btn btn-info' do %>
     Ver Reseñas (<%= @course.reviews.count %>)
+    <br>
   <% end %>
 </div>
-
+<br>
 <% if current_user && !current_user.clases_deseadas.exists?(id: @course.id) %> 
-<%= button_to 'Agregar a deseados', add_to_favorites_course_path(@course), method: :post, class: 'btn btn-primary' %>
+<%= button_to 'Agregar a deseados', add_to_favorites_course_path(@course), method: :post, class: 'btn btn-primary', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
 <% end %>
-<% if current_user && current_user.clases_deseadas.exists?(id: @course.id) %> 
-<%= button_to 'Sacar de deseados', eliminar_favorites_course_path(@course), method: :post, class: 'btn btn-primary' %>
-<% end %>
+<% if current_user && current_user.clases_deseadas.exists?(id: @course.id) %>  
+<%= button_to 'Sacar de deseados', eliminar_favorites_course_path(@course), method: :post, class: 'btn btn-primary', style: 'background-color: #f44336; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
 
+<% end %>
+<br>
 <% if current_user.tipo == "Profesor" && current_user == @course.user %>
   <!-- Sección de Evaluaciones -->
-  <h2>Evaluaciones</h2>
+  <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+  Evaluaciones
+  <%= image_tag 'search.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+  </h1>
   <% @course.evaluations.group_by(&:evaluation_method).each do |method, evaluations| %>
     <h3><%= method.titleize %></h3>
     <% evaluations.each do |evaluation| %>
@@ -40,7 +60,7 @@
 
   <!-- Sección de Alumnos Inscritos -->
   <div class="enrolled-students mt-6">
-    <h2 class="text-xl font-bold mb-4">Alumnos Inscritos</h2>
+    <h2 class="title custom-title" style="color: #010c55; font-size: 20px;">Alumnos Inscritos</h2>
     <% if @enrolled_students.any? %>
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
@@ -90,7 +110,7 @@
     <% end %>
 
     <div class="grades-summary mt-6">
-    <h2 class="text-xl font-bold mb-4">Resumen de Calificaciones</h2>
+    <h2 class="title custom-title" style="color: #010c55; font-size: 20px;">Resumen de Calificaciones</h2>
     <div class="overflow-x-auto">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
@@ -159,21 +179,32 @@
 
   <!-- Botones de Acción -->
   <div class="button-group mt-6">
-    <%= button_to 'Crear nueva evaluación', new_course_evaluation_path(@course), method: :get, class: 'btn btn-primary' %>
-    <%= button_to 'Ver solicitudes de inscripción', course_enrollment_requests_path(@course), method: :get, class: 'btn btn-info' %>
-    <%= button_to 'Eliminar Clase', @course, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger' %>
+    <%= button_to 'Crear nueva evaluación', new_course_evaluation_path(@course), method: :get, class: 'btn btn-primary', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
+    <br>
+    <%= button_to 'Ver solicitudes de inscripción', course_enrollment_requests_path(@course), method: :get, class: 'btn btn-info', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
+    <br>
+    <%= button_to 'Eliminar Clase', @course, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger', style: 'background-color: #f44336; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
   </div>
-  <h2>Archivos</h2>
-  <%= button_to 'Reemplazar documentos', form_documents_course_path(@course), method: :get, class: 'btn btn-primary' %>
-  <%= button_to 'Subir documentos', form_subir_documents_course_path(@course), method: :get, class: 'btn btn-primary' %>
+  <br>
+  <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+  Archivos
+  <%= image_tag 'google-docs.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+  </h1>
+  <%= button_to 'Subir documentos', form_subir_documents_course_path(@course), method: :get, class: 'btn btn-primary', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
+  <br>
 
-  <h2>Documentos subidos</h2>
+
+  <h2 class="title custom-title" style="color: #010c55; font-size: 20px;">Documentos subidos</h2>
   <% if @course.documents.attached? %>
     <ul>
       <% @course.documents.each do |document| %>
         <li>
-          <%= link_to document.filename, url_for(document) %>
-          <%= button_to "Eliminar", eliminar_documents_course_path(@course.id, document.blob_id), method: :delete %>
+          <div style="display: flex; align-items: center; gap: 40px;">
+            <%= link_to document.filename, url_for(document), style: 'text-decoration: none; color: #007BFF;' %>                                           
+            <br>
+            <br>
+            <%= button_to "Eliminar", eliminar_documents_course_path(@course.id, document.blob_id), method: :delete, remote: true, class: 'btn btn-danger', style: 'padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px;' %>
+          </div>
         </li>
       <% end %>
     </ul>
