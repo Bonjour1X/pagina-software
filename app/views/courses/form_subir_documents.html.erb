@@ -1,3 +1,25 @@
+<% if flash[:warning].present? %>
+  <div class="alert alert-warning">
+    <ul>
+      <% flash[:warning].each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<br>
+<br>
+
+
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 48px;">
+  <%= image_tag 'pdf.png', alt: 'Imagen izquierda', class: 'title-img-left' %>
+  Subir Documento PDF
+  <%= image_tag 'pdf.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+<br> 
+</h1>
+<br> 
+
 <%= form_with model: @course, url: subir_documents_course_path(@course), local: true, multipart: true do |form| %>
     <div>
       <%= form.label :documents, "Subir documentos" %>
@@ -5,7 +27,8 @@
     </div>
     
     <div>
-      <%= form.submit "Enviar" %>
+      <br> 
+      <%= form.submit "Enviar", class: 'btn btn-primary', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
     </div>
   <% end %>
   
