@@ -1,9 +1,8 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
+# test/fixtures/deseados.yml
 one:
-  user: one
-  course: one
+  user: user_one
+  course: course_one
 
 two:
-  user: two
-  course: two
+  user: profesor_one
+  course: course_two

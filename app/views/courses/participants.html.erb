@@ -8,12 +8,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @students.each do |enrollment| %>
+    <% @students.each do |enrollment_requests| %>
       <tr>
-        <td><%= enrollment.user.name %></td>
+        <td><%= enrollment_requests.user.name %></td>
         <td>
-          <% if enrollment.grade.present? %>
-            <%= enrollment.grade %>
+          <% if enrollment_requests.grade.present? %>
+            <%= enrollment_requests.grade %>
           <% else %>
             Sin calificación disponible
           <% end %>

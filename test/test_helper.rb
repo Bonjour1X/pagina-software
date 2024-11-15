@@ -13,6 +13,7 @@ require 'rails/test_help'
 require 'devise/test/integration_helpers'
 
 module ActiveSupport
+  
   class TestCase
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)

@@ -2,7 +2,7 @@
 class ReviewsController < ApplicationController
   before_action :set_course
   before_action :set_review, only: [:edit, :update, :destroy]
-  before_action :verify_enrollment, only: [:new, :create] 
+  before_action :verify_enrollment_requests, only: [:new, :create] 
 
   def index
     @reviews = @course.reviews.order(created_at: :desc)
@@ -59,7 +59,7 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:content, :rating)
   end
 
-  def verify_enrollment
+  def verify_enrollment_requests
     enrollment_request = @course.enrollment_requests.find_by(user: current_user)
     
     unless enrollment_request&.status == "approved"  # Verificación específica de estado aprobado
