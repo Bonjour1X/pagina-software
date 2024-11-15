@@ -1,4 +1,10 @@
-<h1 class="title has-text-centered" style="color: #4CAF50;">Crear Nueva Clase</h1>
+<br>
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 48px;">
+  <%= image_tag 'basketball.png', alt: 'Imagen izquierda', class: 'title-img-left' %>
+  Crear nueva clase
+  <%= image_tag 'basketball.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+<br> 
+<br>
 
 <%= form_with(model: @course, local: true, class: 'form-container') do |form| %>
   <div class="field">
@@ -27,6 +33,6 @@
   </div>
 
   <div class="control has-text-centered">
-    <%= form.submit 'Crear Clase', class: 'button is-primary' %>
+    <%= form.submit 'Crear Clase', class: 'button', style: 'background-color: #2196F3; color: white;' %>
   </div>
   <% end %>

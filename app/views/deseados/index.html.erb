@@ -1,15 +1,19 @@
 <br>
-<br>
-<h3>Lista de Deseos</h3>
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 48px;">
+  <%= image_tag 'favorite.png', alt: 'Imagen izquierda', class: 'title-img-left' %>
+  Lista de deseados
+  <%= image_tag 'favorite.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+</h1>
+
 <br>
 <% if @deseados.any? %>
   <ul>
     <% @deseados.each do |course| %>
       <li>
         <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
-          <h2 class="subtitle">
+          <strong class="is-size-4">
             <%= link_to course.title, course_path(course), class: "has-text-link" %>
-          </h2>
+          </strong><br>
           <p><strong>Profesor:</strong> <%= course.user.name %></p>
           <p><strong>Fecha:</strong> <%= course.scheduled_date %></p>
           <p><strong>Modalidad:</strong> <%= course.modality %></p>

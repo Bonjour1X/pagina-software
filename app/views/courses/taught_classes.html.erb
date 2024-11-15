@@ -1,11 +1,16 @@
-<h1 class="title has-text-centered" style="color: #4CAF50;">Clases Dictadas</h1>
-
+<br>
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 48px;">
+  <%= image_tag 'profe.png', alt: 'Imagen izquierda', class: 'title-img-left' %>
+  Clases Dictadas
+  <%= image_tag 'profe.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+<br> 
+</h1>
 <% if @courses.any? %>
   <ul class="list">
     <% @courses.each do |course| %>
-      <li class="box" style="margin: 15px 0; border: 2px solid #4CAF50; border-radius: 5px; padding: 15px;">
+      <li class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
         <strong class="is-size-4">
-          <%= link_to course.title, course_path(course), style: "color: #4CAF50;" %>
+          <%= link_to course.title, course_path(course), style: "color: #2196F3;" %>
         </strong><br>
         <p><strong>Descripción:</strong> <%= course.description %></p>
         <p><strong>Fecha programada:</strong> <%= course.scheduled_date %></p>

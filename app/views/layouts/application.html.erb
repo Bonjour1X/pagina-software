@@ -14,6 +14,7 @@
         body {
             display: flex;
             flex-direction: column;
+            
             min-height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
             margin: 0; /* Eliminar margen por defecto */
         }
@@ -22,8 +23,15 @@
             padding: 20px; /* Espaciado interno */
             background-color: white; /* Fondo blanco */
         }
+        .container_ancho {
+            flex-grow: 1; /* Permite que el contenedor ocupe el espacio restante */
+            padding: 20px; /* Espaciado interno */
+            background-color: white; /* Fondo blanco */
+            max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
+            width: 30vw;
+        }
         .navbar {
-            background-color: #4CAF50; /* Color de la barra de navegación */
+            background-color: #010c55  ; /* Color de la barra de navegación */
         }
         .navbar-item {
             color: white; /* Texto blanco para los botones de la navbar */
@@ -33,7 +41,7 @@
             background-color: #45a049; /* Color al pasar el mouse */
         }
         .footer {
-            background-color: #4CAF50; /* Color del pie */
+            background-color: #010c55 ; /* Color del pie */
             color: white; /* Texto blanco */
             padding: 10px; /* Espaciado mínimo */
             text-align: center; /* Centrar texto */
@@ -43,7 +51,7 @@
             margin: 5px; /* Margen entre botones */
         }
         .button.is-info {
-            background-color: #2196F3; /* Color azul para ajustes */
+            background-color: #4CAF50; /* Color azul para ajustes */
             color: white; /* Texto blanco */
         }
         .button.is-info:hover {
@@ -56,6 +64,27 @@
         .button.is-danger:hover {
             background-color: #d32f2f; /* Color al pasar el mouse */
         }
+        .mi-texto-personalizado {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        font-family: 'Roboto', sans-serif; /* Puedes cambiar a cualquier fuente que desees */
+        color: #010c55;  /* Eliminar la coma extra */
+        font-size: 70px;
+        font-weight: bold;
+        }
+        .mi-texto-personalizado2 {
+        font-family: 'Roboto', sans-serif; /* Puedes cambiar a cualquier fuente que desees */
+        color: #010c55;  /* Eliminar la coma extra */
+        font-size: 60px;
+        font-weight: bold;
+        }
+        .title-img-left, .title-img-right {
+        width: 50px;                /* Ajusta el tamaño de las imágenes */
+        height: auto;
+        margin: 0 10px;             /* Agrega un margen entre las imágenes y el texto */
+        }
+
+
+
     </style>
 </head>
 

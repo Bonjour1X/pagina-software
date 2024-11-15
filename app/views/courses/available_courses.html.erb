@@ -1,16 +1,26 @@
-<h1 class="title has-text-centered" style="color: #4CAF50;">Clases Disponibles</h1>
+<br>
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 48px;">
+  <%= image_tag 'sports.png', alt: 'Imagen izquierda', class: 'title-img-left' %>
+  Clases Disponibles
+  <%= image_tag 'sports.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+</h1>
+
 
 <div class="has-text-centered" style="margin-bottom: 20px;">
-  <%= link_to 'Mis Clases Inscritas', enrolled_courses_path, class: 'button is-primary' %>
+  <%= link_to 'Mis Clases Inscritas', enrolled_courses_path, class: 'button', style: 'background-color: #2196F3; color: white;' %>
 </div>
 
 <% @courses.each do |course| %>
-  <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
-    <h2 class="subtitle">
+  <div class="container_ancho" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+    <strong class="is-size-4">
       <%= link_to course.title, course_path(course), class: "has-text-link" %>
-    </h2>
-    <p><strong>Profesor:</strong> <%= course.user.name %></p>
-    <p><strong>Fecha:</strong> <%= course.scheduled_date %></p>
-    <p><strong>Modalidad:</strong> <%= course.modality %></p>
+    </strong><br>
+
+
+    <p><strong>Ptofesor:</strong> <%= course.user.name %></p>
+    <p style="display: inline-block; margin-right: 30px;"><strong>Fecha:</strong> <%= course.scheduled_date %></p>
+    <p style="display: inline-block; margin-right: 30px;"><strong>Modalidad:</strong> <%= course.modality %></p>
+        <p><strong>Descripción:</strong> <%= course.description %></p>
   </div>
 <% end %>
+

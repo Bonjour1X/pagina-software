@@ -1,15 +1,27 @@
-<h1>¡Deporte ya!</h1>
+<%= stylesheet_link_tag "application", media: "all" %>
+
+<br>
+<h1 class="mi-texto-personalizado">¡Deporte ya!</h1>
+
+<br>
 <% if user_signed_in? %>
-  <h2>Sesión iniciada <%= current_user.email %></h2>
-  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>&nbsp;&nbsp;
-  <%= link_to 'Ajustes', render_ajustes_path %>
+  <h3 style="font-size: 24px;">Sesión iniciada: <%= current_user.email %></h3>
+  <%= link_to 'Sign out', destroy_user_session_path, method: :delete, style: "font-size: 30px;" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= link_to 'Ajustes', render_ajustes_path, style: "font-size: 30px;" %>
 
 <% else %>
-  <%= link_to 'Sign in', new_user_session_path %>&nbsp;&nbsp;
-  <%= link_to 'Sign up', new_user_registration_path %>
+  <%= link_to 'Sign in', new_user_session_path, style: "font-size: 30px;" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= link_to 'Sign up', new_user_registration_path, style: "font-size: 30px;" %>
 <% end %>
-
+<br>
 <% if flash[:notice] %>
   <p><%= flash[:notice] %></p>
 <% end %>
+
+
+
+<%= image_tag("Deportes.jpg", 
+  alt: "Imagen fija",
+  style: "position: fixed; top: 400px; right: 550px; width: 800px; height: auto;"
+) %>
 
