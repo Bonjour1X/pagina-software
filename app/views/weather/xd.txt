@@ -48,3 +48,39 @@
 <% end %>
 
 
+<div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+  <% if @dia0 %>
+    <h3><%= @dia0_date %>:</h3>
+    <p><strong>Máxima:</strong> <%= @dia0["day"]["maxtemp_c"] %>°C</p>
+    <p><strong>Mínima:</strong> <%= @dia0["day"]["mintemp_c"] %>°C</p>
+    <p><strong>Condición:</strong> <%= @dia0["day"]["condition"]["text"] %></p>
+    <% if @dia0["day"]["condition"]["text"] == "Sunny" %>
+      <%= image_tag "sun.jpg", alt: "Imagen de sol", style: "width: 100px; height: auto;" %>
+    <% elsif @dia0["day"]["condition"]["text"] == "Partly cloudy" %>
+      <%= image_tag "cloud.jpg", alt: "Imagen parcialmente nublado", style: "width: 100px; height: auto;" %>
+    <% elsif @dia0["day"]["condition"]["text"] == "Cloudy" %>
+      <%= image_tag "cloud.jpg", alt: "Imagen de nublado", style: "width: 100px; height: auto;" %>
+    <% else %>
+      <%= image_tag "rain.jpg", alt: "lluvia", style: "width: 100px; height: auto;" %>
+    <% end %> <!-- Esta línea es para cerrar el condicional -->
+  <% end %> <!-- Esta línea es para cerrar el condicional @dia0 -->
+</div>
+
+
+
+<div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+  <% if @dia0 %>
+    <h3><%= @dia0_date %>:</h3></h3>
+    <p><strong>Máxima:</strong> <%= @dia0["day"]["maxtemp_c"] %>°C</p>
+    <p><strong>Mínima:</strong> <%= @dia0["day"]["mintemp_c"] %>°C</p>
+    <p><strong>Condición:</strong> <%= @dia0["day"]["condition"]["text"] %></p>
+    <% if @dia0["day"]["condition"]["text"] == "Sunny" %>
+      <%= image_tag "sun.jpg", alt: "Imagen de sol", style: "width: 100px; height: auto;" %>
+    <% elsif @dia0["day"]["condition"]["text"] == "Partly cloudy" %>
+      <%= image_tag "cloud.jpg", alt: "Imagen parcialmente nublado", style: "width: 100px; height: auto;" %>
+    <% elsif @dia0["day"]["condition"]["text"] == "Cloudy" %>
+      <%= image_tag "cloud.jpg", alt: "Imagen de nublado", style: "width: 100px; height: auto;" %>
+    <% else %>
+      <%= image_tag "rain.jpg", alt: "lluvia", style: "width: 100px; height: auto;" %>
+  <end>
+</div>

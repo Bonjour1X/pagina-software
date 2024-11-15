@@ -1,8 +1,17 @@
+<%= stylesheet_link_tag "application", media: "all" %>
+
+<br>
 <%= render 'shared/flash' %>
 
-<h1 class="title has-text-centered">¡Bienvenido a Deporte Ya!</h1>
+<h1 class="mi-texto-personalizado" class="title has-text-centered">¡Bienvenido a Deporte Ya!</h1>
+
+<br>
 
 <% if user_signed_in? %>
+  <h3 style="font-size: 24px;">Sesión iniciada: <%= current_user.email %></h3>
+  <%= link_to 'Sign out', destroy_user_session_path, method: :delete, style: "font-size: 30px;" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= link_to 'Ajustes', render_ajustes_path, style: "font-size: 30px;" %>
+
   <h2 class="subtitle has-text-centered">¡Hola, <%= current_user.name %>! Ya has iniciado sesión.</h2>
   <div class="buttons is-centered">
     <%= link_to 'Mis cursos', my_courses_path, class: 'button is-primary' %>
@@ -13,7 +22,12 @@
     <%= link_to 'Iniciar sesión', new_user_session_path, class: 'button is-link' %>&nbsp;&nbsp;
     <%= link_to 'Registrarse', new_user_registration_path, class: 'button is-success' %>
   </div>
+  <%= link_to 'Sign in', new_user_session_path, style: "font-size: 30px;" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= link_to 'Sign up', new_user_registration_path, style: "font-size: 30px;" %>
 <% end %>
+<br>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
 
 <!-- Mostrar lista de cursos disponibles -->
 <h2 class="title is-4 has-text-centered">Cursos Disponibles</h2>
@@ -66,4 +80,12 @@
   </div>
 <% else %>
   <p class="has-text-centered">No hay cursos disponibles en este momento. Vuelve pronto para ver nuevas opciones.</p>
+<% end %>
+
+# editar linea 86-89
+<%= image_tag("Deportes.jpg", 
+  alt: "Imagen fija",
+  style: "position: fixed; top: 400px; right: 550px; width: 800px; height: auto;"
+) %>
+
 <% end %>

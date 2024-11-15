@@ -1,30 +1,34 @@
-<h2>Log in</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2 style="font-size: 40px;">Log in</h2>
 
 <% if flash[:alert] %>
-  <div class="alert alert-danger"><%= flash[:alert] %></div>
+  <div class="alert alert-danger" style="font-size: 18px; padding: 10px;"><%= flash[:alert] %></div>
 <% end %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="field" style="margin-bottom: 20px;">
+    <%= f.label :email, style: "font-size: 20px;" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "font-size: 18px; padding: 10px; width: 100%;" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="field" style="margin-bottom: 20px;">
+    <%= f.label :password, style: "font-size: 20px;" %><br />
+    <%= f.password_field :password, autocomplete: "current-password", style: "font-size: 18px; padding: 10px; width: 100%;" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="field" style="margin-bottom: 20px;">
+      <%= f.check_box :remember_me, style: "transform: scale(1.5); margin-right: 10px;" %>
+      <%= f.label :remember_me, style: "font-size: 18px;" %>
     </div>
   <% end %>
 
   <% if resource.errors.any? %>
-    <div id="error_explanation">
-
+    <div id="error_explanation" style="font-size: 18px; margin-bottom: 20px;">
       <ul>
         <% resource.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -34,7 +38,7 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", style: "font-size: 20px; padding: 15px 30px; width: 100%;" %>
   </div>
 <% end %>
 

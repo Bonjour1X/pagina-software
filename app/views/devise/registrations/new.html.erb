@@ -1,53 +1,55 @@
-<h2>Sign up</h2>
+<h2 style="font-size: 36px;">Sign up</h2>
+
+<% if flash[:alert] %>
+  <div class="alert alert-danger" style="font-size: 18px; padding: 10px;"><%= flash[:alert] %></div>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="field" style="margin-bottom: 20px;">
+    <%= f.label :email, style: "font-size: 20px;" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "font-size: 18px; padding: 12px; width: 100%; box-sizing: border-box;" %>
   </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+  <div class="field" style="margin-bottom: 20px;">
+    <%= f.label :name, style: "font-size: 20px;" %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", style: "font-size: 18px; padding: 12px; width: 100%; box-sizing: border-box;" %>
   </div>
 
-  <div class="field">
-  <%= f.label :phone %><br />
-  <%= f.text_field :phone, autofocus: true, autocomplete: "phone" %>
+  <div class="field" style="margin-bottom: 20px;">
+    <%= f.label :phone, style: "font-size: 20px;" %><br />
+    <%= f.text_field :phone, autofocus: true, autocomplete: "phone", style: "font-size: 18px; padding: 12px; width: 100%; box-sizing: border-box;" %>
   </div>
 
-  <div class="field">
-  <%= f.label :description %><br />
-  <%= f.text_field :description, autofocus: true, autocomplete: "description" %>
+  <div class="field" style="margin-bottom: 20px;">
+    <%= f.label :description, style: "font-size: 20px;" %><br />
+    <%= f.text_field :description, autofocus: true, autocomplete: "description", style: "font-size: 18px; padding: 12px; width: 100%; box-sizing: border-box;" %>
   </div>
 
-  <div class="field">
-  <%= f.label :tipo %><br />
-  <%= f.select :tipo, ["Estudiante", "Profesor"], { prompt: "Seleccione un tipo" } %>
+  <div class="field" style="margin-bottom: 20px;">
+    <%= f.label :tipo, style: "font-size: 20px;" %><br />
+    <%= f.select :tipo, ["Estudiante", "Profesor"], { prompt: "Seleccione un tipo" }, style: "font-size: 18px; padding: 12px; width: 100%; box-sizing: border-box;" %>
   </div>
 
-  <div class="field">
-  <%= f.label :imagen %>
-  <%= f.file_field :imagen %>
+  <div class="field" style="margin-bottom: 20px;">
+    <%= f.label :imagen, style: "font-size: 20px;" %><br />
+    <%= f.file_field :imagen, style: "font-size: 18px; padding: 12px; width: 100%; box-sizing: border-box;" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
+  <div class="field" style="margin-bottom: 20px;">
+    <%= f.label :password, style: "font-size: 20px;" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em style="font-size: 16px;">(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", style: "font-size: 18px; padding: 12px; width: 100%; box-sizing: border-box;" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="field" style="margin-bottom: 20px;">
+    <%= f.label :password_confirmation, style: "font-size: 20px;" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", style: "font-size: 18px; padding: 12px; width: 100%; box-sizing: border-box;" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions" style="margin-top: 20px;">
+    <%= f.submit "Sign up", style: "font-size: 18px; padding: 15px 30px; background-color: #010c55; color: white; border: none; border-radius: 5px; cursor: pointer;" %>
   </div>
 <% end %>
 

@@ -175,9 +175,11 @@ class CoursesController < ApplicationController
   
   def participants
     @course = Course.find(params[:id])
-    @students = @course.enrollments.includes(:user) # Obtener estudiantes inscritos
-    @evaluations = @course.evaluations.includes(:questions) # Obtener evaluaciones del curso
+    # Cambiar a enrollment_requests aprobados
+    @students = @course.enrollment_requests.approved.includes(:user)
+    @evaluations = @course.evaluations.includes(:questions)
   end
+  
   private
 
   def evaluation_status(_student, evaluation)

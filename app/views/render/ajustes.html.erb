@@ -1,5 +1,21 @@
-<h1>¡Deporte ya!</h1>
-<h2>Ajustes</h2>
-<p><%= link_to 'Ver mi perfil', render_perfil_path %></p>
-<p><%= link_to 'Actualizar Datos o Borrar Cuenta', edit_user_registration_path %></p>
-<%= link_to 'Volver', render_index_path %>
+<br>
+<br>
+<br>
+
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 48px;">
+  <%= image_tag 'cogwheel.png', alt: 'Imagen izquierda', class: 'title-img-left' %>
+  Ajustes
+  <%= image_tag 'cogwheel.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+</h1>
+<br> 
+<p style="text-align: center; font-size: 24px; margin: 20px;">
+  <%= link_to 'Ver mi perfil', render_perfil_path, style: "font-size: 20px;" %>
+</p>
+
+<p style="text-align: center; font-size: 24px; margin: 20px;">
+  <%= link_to 'Actualizar Datos o Borrar Cuenta', edit_user_registration_path, style: "font-size: 20px;" %>
+</p>
+
+<p style="text-align: center; font-size: 24px; margin: 20px;">
+  <%= link_to 'Volver', render_index_path, style: "font-size: 20px;" %>
+</p>

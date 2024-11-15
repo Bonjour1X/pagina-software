@@ -1,61 +1,119 @@
 
-<h1><strong>Pronóstico del Clima para Santiago</strong></h1>
-<ul>
-<ul>
-<% if @dia0 %>
-  <h3><%= @dia0_date %>:</h3></h3>
-  <p><strong>Máxima:</strong> <%= @dia0["day"]["maxtemp_c"] %>°C</p>
-  <p><strong>Mínima:</strong> <%= @dia0["day"]["mintemp_c"] %>°C</p>
-  <p><strong>Condición:</strong> <%= @dia0["day"]["condition"]["text"] %></p>
-<% end %>
-<ul>
-<% if @tomorrow_forecast %>
-  <h3><%= @tomorrow_date %>:</h3></h3>
-  <p><strong>Máxima:</strong> <%= @tomorrow_forecast["day"]["maxtemp_c"] %>°C</p>
-  <p><strong>Mínima:</strong> <%= @tomorrow_forecast["day"]["mintemp_c"] %>°C</p>
-  <p><strong>Condición:</strong> <%= @tomorrow_forecast["day"]["condition"]["text"] %></p>
-<% end %>
-<ul>
-<% if @dia2 %>
-  <h3><%= @dia2_date %>:</h3></h3>
-  <p><strong>Máxima:</strong> <%= @dia2["day"]["maxtemp_c"] %>°C</p>
-  <p><strong>Mínima:</strong> <%= @dia2["day"]["mintemp_c"] %>°C</p>
-  <p><strong>Condición:</strong> <%= @dia2["day"]["condition"]["text"] %></p>
-<% end %>
-<ul>
-<% if @dia3 %>
-  <h3><%= @dia3_date %>:</h3></h3>
-  <p><strong>Máxima:</strong> <%= @dia3["day"]["maxtemp_c"] %>°C</p>
-  <p><strong>Mínima:</strong> <%= @dia3["day"]["mintemp_c"] %>°C</p>
-  <p><strong>Condición:</strong> <%= @dia3["day"]["condition"]["text"] %></p>
-<% end %>
-<ul>
-<% if @dia4 %>
-  <h3><%= @dia4_date %>:</h3></h3>
-  <p><strong>Máxima:</strong> <%= @dia4["day"]["maxtemp_c"] %>°C</p>
-  <p><strong>Mínima:</strong> <%= @dia4["day"]["mintemp_c"] %>°C</p>
-  <p><strong>Condición:</strong> <%= @dia4["day"]["condition"]["text"] %></p>
-<% end %>
-<ul>
-<% if @dia5 %>
-  <h3><%= @dia5_date %>:</h3></h3>
-  <p><strong>Máxima:</strong> <%= @dia5["day"]["maxtemp_c"] %>°C</p>
-  <p><strong>Mínima:</strong> <%= @dia5["day"]["mintemp_c"] %>°C</p>
-  <p><strong>Condición:</strong> <%= @dia5["day"]["condition"]["text"] %></p>
-<% end %>
-<ul>
-<% if @dia6 %>
-  <h3><%= @dia6_date %>:</h3></h3>
-  <p><strong>Máxima:</strong> <%= @dia6["day"]["maxtemp_c"] %>°C</p>
-  <p><strong>Mínima:</strong> <%= @dia6["day"]["mintemp_c"] %>°C</p>
-  <p><strong>Condición:</strong> <%= @dia6["day"]["condition"]["text"] %></p>
-<% end %>
-<ul>
-<% if @dia7 %>
-  <h3><%= @dia7_date %>:</h3></h3>
-  <p><strong>Máxima:</strong> <%= @dia7["day"]["maxtemp_c"] %>°C</p>
-  <p><strong>Mínima:</strong> <%= @dia7["day"]["mintemp_c"] %>°C</p>
-  <p><strong>Condición:</strong> <%= @dia7["day"]["condition"]["text"] %></p>
-<% end %>
+<h1 class="mi-texto-personalizado2"><strong>Pronóstico del Clima&nbsp;&nbsp;&nbsp;     </strong></h1>
+<h1>Realiza tus clases sin preocuparte por el clima </strong></h1>
 
 
+<div class="boxes-container" style="display: flex; justify-content: space-between;">
+  <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <% if @dia0 %>
+      <h3><strong><%= @dia0_date %>:</strong></h3>
+      <p>Máxima: <%= @dia0["day"]["maxtemp_c"] %>°C</p>
+      <p>Mínima: <%= @dia0["day"]["mintemp_c"] %>°C</p>
+      <p>Condición: <%= @dia0["day"]["condition"]["text"] %></p>
+      <% if @dia0["day"]["condition"]["text"] == "Sunny" %>
+        <%= image_tag "sun.jpg", alt: "Imagen de sol", style: "width: 100px; height: auto;" %>
+      <% elsif @dia0["day"]["condition"]["text"].downcase.include?("cloud")%>
+        <%= image_tag "cloud.jpg", alt: "Imagen parcialmente nublado", style: "width: 100px; height: auto;" %>
+      <% elsif @dia0["day"]["condition"]["text"] == "Cloudy" %>
+        <%= image_tag "cloud.jpg", alt: "Imagen de nublado", style: "width: 100px; height: auto;" %>
+      <% else %>
+        <%= image_tag "rain.jpg", alt: "lluvia", style: "width: 100px; height: auto;" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <% if @tomorrow_forecast %>
+      <h3><strong><%= @tomorrow_date %>:</strong></h3>
+      <p>Máxima: <%= @tomorrow_forecast["day"]["maxtemp_c"] %>°C</p>
+      <p>Mínima: <%= @tomorrow_forecast["day"]["mintemp_c"] %>°C</p>
+      <p>Condición: <%= @tomorrow_forecast["day"]["condition"]["text"] %></p>
+      <% if @tomorrow_forecast["day"]["condition"]["text"] == "Sunny" %>
+        <%= image_tag "sun.jpg", alt: "Imagen de sol", style: "width: 100px; height: auto;" %>
+      <% elsif @tomorrow_forecast["day"]["condition"]["text"].downcase.include?("cloud")%>
+        <%= image_tag "cloud.jpg", alt: "Imagen parcialmente nublado", style: "width: 100px; height: auto;" %>
+      <% elsif @tomorrow_forecast["day"]["condition"]["text"] == "Cloudy" %>
+        <%= image_tag "cloud.jpg", alt: "Imagen de nublado", style: "width: 100px; height: auto;" %>
+      <% else %>
+        <%= image_tag "rain.jpg", alt: "lluvia", style: "width: 100px; height: auto;" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="boxes-container" style="display: flex; justify-content: space-between;">
+  <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <% if @dia2 %>
+      <h3><strong><%= @dia2_date %>:</strong></h3>
+      <p>Máxima: <%= @dia2["day"]["maxtemp_c"] %>°C</p>
+      <p>Mínima: <%= @dia2["day"]["mintemp_c"] %>°C</p>
+      <p>Condición: <%= @dia2["day"]["condition"]["text"] %></p>
+      <% if @dia2["day"]["condition"]["text"] == "Sunny" %>
+        <%= image_tag "sun.jpg", alt: "Imagen de sol", style: "width: 100px; height: auto;" %>
+      <% elsif @dia2["day"]["condition"]["text"].downcase.include?("cloud")%>
+        <%= image_tag "cloud.jpg", alt: "Imagen parcialmente nublado", style: "width: 100px; height: auto;" %>
+      <% elsif @dia2["day"]["condition"]["text"] == "Cloudy" %>
+        <%= image_tag "cloud.jpg", alt: "Imagen de nublado", style: "width: 100px; height: auto;" %>
+      <% else %>
+        <%= image_tag "rain.jpg", alt: "lluvia", style: "width: 100px; height: auto;" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <% if @dia3 %>
+      <h3><strong><%= @dia3_date %>:</strong></h3>
+      <p>Máxima: <%= @dia3["day"]["maxtemp_c"] %>°C</p>
+      <p>Mínima: <%= @dia3["day"]["mintemp_c"] %>°C</p>
+      <p>Condición: <%= @dia3["day"]["condition"]["text"] %></p>
+      <% if @dia3["day"]["condition"]["text"] == "Sunny" %>
+        <%= image_tag "sun.jpg", alt: "Imagen de sol", style: "width: 100px; height: auto;" %>
+      <% elsif @dia3["day"]["condition"]["text"].downcase.include?("cloud")%>
+        <%= image_tag "cloud.jpg", alt: "Imagen parcialmente nublado", style: "width: 100px; height: auto;" %>
+      <% elsif @dia3["day"]["condition"]["text"] == "Cloudy" %>
+        <%= image_tag "cloud.jpg", alt: "Imagen de nublado", style: "width: 100px; height: auto;" %>
+      <% else %>
+        <%= image_tag "rain.jpg", alt: "lluvia", style: "width: 100px; height: auto;" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="boxes-container" style="display: flex; justify-content: space-between;">
+  <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <% if @dia4 %>
+      <h3><strong><%= @dia4_date %>:</strong></h3>
+      <p>Máxima: <%= @dia4["day"]["maxtemp_c"] %>°C</p>
+      <p>Mínima: <%= @dia4["day"]["mintemp_c"] %>°C</p>
+      <p>Condición: <%= @dia4["day"]["condition"]["text"] %></p>
+      <% if @dia4["day"]["condition"]["text"] == "Sunny" %>
+        <%= image_tag "sun.jpg", alt: "Imagen de sol", style: "width: 100px; height: auto;" %>
+      <% elsif @dia4["day"]["condition"]["text"].downcase.include?("cloud")%>
+        <%= image_tag "cloud.jpg", alt: "Imagen parcialmente nublado", style: "width: 100px; height: auto;" %>
+      <% elsif @dia4["day"]["condition"]["text"] == "Cloudy" %>
+        <%= image_tag "cloud.jpg", alt: "Imagen de nublado", style: "width: 100px; height: auto;" %>
+      <% else %>
+        <%= image_tag "rain.jpg", alt: "lluvia", style: "width: 100px; height: auto;" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <% if @dia5 %>
+      <h3><strong><%= @dia5_date %>:</strong></h3>
+      <p>Máxima: <%= @dia5["day"]["maxtemp_c"] %>°C</p>
+      <p>Mínima: <%= @dia5["day"]["mintemp_c"] %>°C</p>
+      <p>Condición: <%= @dia5["day"]["condition"]["text"] %></p>
+      <% if @dia5["day"]["condition"]["text"] == "Sunny" %>
+        <%= image_tag "sun.jpg", alt: "Imagen de sol", style: "width: 100px; height: auto;" %>
+      <% elsif @dia5["day"]["condition"]["text"].downcase.include?("cloud")%>
+        <%= image_tag "cloud.jpg", alt: "Imagen parcialmente nublado", style: "width: 100px; height: auto;" %>
+      <% elsif @dia5["day"]["condition"]["text"] == "Cloudy" %>
+        <%= image_tag "cloud.jpg", alt: "Imagen de nublado", style: "width: 100px; height: auto;" %>
+      <% else %>
+        <%= image_tag "rain.jpg", alt: "lluvia", style: "width: 100px; height: auto;" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

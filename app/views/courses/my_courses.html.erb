@@ -1,14 +1,19 @@
-<h1 class="title has-text-centered" style="color: #4CAF50;">Mis Clases</h1>
+<br>
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 48px;">
+  <%= image_tag 'sports.png', alt: 'Imagen izquierda', class: 'title-img-left' %>
+  Mis clases inscritas
+  <%= image_tag 'sports.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+</h1>
 
 <% if @courses.any? %>
   <% @courses.each do |course| %>
-    <div class="box" style="margin: 15px 0; border: 2px solid #4CAF50; border-radius: 5px; padding: 15px;">
-      <h2 class="subtitle" style="color: #333;">
+    <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+      <strong class="is-size-4">
         <%= link_to course.title, course_path(course), class: "has-text-link" %>
-      </h2>
+      </strong><br>
       <p><strong>Profesor:</strong> <%= course.user&.name %></p>
-      <p><strong>Fecha:</strong> <%= course.scheduled_date %></p>
-      <p><strong>Modalidad:</strong> <%= course.modality %></p>
+      <p style="display: inline-block; margin-right: 30px;"><strong>Fecha:</strong> <%= course.scheduled_date %></p>
+      <p style="display: inline-block; margin-right: 30px;"><strong>Modalidad:</strong> <%= course.modality %></p>
     </div>
   <% end %>
 <% else %>
@@ -19,12 +24,12 @@
   <h2 class="title" style="color: #4CAF50;">Clases en las que Estoy Inscrito</h2>
   <% @enrolled_courses.each do |course| %>
     <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
-      <h2 class="subtitle" style="color: #333;">
+      <strong class="is-size-4">
         <%= link_to course.title, course_path(course), class: "has-text-link" %>
-      </h2>
+      </strong><br>
       <p><strong>Profesor:</strong> <%= course.user&.name %></p>
-      <p><strong>Fecha:</strong> <%= course.scheduled_date %></p>
-      <p><strong>Modalidad:</strong> <%= course.modality %></p>
+      <p style="display: inline-block; margin-right: 30px;"><strong>Fecha:</strong> <%= course.scheduled_date %></p>
+      <p style="display: inline-block; margin-right: 30px;"><strong>Modalidad:</strong> <%= course.modality %></p>
     </div>
   <% end %>
 <% end %>
