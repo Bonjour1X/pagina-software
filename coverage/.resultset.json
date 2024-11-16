@@ -2610,49 +2610,6 @@
           null
         ]
       },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/models/student_response.rb": {
-        "lines": [
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/models/review.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/models/message.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/posts_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
       "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/render_controller.rb": {
         "lines": [
           null,
@@ -2706,8 +2663,51 @@
           null,
           null
         ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/posts_controller.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/models/student_response.rb": {
+        "lines": [
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/models/review.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/models/message.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1731724762
+    "timestamp": 1731725691
   }
 }
