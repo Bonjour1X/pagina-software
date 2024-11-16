@@ -1,10 +1,6 @@
 <h2>Reseñas para <%= @course.title %></h2>
 
-<% if current_user %>
-  <%= link_to 'Volver al Curso', course_path(@course), class: 'btn btn-secondary' %>
-<% else %>
-  <%= link_to 'Volver a la Visita', visitantes_course_path(@course), class: 'btn btn-secondary' %>
-<% end %>
+<%= link_to 'Volver al Curso', course_path(@course), class: 'btn btn-secondary' %>
 
 <% if @course.enrollment_requests.find_by(user: current_user)&.status == "approved" && current_user.tipo == "Estudiante" %>
   <%= link_to 'Escribir Reseña', new_course_review_path(@course), class: 'btn btn-primary' %>
@@ -27,23 +23,27 @@
           <%= review.content %>
         </div>
 
-        <% if review.user == current_user %>
-          <div class="review-actions">
-            <%= link_to 'Editar', edit_course_review_path(@course, review), class: 'btn btn-sm btn-secondary' %>
-          </div>
-        <% end %>
+        <div class="review-actions">
+          <% if review.user == current_user %>
+            <%= link_to 'Editar', 
+                edit_course_review_path(@course, review), 
+                class: 'btn btn-sm btn-secondary' %>
             
-        <% if current_user.admin? || review.user == current_user %>
-          <div class="review-actions">
             <%= button_to 'Eliminar', 
                 course_review_path(@course, review), 
                 method: :delete,
                 class: 'btn btn-sm btn-danger',
-                data: { confirm: '¿Estás seguro?' } %>
-          </div>
-        <% end %>
-
-
+                data: { confirm: '¿Estás seguro de eliminar esta reseña?' },
+                form: { style: 'display: inline-block;' } %>
+          <% elsif current_user&.admin? %>
+            <%= button_to 'Eliminar', 
+                course_review_path(@course, review), 
+                method: :delete,
+                class: 'btn btn-sm btn-danger',
+                data: { confirm: '¿Estás seguro de eliminar esta reseña?' },
+                form: { style: 'display: inline-block;' } %>
+          <% end %>
+        </div>
       </div>
     <% end %>
   <% else %>

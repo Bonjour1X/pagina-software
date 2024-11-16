@@ -94,10 +94,10 @@ Rails.application.routes.draw do
     member do
       post 'add_to_favorites', to: 'deseados#add_to_favorites'
       post 'eliminar_favorites', to: 'deseados#eliminar_favorites'
-      get 'foro'
-      post 'crear_mensaje'
-      # Cambiamos la ruta del delete para que coincida con el helper path
-      delete 'chat/:message_id', to: 'chats#delete_message', as: 'chat_message_delete'
+      # nuevo
+      get 'foro', to: 'chats#foro'
+      post 'crear_mensaje', to: 'chats#crear_mensaje'
+      delete 'delete_message/:message_id', to: 'chats#delete_message', as: 'delete_message'
     end
   end
 

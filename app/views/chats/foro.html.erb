@@ -9,9 +9,9 @@
         <small><%= message.created_at.strftime("%d/%m/%Y %H:%M") %></small>
         
         <!-- Agregar botón de eliminar solo para admin y dueño del mensaje -->
-        <% if current_user.admin? || message.user == current_user %>
-          <%= button_to 'Eliminar', 
-              course_path(@course, message_id: message.id), 
+        <% if current_user.admin? %>
+          <%= button_to 'Eliminar',
+              delete_message_course_path(@course, message_id: message.id),
               method: :delete,
               form: { data: { turbo_confirm: '¿Estás seguro?' } },
               class: 'button is-small is-danger' %>
@@ -35,3 +35,53 @@
 <% end %>
 
 <%= link_to 'Volver al curso', course_path(@course) %>
+
+<style>
+.chat-messages {
+  max-height: 500px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.message:last-child {
+  border-bottom: none;
+}
+
+.message strong {
+  color: #333;
+  margin-right: 10px;
+}
+
+.message small {
+  color: #666;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+
+.message-form {
+  margin: 20px 0;
+}
+
+.message-input {
+  width: 100%;
+  min-height: 100px;
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.button.is-danger {
+  margin-left: 10px;
+  font-size: 0.8em;
+}
+</style>
