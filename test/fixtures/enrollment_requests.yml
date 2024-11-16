@@ -1,1 +1,10 @@
 # test/fixtures/enrollment_requests.yml
+request_one:
+  user: user_one
+  course: course_one
+  status: "pending"
+
+request_two:
+  user: profesor_one
+  course: course_two
+  status: "approved"

@@ -10,3 +10,10 @@ profesor_one:
   name: "Test Profesor"
   tipo: "Profesor"
   phone: "1234567890"
+
+
+missing_name_user:
+  email: "missing_name@example.com"
+  name: ~  # Esto simula un usuario sin nombre
+  tipo: "Estudiante"
+  phone: "1234567890"
