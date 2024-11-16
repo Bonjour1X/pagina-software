@@ -4,6 +4,7 @@ class EnrollmentRequest < ApplicationRecord
   belongs_to :user
   belongs_to :course
 
+  validates :status, presence: true, inclusion: { in: %w[approved pending rejected], message: "no es válido" }
   # Añade estos métodos
   def approved?
     status == 'approved'
