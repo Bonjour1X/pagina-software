@@ -6,6 +6,10 @@ Puedes acceder a la aplicación en el siguiente enlace:
 
 [Aplicación en Render](https://two024-2-grupo-23.onrender.com)
 
+- **Para entrar como administrador: tenemos que usar como correo: admin@admin.com , contraseña: 123456
+
+- **El Administrado puede, crear,editar,eliminar todos los cursos, tambien es el unico que puede eliminar los mensajes del foro/chat
+  
 ## Descripción
 
 Aplicación web desarrollada en Ruby on Rails para la gestión de cursos en línea y evaluaciones interactivas. La plataforma permite a los usuarios:
@@ -56,11 +60,4 @@ Se añadió la foto de perfil (revisar en ajustes -> mi perfil)
 ### Configuración
 
 El archivo de configuración para RuboCop está incluido en el proyecto para mantener el código conforme a las mejores prácticas.
-
-### Sprint2 (no completado)
-Decidimos obviar lo de ocultar archivos (no tiene sentido sin calendario, es lo mismo que subirlo después)
-
- 
-
-
 
