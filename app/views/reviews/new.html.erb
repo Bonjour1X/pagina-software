@@ -1,5 +1,12 @@
-# app/views/reviews/new.html.erb
+
+<br>
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 40px; display: flex; align-items: center; justify-content: center;">
+  <%= image_tag 'favorite.png', alt: 'Imagen izquierda', class: 'title-img-left', style: 'margin-right: 10px;' %>
+  Nueva reseña para: <%= @course.title %>
+  <%= image_tag 'favorite.png', alt: 'Imagen derecha', class: 'title-img-right', style: 'margin-left: 10px;' %>
+</h1>
+<br>
+
 <div class="container">
-  <h2>Nueva Reseña para <%= @course.title %></h2>
   <%= render 'form' %>
 </div>

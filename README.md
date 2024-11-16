@@ -1,5 +1,5 @@
 #  README
-#  Sprint_2
+#  Sprint_3
  #  Aplicación Ruby on Rails - Grupo 23
 
 Puedes acceder a la aplicación en el siguiente enlace:
@@ -35,6 +35,12 @@ Además el profesor material en forma de archivos (recomendado en PDF), subiendo
 eliminando archivos. Los alumnos incritos al curso pueden ver estos archivos.
 También se usó bulma para mejorar la interfaz gráfica. 
 
+## Información del Proyecto (sprint3)
+Se creó un admin
+Mejoras en el frontend
+Archivos solo permite pdf
+Se añadió la foto de perfil (revisar en ajustes -> mi perfil)
+
 ### Ruby version
 
 - Ruby 3.1.0
@@ -45,6 +51,7 @@ También se usó bulma para mejorar la interfaz gráfica.
 - Bundler
 - Cloudinary
 - ActiveStorage
+- Usa weatherapi
 
 ### Configuración
 

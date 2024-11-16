@@ -1,15 +1,26 @@
-<h2>Reseñas para <%= @course.title %></h2>
+<br>
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 40px; display: flex; align-items: center; justify-content: center;">
+  <%= image_tag 'favorite.png', alt: 'Imagen izquierda', class: 'title-img-left', style: 'margin-right: 10px;' %>
+  Reseñas para: <%= @course.title %>
+  <%= image_tag 'favorite.png', alt: 'Imagen derecha', class: 'title-img-right', style: 'margin-left: 10px;' %>
+</h1>
+<br>
+
+
+
 
 <% if current_user %>
-  <%= link_to 'Volver al Curso', course_path(@course), class: 'btn btn-secondary' %>
+  <%= link_to 'Volver al Curso', course_path(@course), class: 'btn btn-secondary', style: 'background-color: #727475; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
 <% else %>
-  <%= link_to 'Volver a la Visita', visitantes_course_path(@course), class: 'btn btn-secondary' %>
+  <%= link_to 'Volver a la Visita', visitantes_course_path(@course), class: 'btn btn-secondary', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
 <% end %>
 
 <% if @course.enrollment_requests.find_by(user: current_user)&.status == "approved" && current_user.tipo == "Estudiante" %>
-  <%= link_to 'Escribir Reseña', new_course_review_path(@course), class: 'btn btn-primary' %>
+  <%= link_to 'Escribir Reseña', new_course_review_path(@course), class: 'btn btn-primary', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
 <% end %>
+<br>
 
+<br>
 <div class="reviews-list">
   <% if @reviews.any? %>
     <% @reviews.each do |review| %>
@@ -47,6 +58,7 @@
       </div>
     <% end %>
   <% else %>
+    <br>
     <p>No hay reseñas todavía para este curso.</p>
   <% end %>
 </div>

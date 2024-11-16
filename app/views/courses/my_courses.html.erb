@@ -21,7 +21,6 @@
 <% end %>
 
 <% if current_user.tipo == "Profesor" && @enrolled_courses.any? %>
-  <h2 class="title" style="color: #4CAF50;">Clases en las que Estoy Inscrito</h2>
   <% @enrolled_courses.each do |course| %>
     <div class="box" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
       <strong class="is-size-4">
