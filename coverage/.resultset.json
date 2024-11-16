@@ -2560,15 +2560,56 @@
           null
         ]
       },
+<<<<<<< HEAD
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/users/sessions_controller.rb": {
+=======
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/render_controller.rb": {
+>>>>>>> respaldo-bonjour1X
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+<<<<<<< HEAD
+          null,
+=======
+          1,
+          3,
+          null,
+          null,
+          1,
+          1,
+>>>>>>> respaldo-bonjour1X
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+<<<<<<< HEAD
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+=======
+          null
+        ]
+      },
       "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/users/sessions_controller.rb": {
         "lines": [
           null,
           1,
           1,
+>>>>>>> respaldo-bonjour1X
           null,
           null,
           1,
-          1,
+          0,
+          null,
           null,
           null,
           null,
@@ -2576,9 +2617,27 @@
           1,
           2,
           null,
+<<<<<<< HEAD
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/users/registrations_controller.rb": {
+        "lines": [
+          null,
+          1,
+=======
+          null,
+          null,
+          null,
+>>>>>>> respaldo-bonjour1X
+          1,
+          2,
+          null,
           null,
           null,
           1,
+<<<<<<< HEAD
+=======
           0,
           null,
           null,
@@ -2591,51 +2650,68 @@
           null
         ]
       },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/users/registrations_controller.rb": {
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/posts_controller.rb": {
+        "lines": [
+>>>>>>> respaldo-bonjour1X
+          null,
+          null,
+          1,
+<<<<<<< HEAD
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+=======
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/models/student_response.rb": {
         "lines": [
           null,
           1,
           1,
           1,
           null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          3,
-          null,
-          null,
-          null,
           1,
           1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/models/review.rb": {
+        "lines": [
+>>>>>>> respaldo-bonjour1X
           1,
           0,
           null,
           null,
           1,
-          null,
+          1,
           null,
           1,
           3,
@@ -2650,10 +2726,14 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/models/message.rb": {
+        "lines": [
           1,
+          1,
+<<<<<<< HEAD
           1,
           null,
           null,
@@ -2704,10 +2784,18 @@
           1,
           1,
           1,
+=======
+          1,
+          1,
+>>>>>>> respaldo-bonjour1X
           null
         ]
       }
     },
+<<<<<<< HEAD
     "timestamp": 1731725202
+=======
+    "timestamp": 1731725691
+>>>>>>> respaldo-bonjour1X
   }
 }
