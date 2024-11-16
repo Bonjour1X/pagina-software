@@ -1,5 +1,10 @@
-<h1>Mensajes del Chat para el Curso: <%= @course.title %></h1>
-
+<br>
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 48px;">
+  <%= image_tag 'chat.png', alt: 'Imagen izquierda', class: 'title-img-left' %>
+  Chat del curso
+  <%= image_tag 'chat.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+</h1>
+<br>
 <div class="chat-messages">
   <% if @chat&.messages&.any? %>
     <% @chat.messages.each do |message| %>
@@ -27,13 +32,18 @@
 <% if current_user.admin? || current_user == @course.user || @course.enrollment_requests.find_by(user: current_user)&.approved? %>
   <%= form_with url: crear_mensaje_course_path(@course), local: true do |form| %>
     <div>
+      <br>
       <%= form.label :content, "Escribe tu mensaje:" %>
-      <%= form.text_area :content %>
+      <%= form.text_area :content, rows: 1, class: "single-line-text-area" %>
+      <br>
     </div>
+    <br>
     <%= form.submit "Enviar mensaje" %>
   <% end %>
 <% end %>
-
+<br>
+<br>
+<br>
 <%= link_to 'Volver al curso', course_path(@course) %>
 
 <style>

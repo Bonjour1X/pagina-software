@@ -8,12 +8,24 @@ class UserTest < ActiveSupport::TestCase
   #end
 
   #test "should not save user with invalid tipo" do
-  #  user = User.new(name: "Juan", phone: "1234567890", email: "juan@example.com", password: "password", tipo: "Invalid")
+  #  user = User.new(
+  #  name: "Juan",
+  #  phone: "1234567890",
+  #  email: "juan@example.com",
+  #  password: "password",
+  #  tipo: "Invalid"
+  #)
   #  assert_not user.save, "Saved the user with an invalid tipo"
   #end
 
   #test "should save user with valid tipo" do
-  #  user = User.new(name: "Juan", phone: "1234567890", email: "juan@example.com", password: "password", tipo: "Estudiante")
+  #  user = User.new(
+  #  name: "Juan",
+  #  phone: "1234567890",
+  #  email: "juan@example.com",
+  #  password: "password",
+  #  tipo: "Estudiante"
+  #)
   #  assert user.save, "Couldn't save the user with a valid tipo"
   #end
 

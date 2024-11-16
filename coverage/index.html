@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-15T23:00:38-03:00">2024-11-15T23:00:38-03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-15T23:39:22-03:00">2024-11-15T23:39:22-03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -501,7 +501,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#378c7b6d077dfd831bdeab3c0a86778442e06497" class="src_link" title="test/controllers/users/user_test.rb">test/controllers/users/user_test.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">48</td>
+            <td class="cell--number">60</td>
             <td class="cell--number">2</td>
             <td class="cell--number">2</td>
             <td class="cell--number">0</td>
@@ -1207,7 +1207,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#378c7b6d077dfd831bdeab3c0a86778442e06497" class="src_link" title="test/controllers/users/user_test.rb">test/controllers/users/user_test.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">48</td>
+            <td class="cell--number">60</td>
             <td class="cell--number">2</td>
             <td class="cell--number">2</td>
             <td class="cell--number">0</td>
@@ -16931,7 +16931,7 @@
 
             
 
-            <code class="ruby">  #  user = User.new(name: &quot;Juan&quot;, phone: &quot;1234567890&quot;, email: &quot;juan@example.com&quot;, password: &quot;password&quot;, tipo: &quot;Invalid&quot;)</code>
+            <code class="ruby">  #  user = User.new(</code>
           </li>
         </div>
       
@@ -16941,7 +16941,7 @@
 
             
 
-            <code class="ruby">  #  assert_not user.save, &quot;Saved the user with an invalid tipo&quot;</code>
+            <code class="ruby">  #  name: &quot;Juan&quot;,</code>
           </li>
         </div>
       
@@ -16951,7 +16951,7 @@
 
             
 
-            <code class="ruby">  #end</code>
+            <code class="ruby">  #  phone: &quot;1234567890&quot;,</code>
           </li>
         </div>
       
@@ -16961,7 +16961,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #  email: &quot;juan@example.com&quot;,</code>
           </li>
         </div>
       
@@ -16971,7 +16971,7 @@
 
             
 
-            <code class="ruby">  #test &quot;should save user with valid tipo&quot; do</code>
+            <code class="ruby">  #  password: &quot;password&quot;,</code>
           </li>
         </div>
       
@@ -16981,7 +16981,7 @@
 
             
 
-            <code class="ruby">  #  user = User.new(name: &quot;Juan&quot;, phone: &quot;1234567890&quot;, email: &quot;juan@example.com&quot;, password: &quot;password&quot;, tipo: &quot;Estudiante&quot;)</code>
+            <code class="ruby">  #  tipo: &quot;Invalid&quot;</code>
           </li>
         </div>
       
@@ -16991,7 +16991,7 @@
 
             
 
-            <code class="ruby">  #  assert user.save, &quot;Couldn&#39;t save the user with a valid tipo&quot;</code>
+            <code class="ruby">  #)</code>
           </li>
         </div>
       
@@ -17001,7 +17001,7 @@
 
             
 
-            <code class="ruby">  #end</code>
+            <code class="ruby">  #  assert_not user.save, &quot;Saved the user with an invalid tipo&quot;</code>
           </li>
         </div>
       
@@ -17011,7 +17011,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #end</code>
           </li>
         </div>
       
@@ -17021,7 +17021,7 @@
 
             
 
-            <code class="ruby">  # Prueba la relación con los cursos</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -17031,7 +17031,7 @@
 
             
 
-            <code class="ruby">  #test &quot;should have many courses&quot; do</code>
+            <code class="ruby">  #test &quot;should save user with valid tipo&quot; do</code>
           </li>
         </div>
       
@@ -17041,7 +17041,7 @@
 
             
 
-            <code class="ruby">  #  user = users(:one) # Asegúrate de tener fixtures con usuarios en test/fixtures/users.yml</code>
+            <code class="ruby">  #  user = User.new(</code>
           </li>
         </div>
       
@@ -17051,7 +17051,7 @@
 
             
 
-            <code class="ruby">  #  assert_respond_to user, :courses</code>
+            <code class="ruby">  #  name: &quot;Juan&quot;,</code>
           </li>
         </div>
       
@@ -17061,7 +17061,7 @@
 
             
 
-            <code class="ruby">  #end</code>
+            <code class="ruby">  #  phone: &quot;1234567890&quot;,</code>
           </li>
         </div>
       
@@ -17071,7 +17071,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #  email: &quot;juan@example.com&quot;,</code>
           </li>
         </div>
       
@@ -17081,7 +17081,7 @@
 
             
 
-            <code class="ruby">  #test &quot;should enroll in approved courses&quot; do</code>
+            <code class="ruby">  #  password: &quot;password&quot;,</code>
           </li>
         </div>
       
@@ -17091,7 +17091,7 @@
 
             
 
-            <code class="ruby">  #  user = users(:one) # Asegúrate de tener usuarios y cursos en los fixtures</code>
+            <code class="ruby">  #  tipo: &quot;Estudiante&quot;</code>
           </li>
         </div>
       
@@ -17101,7 +17101,7 @@
 
             
 
-            <code class="ruby">  #  course = courses(:approved_course) # Usa un curso aprobado en fixtures</code>
+            <code class="ruby">  #)</code>
           </li>
         </div>
       
@@ -17111,7 +17111,7 @@
 
             
 
-            <code class="ruby">  #  assert_includes user.enrolled_courses, course</code>
+            <code class="ruby">  #  assert user.save, &quot;Couldn&#39;t save the user with a valid tipo&quot;</code>
           </li>
         </div>
       
@@ -17141,7 +17141,7 @@
 
             
 
-            <code class="ruby">  #test &quot;should not enroll in unapproved courses&quot; do</code>
+            <code class="ruby">  # Prueba la relación con los cursos</code>
           </li>
         </div>
       
@@ -17151,7 +17151,7 @@
 
             
 
-            <code class="ruby">  #  user = users(:one)</code>
+            <code class="ruby">  #test &quot;should have many courses&quot; do</code>
           </li>
         </div>
       
@@ -17161,7 +17161,7 @@
 
             
 
-            <code class="ruby">  #  course = courses(:unapproved_course) # Usa un curso no aprobado en fixtures</code>
+            <code class="ruby">  #  user = users(:one) # Asegúrate de tener fixtures con usuarios en test/fixtures/users.yml</code>
           </li>
         </div>
       
@@ -17171,7 +17171,7 @@
 
             
 
-            <code class="ruby">  #  assert_not_includes user.enrolled_courses, course</code>
+            <code class="ruby">  #  assert_respond_to user, :courses</code>
           </li>
         </div>
       
@@ -17201,7 +17201,7 @@
 
             
 
-            <code class="ruby">  ## Prueba el método display_title</code>
+            <code class="ruby">  #test &quot;should enroll in approved courses&quot; do</code>
           </li>
         </div>
       
@@ -17211,7 +17211,7 @@
 
             
 
-            <code class="ruby">  #test &quot;should return admin display title&quot; do</code>
+            <code class="ruby">  #  user = users(:one) # Asegúrate de tener usuarios y cursos en los fixtures</code>
           </li>
         </div>
       
@@ -17221,7 +17221,7 @@
 
             
 
-            <code class="ruby">  #  user = users(:admin)  # Suponiendo que tengas un fixture con el admin</code>
+            <code class="ruby">  #  course = courses(:approved_course) # Usa un curso aprobado en fixtures</code>
           </li>
         </div>
       
@@ -17231,7 +17231,7 @@
 
             
 
-            <code class="ruby">  #  assert_equal &quot;#{user.name} ★ Administrador Estrella ★&quot;, user.display_title</code>
+            <code class="ruby">  #  assert_includes user.enrolled_courses, course</code>
           </li>
         </div>
       
@@ -17261,7 +17261,7 @@
 
             
 
-            <code class="ruby">  #test &quot;should return regular user display title&quot; do</code>
+            <code class="ruby">  #test &quot;should not enroll in unapproved courses&quot; do</code>
           </li>
         </div>
       
@@ -17281,7 +17281,7 @@
 
             
 
-            <code class="ruby">  #  assert_equal &quot;Estudiante: #{user.name}&quot;, user.display_title</code>
+            <code class="ruby">  #  course = courses(:unapproved_course) # Usa un curso no aprobado en fixtures</code>
           </li>
         </div>
       
@@ -17291,12 +17291,132 @@
 
             
 
-            <code class="ruby">  #end</code>
+            <code class="ruby">  #  assert_not_includes user.enrolled_courses, course</code>
           </li>
         </div>
       
         <div>
           <li class="never" data-hits="" data-linenumber="48">
+            
+
+            
+
+            <code class="ruby">  #end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="49">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="50">
+            
+
+            
+
+            <code class="ruby">  ## Prueba el método display_title</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="51">
+            
+
+            
+
+            <code class="ruby">  #test &quot;should return admin display title&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="52">
+            
+
+            
+
+            <code class="ruby">  #  user = users(:admin)  # Suponiendo que tengas un fixture con el admin</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="53">
+            
+
+            
+
+            <code class="ruby">  #  assert_equal &quot;#{user.name} ★ Administrador Estrella ★&quot;, user.display_title</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="54">
+            
+
+            
+
+            <code class="ruby">  #end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="55">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="56">
+            
+
+            
+
+            <code class="ruby">  #test &quot;should return regular user display title&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="57">
+            
+
+            
+
+            <code class="ruby">  #  user = users(:one)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="58">
+            
+
+            
+
+            <code class="ruby">  #  assert_equal &quot;Estudiante: #{user.name}&quot;, user.display_title</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="59">
+            
+
+            
+
+            <code class="ruby">  #end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="60">
             
 
             

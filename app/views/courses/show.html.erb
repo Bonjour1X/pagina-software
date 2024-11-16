@@ -171,11 +171,7 @@
     </div>
   </div>
 
-  <!-- Ver mensajes de chat -->
-  <div class="chat-section">
-    <h2>Chat del Curso</h2>
-    <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course), class: 'button is-info' %>
-  </div>
+
 
   <!-- Botones de Acción -->
   <div class="button-group mt-6">
@@ -187,6 +183,19 @@
   </div>
   <br>
   <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+
+  <!-- Ver mensajes de chat -->
+  <div class="chat-section">
+    <br>
+    <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+    Chat del curso
+    <%= image_tag 'chat.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+    </h1>
+    <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course), class: 'button is-info' %>
+  </div>
+  <br>
+
+
   Archivos
   <%= image_tag 'google-docs.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
   </h1>
@@ -217,9 +226,12 @@
   <% enrollment_request = @course.enrollment_requests.find_by(user: current_user) %>
      
   <% if enrollment_request&.approved? %>
-    <%= button_to 'Salir de clase', leave_course_path(@course), method: :delete, data: { confirm: '¿Estás seguro de que deseas salir de esta clase?' }, class: 'btn btn-warning' %>
-        
-    <h2>Evaluaciones disponibles</h2>
+    <%= button_to 'Salir de clase', leave_course_path(@course), method: :delete, data: { confirm: '¿Estás seguro de que deseas salir de esta clase?' }, class: 'btn btn-warning', style: 'font-size: 1.25rem; padding: 12px 24px; background-color: #f44336; color: white; border: none; border-radius: 4px;' %> 
+    <br>
+    <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+    Evaluaciones disponibles
+    <%= image_tag 'search.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+    </h1>
     <% if current_user.tipo == "Profesor" %>
       <p class="text-info">Aunque seas profesor, aquí eres un estudiante más.</p>
     <% end %>
@@ -239,7 +251,10 @@
 <% end %>
 
 <% if current_user != @course.user && enrollment_request&.approved? %>
-  <h2>Documentos públicos</h2>
+  <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+  Documentos públicos
+  <%= image_tag 'pdf.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+  </h1>
   <% if @course.documents.attached? %>
     <ul>
       <% @course.documents.each do |document| %>
@@ -274,7 +289,7 @@
   <% end %>
 <% end %>
 
-# SECCION DE FORO
+
 <% if current_user.admin? || current_user == @course.user %>
   <div class="chat-section">
     <h2>Chat del Curso</h2>
@@ -283,7 +298,11 @@
 <% end %>
 
 <% if enrollment_request&.approved? || current_user == @course.user %>
-  <h2>Chat</h2>
-  <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course) %>
+  <br> 
+  <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+  Chat
+  <%= image_tag 'chat.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+  </h1>
+  <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course), class: 'button is-info' %>
 <% end %>
 <% end %>
