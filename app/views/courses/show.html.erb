@@ -213,6 +213,7 @@
   <% end %>
 
 <% else %>
+
   <% enrollment_request = @course.enrollment_requests.find_by(user: current_user) %>
      
   <% if enrollment_request&.approved? %>
@@ -230,11 +231,12 @@
         <p>Fecha de fin: <%= evaluation.end_date.strftime("%d/%m/%Y %H:%M") %></p>
       </div>
     <% end %>
+
   <% elsif enrollment_request&.pending? %>
-    <p>Solicitud de inscripción pendiente</p>
-  <% else %>
-    <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary', data: { disable_with: 'Enviando solicitud...' } %>
-  <% end %>
+  <p>Solicitud de inscripción pendiente</p>
+<% elsif current_user.tipo != "Administrador" %>
+  <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary', data: { disable_with: 'Enviando solicitud...' } %>
+<% end %>
 
 <% if current_user != @course.user && enrollment_request&.approved? %>
   <h2>Documentos públicos</h2>
