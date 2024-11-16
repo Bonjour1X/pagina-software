@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class CourseTest < ActiveSupport::TestCase
-  include Devise::Test::IntegrationHelpers
   def setup
     @user = users(:user_one)
     @course = courses(:course_one)
