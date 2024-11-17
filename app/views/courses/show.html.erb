@@ -1,3 +1,5 @@
+
+
 <% if flash[:warning].present? %>
   <div class="alert alert-warning">
     <ul>
@@ -9,181 +11,201 @@
 <% end %>
 
 <br>
-<h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
-  Información
-  <%= image_tag 'info.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
-</h1>
-<div class="course-info">
-  <h1><%= @course.title %></h1>
-  <p>Profesor: <%= @course.user&.name %></p>
-  <p>Fecha: <%= @course.scheduled_date %></p>
-  <p>Modalidad: <%= @course.modality %></p>
-
-  <%= link_to course_reviews_path(@course), class: 'btn btn-info' do %>
-    Ver Reseñas (<%= @course.reviews.count %>)
-    <br>
-  <% end %>
-</div>
-<br>
-<% if current_user && !current_user.clases_deseadas.exists?(id: @course.id) %> 
-<%= button_to 'Agregar a deseados', add_to_favorites_course_path(@course), method: :post, class: 'btn btn-primary', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
-<% end %>
-<% if current_user && current_user.clases_deseadas.exists?(id: @course.id) %>  
-<%= button_to 'Sacar de deseados', eliminar_favorites_course_path(@course), method: :post, class: 'btn btn-primary', style: 'background-color: #f44336; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
-
-<% end %>
-<br>
-<% if current_user.tipo == "Profesor" && current_user == @course.user %>
-  <!-- Sección de Evaluaciones -->
+<div class="container_ancho2" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
   <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
-  Evaluaciones
-  <%= image_tag 'search.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+    Información
+    <%= image_tag 'info.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
   </h1>
-  <% @course.evaluations.group_by(&:evaluation_method).each do |method, evaluations| %>
-    <h3><%= method.titleize %></h3>
-    <% evaluations.each do |evaluation| %>
-      <li>
-        <%= link_to evaluation.name, course_evaluation_path(@course, evaluation) %>
-        (<%= evaluation.start_date.strftime("%d/%m/%Y") %> - <%= evaluation.end_date.strftime("%d/%m/%Y") %>)
-        <%= link_to 'Editar', edit_course_evaluation_path(@course, evaluation), class: 'btn btn-sm btn-secondary' %>
-        <%= button_to 'Eliminar', 
-            course_evaluation_path(@course, evaluation),
-            method: :delete,
-            data: { confirm: '¿Estás seguro?' },
-            class: 'btn btn-sm btn-danger' %>
-        <%= link_to "Ver resultados", 
-            student_results_course_evaluation_path(@course, evaluation), 
-            class: 'btn btn-sm btn-info' %>
-      </li>
+  <div class="course-info">
+    <h1 style=" font-size: 25px; font-weight: bold;"><%= @course.title %></h1>
+    <p>Profesor: <%= @course.user&.name %></p>
+    <p>Fecha: <%= @course.scheduled_date %></p>
+    <p>Modalidad: <%= @course.modality %></p>
+    <p>Descripción: <%= @course.description %></p>
+
+    <%= link_to course_reviews_path(@course), class: 'btn btn-info' do %>
+      Ver Reseñas (<%= @course.reviews.count %>)
+      <br>
     <% end %>
-  <% end %>
-
-  <!-- Sección de Alumnos Inscritos -->
-  <div class="enrolled-students mt-6">
-    <h2 class="title custom-title" style="color: #010c55; font-size: 20px;">Alumnos Inscritos</h2>
-    <% if @enrolled_students.any? %>
-      <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-            <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Nombre
-              </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email
-              </th>
-              <% @course.evaluations.each do |evaluation| %>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  <%= evaluation.name %>
-                </th>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            <% @enrolled_students.each do |student| %>
-              <tr>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <%= student.name %>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <%= student.email %>
-                </td>
-                <% @student_evaluations[student.id].each do |eval_info| %>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                      <%= case eval_info[:status]
-                        when 'Pendiente' then 'bg-yellow-100 text-yellow-800'
-                        when 'En curso' then 'bg-green-100 text-green-800'
-                        when 'Finalizada' then 'bg-gray-100 text-gray-800'
-                      end %>">
-                      <%= eval_info[:status] %>
-                    </span>
-                  </td>
-                <% end %>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    <% else %>
-      <p class="text-gray-500 italic">No hay alumnos inscritos en este curso.</p>
-    <% end %>
-
-    <div class="grades-summary mt-6">
-    <h2 class="title custom-title" style="color: #010c55; font-size: 20px;">Resumen de Calificaciones</h2>
-    <div class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Alumno
-            </th>
-            <% @course.evaluations.each do |evaluation| %>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                <%= evaluation.name %>
-              </th>
-            <% end %>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Promedio
-            </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Estado
-            </th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <% @enrolled_students.each do |student| %>
-            <% grades = [] %>
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <%= student.name %>
-              </td>
-
-              <% @course.evaluations.each do |evaluation| %>
-                <% grade = Grade.find_by(student: student, evaluation: evaluation)&.score %>
-                <% grades << grade if grade.present? %>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <%= grade ? sprintf('%.1f', grade) : '-' %>
-                </td>
-              <% end %>
-              
-              <% average = grades.any? ? (grades.sum / grades.size).round(1) : nil %>
-              <td class="px-6 py-4 whitespace-nowrap <%= average && average >= 4.0 ? 'text-green-600' : 'text-red-600' %>">
-                <%= average ? sprintf('%.1f', average) : '-' %>
-              </td>
-                
-              <td class="px-6 py-4 whitespace-nowrap">
-                <% if average %>
-                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                    <%= average >= 4.0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
-                    <%= average >= 4.0 ? 'Aprobado' : 'Reprobado' %>
-                  </span>
-                <% else %>
-                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                    Pendiente
-                  </span>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
   </div>
 
+  <br>
+  <% if current_user && !current_user.clases_deseadas.exists?(id: @course.id) %> 
+  <%= button_to 'Guardar curso', add_to_favorites_course_path(@course), method: :post, class: 'btn btn-primary', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
+  <% end %>
+  <% if current_user && current_user.clases_deseadas.exists?(id: @course.id) %>  
+  <%= button_to 'Sacar de guardados', eliminar_favorites_course_path(@course), method: :post, class: 'btn btn-primary', style: 'background-color: #f44336; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
+  <% end %>
 
-
-  <!-- Botones de Acción -->
-  <div class="button-group mt-6">
-    <%= button_to 'Crear nueva evaluación', new_course_evaluation_path(@course), method: :get, class: 'btn btn-primary', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
+  <% enrollment_request = @course.enrollment_requests.find_by(user: current_user) %>
+  <% if enrollment_request&.approved? %>
+    <br>
+    <%= button_to 'Salir de clase', leave_course_path(@course), method: :delete, data: { confirm: '¿Estás seguro de que deseas salir de esta clase?' }, class: 'btn btn-warning', style: 'font-size: 1.25rem; padding: 12px 24px; background-color: #f44336; color: white; border: none; border-radius: 4px;' %> 
+    <br>
+  <%end%>
+ 
+  <% if current_user.tipo == "Profesor" && current_user == @course.user %>
     <br>
     <%= button_to 'Ver solicitudes de inscripción', course_enrollment_requests_path(@course), method: :get, class: 'btn btn-info', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
     <br>
     <%= button_to 'Eliminar Clase', @course, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger', style: 'background-color: #f44336; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
-  </div>
-  <br>
-  <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+  <% end %>
+</div>
 
+
+
+  <% if current_user.tipo == "Profesor" && current_user == @course.user %>
+    <div class="container_ancho2" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+      <!-- Sección de Evaluaciones -->
+      <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+      Evaluaciones
+      <%= image_tag 'search.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+      </h1>
+      <% @course.evaluations.group_by(&:evaluation_method).each do |method, evaluations| %>
+        <% evaluations.each do |evaluation| %>
+        <li style="display: flex; align-items: center; gap: 10px;">
+          <%= link_to evaluation.name, course_evaluation_path(@course, evaluation) %>
+          (<%= evaluation.start_date.strftime("%d/%m/%Y") %> - <%= evaluation.end_date.strftime("%d/%m/%Y") %>)
+          <%= link_to 'Editar', edit_course_evaluation_path(@course, evaluation), class: 'btn btn-sm btn-secondary' %>
+          <%= link_to "Ver resultados", 
+          student_results_course_evaluation_path(@course, evaluation), 
+          class: 'btn btn-sm btn-info' %>
+          <%= button_to 'Eliminar', 
+              course_evaluation_path(@course, evaluation),
+              method: :delete,
+              data: { confirm: '¿Estás seguro?' },
+              class: 'btn btn-sm btn-danger',
+                style: 'background-color: #f44336; color: white; font-size: 0.75rem; padding: 4px 10px; border: none; border-radius: 2px;' %>
+        </li>
+
+        <% end %>
+      <% end %>
+
+      <!-- Sección de Alumnos Inscritos -->
+      <div class="enrolled-students mt-6">
+        <h2 class="title custom-title" style="color: #010c55; font-size: 20px;">Alumnos Inscritos</h2>
+        <% if @enrolled_students.any? %>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Nombre
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Email
+                  </th>
+                  <% @course.evaluations.each do |evaluation| %>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <%= evaluation.name %>
+                    </th>
+                  <% end %>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <% @enrolled_students.each do |student| %>
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <%= student.name %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <%= student.email %>
+                    </td>
+                    <% @student_evaluations[student.id].each do |eval_info| %>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                          <%= case eval_info[:status]
+                            when 'Pendiente' then 'bg-yellow-100 text-yellow-800'
+                            when 'En curso' then 'bg-green-100 text-green-800'
+                            when 'Finalizada' then 'bg-gray-100 text-gray-800'
+                          end %>">
+                          <%= eval_info[:status] %>
+                        </span>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <p class="text-gray-500 italic">No hay alumnos inscritos en este curso.</p>
+        <% end %>
+  </div>
+        <div class="grades-summary mt-6">
+        <h2 class="title custom-title" style="color: #010c55; font-size: 20px;">Resumen de Calificaciones</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Alumno
+                </th>
+                <% @course.evaluations.each do |evaluation| %>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <%= evaluation.name %>
+                  </th>
+                <% end %>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Promedio
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Estado
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <% @enrolled_students.each do |student| %>
+                <% grades = [] %>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <%= student.name %>
+                  </td>
+
+                  <% @course.evaluations.each do |evaluation| %>
+                    <% grade = Grade.find_by(student: student, evaluation: evaluation)&.score %>
+                    <% grades << grade if grade.present? %>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <%= grade ? sprintf('%.1f', grade) : '-' %>
+                    </td>
+                  <% end %>
+                  
+                  <% average = grades.any? ? (grades.sum / grades.size).round(1) : nil %>
+                  <td class="px-6 py-4 whitespace-nowrap <%= average && average >= 4.0 ? 'text-green-600' : 'text-red-600' %>">
+                    <%= average ? sprintf('%.1f', average) : '-' %>
+                  </td>
+                    
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <% if average %>
+                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                        <%= average >= 4.0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                        <%= average >= 4.0 ? 'Aprobado' : 'Reprobado' %>
+                      </span>
+                    <% else %>
+                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                        Pendiente
+                      </span>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <!-- Botones de Acción -->
+      <div class="button-group mt-6">
+        <%= button_to 'Crear nueva evaluación', new_course_evaluation_path(@course), method: :get, class: 'btn btn-primary', style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
+        <br>
+      </div>
+      <br>
+      <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+  </div>
+
+<div class="container_ancho2" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
   <!-- Ver mensajes de chat -->
   <div class="chat-section">
     <br>
@@ -194,8 +216,10 @@
     <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course), class: 'button is-info' %>
   </div>
   <br>
+</div>
 
-
+<div class="container_ancho2" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+  <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
   Archivos
   <%= image_tag 'google-docs.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
   </h1>
@@ -221,52 +245,73 @@
     <p>No hay documentos subidos.</p>
   <% end %>
 
+
 <% else %>
 
-  <% enrollment_request = @course.enrollment_requests.find_by(user: current_user) %>
-     
+
+
   <% if enrollment_request&.approved? %>
-    <%= button_to 'Salir de clase', leave_course_path(@course), method: :delete, data: { confirm: '¿Estás seguro de que deseas salir de esta clase?' }, class: 'btn btn-warning', style: 'font-size: 1.25rem; padding: 12px 24px; background-color: #f44336; color: white; border: none; border-radius: 4px;' %> 
     <br>
-    <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
-    Evaluaciones disponibles
-    <%= image_tag 'search.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
-    </h1>
-    <% if current_user.tipo == "Profesor" %>
-      <p class="text-info">Aunque seas profesor, aquí eres un estudiante más.</p>
-    <% end %>
-    <% @course.evaluations.each do |evaluation| %>
-      <div>
-        <h3><%= link_to evaluation.name, course_evaluation_path(@course, evaluation) %></h3>
-        <p>Tipo: <%= evaluation.evaluation_method %></p>
-        <p>Fecha de inicio: <%= evaluation.start_date.strftime("%d/%m/%Y %H:%M") %></p>
-        <p>Fecha de fin: <%= evaluation.end_date.strftime("%d/%m/%Y %H:%M") %></p>
-      </div>
-    <% end %>
+    <div class="container_ancho2" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+      <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+      Evaluaciones disponibles
+      <%= image_tag 'search.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+      </h1>
+      <% if current_user.tipo == "Profesor" %>
+        <p class="text-info">Aunque seas profesor, aquí eres un estudiante más.</p>
+      <% end %>
+      <% @course.evaluations.each do |evaluation| %>
+        <div>
+          <h3><%= link_to evaluation.name, course_evaluation_path(@course, evaluation) %></h3>
+          <p>Tipo: <%= evaluation.evaluation_method %></p>
+          <p>Fecha de inicio: <%= evaluation.start_date.strftime("%d/%m/%Y %H:%M") %></p>
+          <p>Fecha de fin: <%= evaluation.end_date.strftime("%d/%m/%Y %H:%M") %></p>
+          <br>
+        </div>
+      <% end %>
+    </div>
 
   <% elsif enrollment_request&.pending? %>
-  <p>Solicitud de inscripción pendiente</p>
+  <div class="container_ancho2" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+    <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+    ¡Inscríbete ya!
+    <%= image_tag 'sports.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+    </h1>
+    <p>Solicitud de inscripción pendiente</p>
+  </div>
+  
 <% elsif current_user.tipo != "Administrador" %>
-  <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary', data: { disable_with: 'Enviando solicitud...' } %>
+  <div class="container_ancho2" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+  <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+    ¡Inscríbete ya!
+    <%= image_tag 'sports.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+    </h1>
+    <%= button_to 'Solicitar inscripción', course_enrollment_requests_path(@course), method: :post, class: 'btn btn-primary', data: { disable_with: 'Enviando solicitud...' }, style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
+  </div>
 <% end %>
 
 <% if current_user != @course.user && enrollment_request&.approved? %>
-  <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
-  Documentos públicos
-  <%= image_tag 'pdf.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
-  </h1>
-  <% if @course.documents.attached? %>
-    <ul>
-      <% @course.documents.each do |document| %>
-        <li>
-          <%= link_to document.filename, url_for(document) %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No hay documentos públicos.</p>
+  <br> 
+  <div class="container_ancho2" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
+    <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
+    Documentos públicos
+    <%= image_tag 'pdf.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
+    </h1>
+    <% if @course.documents.attached? %>
+      <ul>
+        <% @course.documents.each do |document| %>
+          <li>
+            <%= link_to document.filename, url_for(document) %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No hay documentos públicos.</p>
+    <% end %>
   <% end %>
-<% end %>
+  </div>
+
+
 
 <% if current_user.admin? || current_user == @course.user %>
   <%= button_to 'Eliminar Curso', 
@@ -299,6 +344,7 @@
 
 <% if enrollment_request&.approved? || current_user == @course.user %>
   <br> 
+  <div class="container_ancho2" style="margin: 15px 0; border: 2px solid #2196F3; border-radius: 5px; padding: 15px;">
   <h1 class="title custom-title" style="color: #010c55; font-size: 40px;">
   Chat
   <%= image_tag 'chat.png', alt: 'Imagen derecha', class: 'title-img-right2' %>
@@ -306,3 +352,5 @@
   <%= link_to 'Ver Mensajes del Chat', foro_course_path(@course), class: 'button is-info' %>
 <% end %>
 <% end %>
+
+

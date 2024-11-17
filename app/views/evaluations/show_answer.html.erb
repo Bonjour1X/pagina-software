@@ -12,7 +12,7 @@
       <% if question.question_type == 'multiple_choice' %>
         <div class="alternatives">
           <p>Alternativas:</p>
-          <% alternatives = question.content.split('|')[1..-1] 
+          <% alternatives = question.content.split('|')[1..-1] %>
           <% alternatives.each_with_index do |alt, i| %>
             <% alt = alt.delete_prefix('*') %>
             <div class="alternative">
@@ -33,7 +33,7 @@
           </div>
         </div>
 
-      <% else
+      <% else %>
         <div class="essay-response">
           <p class="font-medium">Respuesta del alumno:</p>
           <div class="answer-content">

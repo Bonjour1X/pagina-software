@@ -11,8 +11,6 @@
 <br>
 
 <% if user_signed_in? %>
-  <h3 class="subtitle has-text-centered", style="font-size: 24px;">Sesión iniciada: <%= current_user.email %></h3>
-  <h2 class="subtitle has-text-centered">¡Hola, <%= current_user.name %>! Ya has iniciado sesión.</h2>
   <div class="buttons is-centered">
     <%= link_to 'Mis cursos', my_courses_path, class: 'button is-primary', style: 'background-color: #2196F3; color: white;' %>
   </div>
@@ -25,9 +23,8 @@
 <% end %>
 
 <br>
-<% if flash[:notice] %>
-  <p><%= flash[:notice] %></p>
-  <% end %>
+<br>
+<br>
 
 
 
