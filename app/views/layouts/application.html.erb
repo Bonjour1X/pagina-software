@@ -2,9 +2,7 @@
 <html lang="es">
 <head> 
 <!-- Lo que buscaba el agus --!>
-    <% if current_user %>
-    Bienvenido, <%= current_user.display_title %>
-    <% end %>
+
     <title><%= content_for(:title) || "Cursos de Deporte" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
@@ -98,6 +96,14 @@
             height: auto;
             margin: 0 10px;             /* Agrega un margen entre las imágenes y el texto */
         }
+        .container_ancho2 {
+            flex-grow: 1; /* Permite que el contenedor ocupe el espacio restante */
+            padding: 20px; /* Espaciado interno */
+            background-color: white; /* Fondo blanco */
+            max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
+            width: 55vw;
+            justify-content: center; 
+        }
 
 
 
@@ -119,12 +125,23 @@
                     <% end %>
                     <%= link_to 'Clases Disponibles', available_courses_path, class: "navbar-item" %>
                     <%= link_to 'Mis Clases Inscritas', enrolled_courses_path, class: "navbar-item" %> 
-                <%= link_to 'Lista de deseos', deseados_path, class: "navbar-item" %>
+                    <%= link_to 'Cursos Guardados', deseados_path, class: "navbar-item" %>
                 <% end %>
-            <%= link_to 'Clima', clima_path, class: "navbar-item" %>
+                <%= link_to 'Clima', clima_path, class: "navbar-item" %>
             </div>
+            <% if user_signed_in? %>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <%= link_to 'Ajustes', render_ajustes_path, class: "button is-info", style: 'background-color: #2196F3; color: white;' %>
+                    </div>
+                    <div class="navbar-item">
+                        <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: "button is-danger" %>
+                    </div>
+                </div>
+            <% end %>
         </div>
     </nav>
+
 
     <div class="container">
         <% if user_signed_in? %>
@@ -136,14 +153,7 @@
         <%= yield %> <!-- Aquí se renderizará el contenido de las vistas específicas -->
     </div>
 
-    <% if user_signed_in? %>
-    <footer class="footer">
-        <div class="buttons are-centered">
-            <%= link_to 'Ajustes', render_ajustes_path, class: "button is-info" %>
-            <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: "button is-danger" %>
-        </div>
-    </footer>
-    <% end %>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const burger = document.querySelector('.navbar-burger');
