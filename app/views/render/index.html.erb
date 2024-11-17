@@ -33,7 +33,7 @@
 <h2 class="title is-4 has-text-centered">Cursos Disponibles</h2>
 <% if @courses.any? %>
   <div class="columns is-multiline">
-    <% @courses.first(5).each do |course| %>
+    <% @courses.first(14).each do |course| %>
       <div class="column is-one-third">
         <!-- Tarjeta con estilos adicionales de Bulma para borde y sombra -->
         <div class="card box has-background-light">
@@ -60,15 +60,15 @@
       </div>
     <% end %>
 
-    <% if @courses.size > 5 %>
+    <% if @courses.size > 15 %>
       <div class="column is-one-third">
         <div class="card box has-background-light">
           <div class="card-content">
             <h3 class="title is-5">¡Ingresa para ver más cursos!</h3>
-            <p class="subtitle is-6 has-text-grey-dark">Hay más cursos disponibles, pero solo mostramos los primeros 5.</p>
+            <p class="subtitle is-6 has-text-grey-dark">Hay más cursos disponibles.</p>
             <div class="content">
               <% if user_signed_in? %>
-                <%= link_to 'Ver más cursos', my_courses_path, class: 'button is-primary is-fullwidth' %>
+                <%= link_to 'Ver más cursos', available_courses_path, class: 'button is-primary is-fullwidth' %>
               <% else %>
                 <%= link_to 'Ver más cursos', new_user_session_path, class: 'button is-primary is-fullwidth' %>
               <% end %>
