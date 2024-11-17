@@ -10,9 +10,11 @@ class EvaluationsController < ApplicationController
   
   def create
     @course = Course.find(params[:course_id])
-    @evaluation = @course.evaluations.new(evaluation_params)
+    @evaluation = @course.evaluations.build(evaluation_params)
+    
     if @evaluation.save
-      redirect_to @course, notice: 'Evaluación creada exitosamente.'
+      redirect_to edit_course_evaluation_path(@course, @evaluation), 
+                  notice: 'Evaluación creada exitosamente. Ahora puedes agregar preguntas.'
     else
       render :new
     end

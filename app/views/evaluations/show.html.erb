@@ -99,8 +99,8 @@ function saveResponse(questionId) {
       content: question.value
     })
   })
-  .then(response => response.json())
-  .then(data => {
+  .then(response => {
+    alert('Respuesta guardada exitosamente'); // Agregamos este mensaje
     const button = event.target;
     button.textContent = '¡Guardado!';
     setTimeout(() => button.textContent = 'Guardar Respuesta', 2000);
@@ -116,11 +116,9 @@ function submitEvaluation() {
       'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
     }
   })
-  .then(response => response.json())
-  .then(data => {
-    if (data.status === 'success') {
-      window.location.href = '<%= course_path(@course) %>';
-    }
+  .then(response => {
+    alert('Evaluación enviada exitosamente');
+    window.location.href = '<%= course_path(@course) %>';
   });
 }
 </script>
