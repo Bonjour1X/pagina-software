@@ -1,4 +1,11 @@
-<h1>Nueva Evaluación para <%= @course.title %></h1>
+
+
+<h1 class="title has-text-centered custom-title" style="color: #010c55; font-size: 48px;">
+  <%= image_tag 'sports.png', alt: 'Imagen izquierda', class: 'title-img-left' %>
+  Nueva Evaluación para <%= @course.title %>
+  <%= image_tag 'sports.png', alt: 'Imagen derecha', class: 'title-img-right' %>
+</h1>
+<br>
 
 <%= form_with(model: [@course, @evaluation], local: true) do |form| %>
   <% if @evaluation.errors.any? %>
@@ -11,32 +18,32 @@
       </ul>
     </div>
   <% end %>
-
+  <br>
   <div>
-    <%= form.label :name, "Nombre de la Evaluación" %>
-    <%= form.text_field :name %>
+    <%= form.label :name, "Nombre de la Evaluación   ", style: "font-size: 1.5rem;" %>
+    <%= form.text_field :name, style: "font-size: 1.5rem;" %>
   </div>
-
+  <br>
   <div>
-    <%= form.label :evaluation_method, "Tipo de Evaluación" %>
+    <%= form.label :evaluation_method, "Tipo de Evaluación", style: "font-size: 1.5rem;" %>
     <%= form.select :evaluation_method, [
       ['Opción múltiple', 'multiple_choice'],
       ['Desarrollo', 'essay'],
       ['Mixto', 'mixed']
-    ], prompt: "Selecciona un tipo" %>
+    ], prompt: "Selecciona un tipo", style: "font-size: 1.5rem;" %>
   </div>
-
+  <br>
   <div>
-    <%= form.label :start_date, "Fecha de Inicio" %>
+    <%= form.label :start_date, "Fecha de Inicio", style: "font-size: 1.5rem;" %>
     <%= form.datetime_local_field :start_date %>
   </div>
-
+  <br>
   <div>
-    <%= form.label :end_date, "Fecha de Término" %>
+    <%= form.label :end_date, "Fecha de Término", style: "font-size: 1.5rem;" %>
     <%= form.datetime_local_field :end_date %>
   </div>
-
-  <%= form.submit "Crear Evaluación", data: { disable_with: 'Creando...' } %>
+  <br>
+  <%= form.submit "Crear Evaluación", data: { disable_with: 'Creando...' }, style: 'background-color: #2196F3; color: white; font-size: 1.25rem; padding: 12px 24px; border: none; border-radius: 4px;' %>
 <% end %>
-
+<br>
 <%= link_to 'Volver al Curso', course_path(@course) %>
