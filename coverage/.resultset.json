@@ -1512,95 +1512,6 @@
           null
         ]
       },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/render_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/application_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          0,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/application_helper.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/chats_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/deseados_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/posts_helper.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/render_helper.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/reviews_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/weather_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
       "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/users/registrations_controller.rb": {
         "lines": [
           null,
@@ -1674,6 +1585,72 @@
           null
         ]
       },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/application_controller.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/application_helper.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/chats_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/deseados_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/posts_helper.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/render_helper.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/reviews_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/helpers/weather_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
       "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/models/student_response.rb": {
         "lines": [
           null,
@@ -1716,8 +1693,31 @@
           1,
           null
         ]
+      },
+      "/home/bonjour1x/proyecto-2024-02-grupo23/2024-2-grupo-23/app/controllers/render_controller.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1731877801
+    "timestamp": 1731878647
   }
 }

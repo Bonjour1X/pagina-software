@@ -82,6 +82,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_025826) do
     t.index ["user_id"], name: "index_enrollment_requests_on_user_id"
   end
 
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
+  end
+
   create_table "evaluations", force: :cascade do |t|
     t.string "name", null: false
     t.text "questions"
